@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_warehouse_tree" model="ir.ui.view">
+        <field name="name">stock.warehouse.tree</field>
+        <field name="model">stock.warehouse</field>
+        <field name="arch" type="xml">
+            <tree string="Picking list">
+                <field name="name"/>
+                <field name="active" invisible="1"/>
+                <field name="partner_id"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_warehouse_form" model="ir.ui.view">
+        <field name="name">stock.warehouse.form</field>
+        <field name="model">stock.warehouse</field>
+        <field eval="12" name="priority"/>
+        <field name="arch" type="xml">
+            <form string="Transfer">
+                <header>
+                </header>
+                <sheet>
+                    <label for="name"/>
+                    <h1>
+                        <field name="name" placeholder="e.g. Central Warehouse"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="code" placeholder="e.g. CW"/>
+                        </group>
+                        <group>
+                            <field name="company_id" options="{'no_create': True}"/>
+                            <field name="partner_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="stock_warehouse_action" model="ir.actions.act_window">
+        <field name="name">Warehouses</field>
+        <field name="res_model">stock.warehouse</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="stock_warehouse_menu" name="Warehouses" action="stock_warehouse_action" parent="warehouse_config_menu" sequence="1"/>
+
+</odoo>

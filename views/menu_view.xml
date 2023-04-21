@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem name="Tracking" web_icon="tracking,static/icon/car.png" id="tracking_root_menu" sequence="1" />
+    <menuitem name="Operations" parent="tracking_root_menu" id="operations_root_menu" sequence="1" />
+    <menuitem name="Products" parent="tracking_root_menu" id="products_root_menu" sequence="2" />
+    <menuitem name="Reporting" parent="tracking_root_menu" id="reporting_root_menu" sequence="3" />
+    <menuitem name="Configuration" parent="tracking_root_menu" id="config_root_menu" sequence="4"/>
+    <menuitem name="Warehouse Management" parent="config_root_menu" id="warehouse_config_menu" sequence="1"/>
+    <menuitem name="Products" parent="config_root_menu" id="product_config_menu" sequence="1"/>
+</odoo>	

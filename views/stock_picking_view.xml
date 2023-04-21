@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_picking_tree" model="ir.ui.view">
+        <field name="name">stock.picking.tree</field>
+        <field name="model">stock.picking</field>
+        <field name="arch" type="xml">
+            <tree string="Picking list">
+                <header>
+                </header>
+                <field name="priority" optional="show" widget="priority" nolabel="1"/>
+                <field name="name"/>
+                <field name="contract_id"/>
+                <field name="vehicle_id"/>
+                <field name="location_id"/>
+                <field name="location_dest_id"/>
+                <field name="product_id"/>
+                <field name="total_qty"/>
+                <field name="transfer_qty"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field eval="12" name="priority"/>
+        <field name="arch" type="xml">
+            <form string="Transfer">
+                <header>
+                    <button name="action_assign" attrs="{'invisible': [('state', '!=', 'draft')]}" string="Mark as Todo" class="oe_highlight" type="object" data-hotkey="z"/>
+                    <button name="action_done" attrs="{'invisible': [('state', '!=', 'assigned')]}" string="Validate" groups="base.group_user" class="oe_highlight" type="object" data-hotkey="z"/>
+                    <button name="action_cancel" attrs="{'invisible': [('state', '!=', 'assigned')]}" string="Cancel" type="object" data-hotkey="z"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,assigned,done" />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1 class="d-flex">
+                            <field name="priority" widget="priority" class="me-3" attrs="{'invisible': [('name','=','/')]}"/>
+                            <field name="name" attrs="{'invisible': [('name','=','/')]}"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="contract_id"/>
+                            <field name="vehicle_id"/>
+                            <field name="transfer_qty"/>
+                            <field name="note"/>
+                        </group>
+                        <group>
+                            <field name="location_id"/>
+                            <field name="location_dest_id"/>
+                            <field name="product_id"/>
+                            <field name="total_qty"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="stock_transfer_action" model="ir.actions.act_window">
+        <field name="name">Transfers</field>
+        <field name="res_model">stock.picking</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="stock_transfer_menu" name="Transfers" action="stock_transfer_action" parent="operations_root_menu" sequence="1"/>
+
+</odoo>

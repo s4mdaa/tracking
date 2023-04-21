@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_contract_form" model="ir.ui.view">
+        <field name="name">stock.contract.form</field>
+        <field name="model">stock.contract</field>
+        <field eval="1" name="priority"/>
+        <field name="arch" type="xml">
+            <form string="Stock Contracts" delete="0">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,open,close" />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1 class="d-flex">
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group col="2">
+                            <field name="product_id"/>
+                            <field name="location_id" options="{'no_create': True}"/>
+                        </group>
+                        <group col="2">
+                            <field name="location_dest_id" options="{'no_create': True}"/>
+                            <field name="total_qty" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_contract_tree" model="ir.ui.view">
+        <field name="name">stock.contract.tree</field>
+        <field name="model">stock.contract</field>
+        <field eval="50" name="priority"/>
+        <field name="arch" type="xml">
+            <tree delete="false" string="Contracts">
+                <field name="name" />
+                <field name="product_id"/>
+                <field name="location_id" />
+                <field name="location_dest_id"/>
+                <field name="total_qty" />
+            </tree>
+        </field>
+    </record>
+    <record id="stock_contract_action" model="ir.actions.act_window">
+        <field name="name">Contracts</field>
+        <field name="res_model">stock.contract</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No contract found. Let's create from exchange app!
+            </p>
+        </field>
+    </record>
+
+    <menuitem action="stock_contract_action" id="stock_contract_menu" parent="reporting_root_menu" sequence="3" name="Contracts"/>
+</odoo>

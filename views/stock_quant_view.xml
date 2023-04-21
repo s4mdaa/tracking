@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="stock_quant_action" model="ir.actions.act_window">
+        <field name="name">Stock Quant</field>
+        <field name="res_model">stock.quant</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="stock_quant_menu" name="Quants" action="stock_quant_action" parent="reporting_root_menu" sequence="1"/>
+
+</odoo>

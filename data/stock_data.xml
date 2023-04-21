@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Resource: stock.location -->
+        <record id="stock_location_locations" model="stock.location">
+            <field name="name">Physical Locations</field>
+            <field name="usage">view</field>
+            <field name="company_id"></field>
+        </record>
+        <record id="stock_location_locations_partner" model="stock.location">
+            <field name="name">Partners</field>
+            <field name="usage">view</field>
+            <field name="posz">1</field>
+            <field name="company_id"></field>
+        </record>
+        <record id="stock_location_locations_virtual" model="stock.location">
+            <field name="name">Virtual Locations</field>
+            <field name="usage">view</field>
+            <field name="posz">1</field>
+            <field name="company_id"></field>
+        </record>
+
+        <record id="stock_location_suppliers" model="stock.location">
+            <field name="name">Vendors</field>
+            <field name="location_id" ref="stock_location_locations_partner"/>
+            <field name="usage">supplier</field>
+            <field name="company_id"></field>
+        </record>
+        <record id="stock_location_customers" model="stock.location">
+            <field name="name">Customers</field>
+            <field name="location_id" ref="stock_location_locations_partner"/>
+            <field name="usage">customer</field>
+            <field name="company_id"></field>
+        </record>
+        
+        <record id="stock_location_locations_transit" model="stock.location">
+            <field name="name">Transit Locations</field>
+            <field name="usage">transit</field>
+            <field name="company_id"></field>
+        </record>
+
+        <!-- create the transit location for each company existing -->
+        <function model="res.company" name="create_missing_transit_location"/>
+        <function model="res.company" name="create_missing_warehouse"/>
+        <function model="res.company" name="create_missing_inventory_loss_location"/>
+        <function model="res.company" name="create_missing_production_location"/>
+        <function model="res.company" name="create_missing_scrap_location"/>
+        <function model="res.company" name="create_missing_scrap_sequence"/>
+    </data>
+</odoo>

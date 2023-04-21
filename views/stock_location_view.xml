@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_location_tree" model="ir.ui.view">
+        <field name="name">stock.location.tree</field>
+        <field name="model">stock.location</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Location" decoration-info="usage=='view'" decoration-danger="usage=='internal'" multi_edit="1">
+                <field name="complete_name"/>
+                <field name="usage"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_location_form" model="ir.ui.view">
+        <field name="name">stock.location.form</field>
+        <field name="model">stock.location</field>
+        <field eval="12" name="priority"/>
+        <field name="arch" type="xml">
+            <form string="Stock Location">
+                <field name="company_id" invisible="1"/>
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <label for="name"/>
+                    <h1>
+                        <field name="name" placeholder="e.g. Spare Stock"/>
+                    </h1>
+                    <label for="location_id"/>
+                    <h2>
+                        <field name="location_id" placeholder="e.g. Physical Locations" options="{'no_create': True}"/>
+                    </h2>
+
+                    <group>
+                        <group string="Additional Information" name="additional_info">
+                            <field name="active" invisible="1"/>
+                            <field name="usage"/>
+                            <field name="company_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="stock_location_action">
+        <field name="name">Locations</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.location</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="stock_location_action" id="stock_location_menu" parent="warehouse_config_menu" sequence="2" />
+
+</odoo>
