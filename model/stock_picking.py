@@ -106,7 +106,7 @@ class Picking(models.Model):
                 'product_id': self.product_id.id,
                 'quantity': self.transfer_qty,
             }
-        self.env['stock.quant'].sudo().create(stock_quant_vals)
+            self.env['stock.quant'].sudo().create(stock_quant_vals)
 
         return True
 
@@ -117,7 +117,10 @@ class Picking(models.Model):
 
     @api.depends('picking_type')
     def _compute_source_location(self):
+        print("SDDDDDDDDDDDDDDDDDDDDDDDDDDDDDs")
         for rec in self:
+            print(rec.partner_default_company_id.id,
+                  "+++++++++++++++++++++++++++++++++")
             company_id = rec.partner_default_company_id.id
             if rec.picking_type == 'delivery':
                 source_location = self.env['stock.location'].search(
