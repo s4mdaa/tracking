@@ -22,6 +22,7 @@ class Warehouse(models.Model):
     code = fields.Char('Short Name', required=True, size=5,
                        help="Short name used to identify your warehouse")
 
+    @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
             if not vals.get('company_id'):
