@@ -21,6 +21,8 @@ class Vehicle(models.Model):
     state_number = fields.Char('State number', required=True)
     user_company_id = fields.Many2one(
         'res.company', string='Parent', default=lambda self: self.env.company)
+    parent_company_id = fields.Many2one(
+        'res.company', 'Company', related='company_id.parent_id')
     company_id = fields.Many2one(
         'res.company', 'Company', required=True, domain="[('parent_id', '=', user_company_id)]")
     parent_company = fields.Many2one(

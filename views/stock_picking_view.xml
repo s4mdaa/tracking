@@ -44,6 +44,7 @@
                         <group>
                             <field name="contract_id"/>
                             <field name="vehicle_id"/>
+                            <field name="picking_type"/>
                             <field name="transfer_qty"/>
                             <field name="scheduled_date"/>
                             <field name="note"/>

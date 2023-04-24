@@ -19,6 +19,11 @@ class Picking(models.Model):
         'res.company', string='Company', related='contract_id.company_id',
         readonly=True, store=True, index=True)
 
+    picking_type = fields.Selection([
+        ('receipt', 'Receipt'),
+        ('delivery', 'Delivery')],
+        string="Picking Type", required=True, default='receipt')
+
     contract_id = fields.Many2one(
         'stock.contract', 'Contract', required=True, readonly=True,
         states={'draft': [('readonly', False)]})
@@ -106,17 +111,30 @@ class Picking(models.Model):
         for rec in self:
             rec.delivery_point_id = rec.contract_id.location_dest_id.id
 
-    @ api.depends('contract_id')
+    @ api.depends('contract_id', 'picking_type')
     def _compute_source_location(self):
+        print(self.env.company.id, "++++++++++++++++++++++++++")
         for rec in self:
-            rec.location_id = rec.contract_id.location_id.id
+            if rec.picking_type == 'delivery':
+                source_location = self.env['stock.location'].search(
+                    [('usage', '=', 'internal'), ('company_id', '=', self.env.company.id)], order='id ASC', limit=1)
+                rec.location_id = source_location.id
+            else:
+                source_location = self.env['stock.location'].search(
+                    [('usage', '=', 'transit'), ('company_id', '=', self.env.company.id)], order='id ASC', limit=1)
+                rec.location_id = source_location.id
 
-    @ api.depends('contract_id')
+    @ api.depends('contract_id', 'picking_type')
     def _compute_dest_location(self):
         for rec in self:
-            destination_location = self.env['stock.location'].search(
-                [('usage', '=', 'transit'), ('company_id', '=', rec.location_id.company_id.id)], order='id ASC', limit=1)
-            rec.location_dest_id = destination_location.id
+            if rec.picking_type == 'delivery':
+                destination_location = self.env['stock.location'].search(
+                    [('usage', '=', 'transit'), ('company_id', '=', self.env.company.id)], order='id ASC', limit=1)
+                rec.location_dest_id = destination_location.id
+            else:
+                destination_location = self.env['stock.location'].search(
+                    [('usage', '=', 'internal'), ('company_id', '=', self.env.company.id)], order='id ASC', limit=1)
+                rec.location_dest_id = destination_location.id
 
     @ api.depends('contract_id', 'state')
     def _compute_available_qty(self):
