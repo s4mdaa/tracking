@@ -51,9 +51,9 @@ class Move(models.Model):
     reference = fields.Char(compute='_compute_reference',
                             string="Reference", store=True)
     contract_id = fields.Many2one(
-        'stock.contract', 'Contract', required=True)
+        'stock.contract', 'Contract')
     vehicle_id = fields.Many2one(
-        'stock.vehicle', 'Vehicle', required=True, readonly=True)
+        'stock.vehicle', 'Vehicle', readonly=True)
     location_usage = fields.Selection(
         string="Source Location Type", related='location_id.usage')
     location_dest_usage = fields.Selection(
