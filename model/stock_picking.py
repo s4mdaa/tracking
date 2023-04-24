@@ -19,10 +19,14 @@ class Picking(models.Model):
         'res.company', string='Company', related='contract_id.company_id',
         readonly=True, store=True, index=True)
 
+    partner_default_company_id = fields.Many2one(
+        'res.company', string='Parent', default=lambda self: self.env.user.company_id.id)
+
     picking_type = fields.Selection([
         ('receipt', 'Receipt'),
         ('delivery', 'Delivery')],
-        string="Picking Type", required=True, default='receipt')
+        string="Picking Type", required=True, readonly=True,
+        states={'draft': [('readonly', False)]}, default='receipt')
 
     contract_id = fields.Many2one(
         'stock.contract', 'Contract', required=True, readonly=True,
@@ -111,28 +115,30 @@ class Picking(models.Model):
         for rec in self:
             rec.delivery_point_id = rec.contract_id.location_dest_id.id
 
-    @ api.depends('contract_id', 'picking_type')
+    @api.depends('picking_type')
     def _compute_source_location(self):
         for rec in self:
+            company_id = rec.partner_default_company_id.id
             if rec.picking_type == 'delivery':
                 source_location = self.env['stock.location'].search(
-                    [('usage', '=', 'internal'), ('company_id', '=', self.env.user.company_id.id)], order='id ASC', limit=1)
+                    [('usage', '=', 'internal'), ('company_id', '=', company_id)], order='id ASC', limit=1)
                 rec.location_id = source_location.id
             else:
                 source_location = self.env['stock.location'].search(
-                    [('usage', '=', 'transit'), ('company_id', '=', self.env.user.company_id.id)], order='id ASC', limit=1)
+                    [('usage', '=', 'transit'), ('company_id', '=', company_id)], order='id ASC', limit=1)
                 rec.location_id = source_location.id
 
-    @ api.depends('contract_id', 'picking_type')
+    @ api.depends('picking_type')
     def _compute_dest_location(self):
         for rec in self:
+            company_id = rec.partner_default_company_id.id
             if rec.picking_type == 'delivery':
                 destination_location = self.env['stock.location'].search(
-                    [('usage', '=', 'transit'), ('company_id', '=', self.env.user.company_id.id)], order='id ASC', limit=1)
+                    [('usage', '=', 'transit'), ('company_id', '=', company_id)], order='id ASC', limit=1)
                 rec.location_dest_id = destination_location.id
             else:
                 destination_location = self.env['stock.location'].search(
-                    [('usage', '=', 'internal'), ('company_id', '=', self.env.user.company_id.id)], order='id ASC', limit=1)
+                    [('usage', '=', 'internal'), ('company_id', '=', company_id)], order='id ASC', limit=1)
                 rec.location_dest_id = destination_location.id
 
     @ api.depends('contract_id', 'state')
