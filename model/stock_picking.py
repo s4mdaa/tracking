@@ -1,5 +1,6 @@
 from odoo import SUPERUSER_ID, _, api, fields, models
 from odoo.addons.stock.models.stock_move import PROCUREMENT_PRIORITIES
+from odoo.exceptions import UserError
 
 
 class Picking(models.Model):
@@ -23,9 +24,11 @@ class Picking(models.Model):
         states={'draft': [('readonly', False)]})
 
     total_qty = fields.Integer(
-        'Quantity', related='contract_id.total_qty', readonly=True)
-    transfer_qty = fields.Integer('Demand', required=True, default=1, readonly=True,
-                                  states={'draft': [('readonly', False)]})
+        'Total Quantity', related='contract_id.total_qty', readonly=True)
+    available_qty = fields.Integer(
+        'Available Quantity', compute='_compute_available_qty', readonly=True)
+    transfer_qty = fields.Integer('Demand', required=True, default=1,
+                                  states={'done': [('readonly', True)], 'cancel': [('readonly', True)]})
     note = fields.Html('Note', readonly=True,
                        states={'draft': [('readonly', False)]})
     location_dest_id = fields.Many2one(
@@ -41,8 +44,8 @@ class Picking(models.Model):
         help="Products will be reserved first for the transfers with the highest priorities.")
     scheduled_date = fields.Datetime(
         'Scheduled Date', store=True,
-        index=True, default=fields.Datetime.now, tracking=True,
-        states={'done': [('readonly', True)]})
+        index=True, default=fields.Datetime.now, tracking=True, readonly=True,
+        states={'draft': [('readonly', False)]})
     state = fields.Selection([
         ('draft', 'Draft'),
         ('assigned', 'Ready'),
@@ -59,6 +62,10 @@ class Picking(models.Model):
         return True
 
     def action_done(self):
+        for rec in self:
+            if rec.transfer_qty > rec.available_qty:
+                raise UserError(
+                    'Transfer quantity cannot be greater than available quantity.')
         self.state = 'done'
         stock_move_vals = {
             'name': str(self.location_id.name) + '-' + str(self.location_dest_id.name),
@@ -76,6 +83,22 @@ class Picking(models.Model):
             'state': self.state,
         }
         self.env['stock.move'].sudo().create(stock_move_vals)
+        stock_quant_source = self.env['stock.quant'].search(
+            [('location_id', '=', self.location_id.id)], limit=1)
+        stock_quant_dest = self.env['stock.quant'].search(
+            [('location_id', '=', self.location_dest_id.id)], limit=1)
+        if stock_quant_source:
+            stock_quant_source.quantity -= self.transfer_qty
+        if stock_quant_dest:
+            stock_quant_dest.quantity += self.transfer_qty
+        else:
+            stock_quant_vals = {
+                'location_id': self.location_dest_id.id,
+                'product_id': self.product_id.id,
+                'quantity': self.transfer_qty,
+            }
+        self.env['stock.quant'].sudo().create(stock_quant_vals)
+
         return True
 
     @ api.depends('contract_id')
@@ -95,9 +118,19 @@ class Picking(models.Model):
                 [('usage', '=', 'transit'), ('company_id', '=', rec.location_id.company_id.id)], order='id ASC', limit=1)
             rec.location_dest_id = destination_location.id
 
+    @ api.depends('contract_id', 'state')
+    def _compute_available_qty(self):
+        for rec in self:
+            done_pickings = self.env['stock.picking'].search(
+                [('state', '=', 'done'), ('contract_id', '=', rec.contract_id.id)])
+            total_qty = sum(done_pickings.mapped('transfer_qty'))
+            rec.available_qty = rec.contract_id.total_qty - total_qty
+
     @ api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
+            if vals.get('transfer_qty') <= 0:
+                raise UserError('Transfer quantity must be greater than zero.')
             now = fields.Date.today().strftime('%y%m%d')
             sequence = self.env['ir.sequence'].sudo().search([
                 ('code', '=', 'stock.picking'),

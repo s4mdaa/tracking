@@ -64,3 +64,8 @@ class Move(models.Model):
     def _compute_reference(self):
         for move in self:
             move.reference = move.picking_id.name if move.picking_id else move.name
+
+    @api.depends('product_id')
+    def _compute_product_uom(self):
+        for move in self:
+            move.product_uom = move.product_id.uom_id.id

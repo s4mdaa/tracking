@@ -14,6 +14,13 @@ class ProductTemplate(models.Model):
     type = fields.Selection(selection_add=[
         ('product', 'Storable Product')
     ], ondelete={'product': 'set consu'})
+    uom_id = fields.Many2one(
+        'uom.uom', string='Unit of Measure', default=lambda self: self._get_default_uom())
+
+    def _get_default_uom(self):
+        default_uom_weight = self.env['uom.uom'].search(
+            [('name', '=', 't')], limit=1)
+        return default_uom_weight.id
 
 
 class ProductCategory(models.Model):

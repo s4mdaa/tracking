@@ -31,3 +31,8 @@ class Contract(models.Model):
     location_dest_id = fields.Many2one(
         'stock.location', 'Destination Location', domain=[('usage', '=', 'internal')])
     total_qty = fields.Integer('Quantity')
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)',
+         "Contract already exists.")
+    ]

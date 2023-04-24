@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <record model="ir.ui.view" id="view_stock_quant_tree">
+        <field name="name">stock.quant.tree</field>
+        <field name="model">stock.quant</field>
+        <field eval="10" name="priority"/>
+        <field name="arch" type="xml">
+            <tree string="Inventory Valuation" js_class="inventory_report_list" create="0" delete="0">
+                <field name="product_id"/>
+                <field name="location_id"/>
+                <field name="quantity" string="Quantity" sum="Total Quantity"/>
+                <field name="product_uom_id"/>
+                <field name='company_id'/>
+            </tree>
+        </field>
+    </record>
+
     <record id="stock_quant_action" model="ir.actions.act_window">
         <field name="name">Stock Quant</field>
         <field name="res_model">stock.quant</field>
