@@ -113,15 +113,14 @@ class Picking(models.Model):
 
     @ api.depends('contract_id', 'picking_type')
     def _compute_source_location(self):
-        print(self.env.company.id, "++++++++++++++++++++++++++")
         for rec in self:
             if rec.picking_type == 'delivery':
                 source_location = self.env['stock.location'].search(
-                    [('usage', '=', 'internal'), ('company_id', '=', self.env.company.id)], order='id ASC', limit=1)
+                    [('usage', '=', 'internal'), ('company_id', '=', self.env.user.company_id.id)], order='id ASC', limit=1)
                 rec.location_id = source_location.id
             else:
                 source_location = self.env['stock.location'].search(
-                    [('usage', '=', 'transit'), ('company_id', '=', self.env.company.id)], order='id ASC', limit=1)
+                    [('usage', '=', 'transit'), ('company_id', '=', self.env.user.company_id.id)], order='id ASC', limit=1)
                 rec.location_id = source_location.id
 
     @ api.depends('contract_id', 'picking_type')
@@ -129,11 +128,11 @@ class Picking(models.Model):
         for rec in self:
             if rec.picking_type == 'delivery':
                 destination_location = self.env['stock.location'].search(
-                    [('usage', '=', 'transit'), ('company_id', '=', self.env.company.id)], order='id ASC', limit=1)
+                    [('usage', '=', 'transit'), ('company_id', '=', self.env.user.company_id.id)], order='id ASC', limit=1)
                 rec.location_dest_id = destination_location.id
             else:
                 destination_location = self.env['stock.location'].search(
-                    [('usage', '=', 'internal'), ('company_id', '=', self.env.company.id)], order='id ASC', limit=1)
+                    [('usage', '=', 'internal'), ('company_id', '=', self.env.user.company_id.id)], order='id ASC', limit=1)
                 rec.location_dest_id = destination_location.id
 
     @ api.depends('contract_id', 'state')
@@ -161,7 +160,7 @@ class Picking(models.Model):
                     'padding': 3,
                     'prefix': f'TS-{now}-',
                     'number_increment': 1,
-                    'company_id': self.env.company.id,
+                    'company_id': self.env.user.company_id.id,
                 })
             vals['name'] = sequence.next_by_id()
         pickings = super().create(vals_list)

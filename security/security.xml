@@ -25,7 +25,7 @@
         <record model="ir.rule" id="stock_vehicle_comp_rule">
             <field name="name">Vehicle multi-company</field>
             <field name="model_id" ref="model_stock_vehicle"/>
-            <field name="domain_force">['|',('company_id', 'in', company_ids),('parent_company_id', 'in', company_id)]</field>
+            <field name="domain_force">['|',('company_id', 'in', company_ids),('user_company_id', '=', company_id)]</field>
         </record>
         <record model="ir.rule" id="stock_contract_comp_rule">
             <field name="name">Contract multi-company</field>

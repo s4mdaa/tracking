@@ -20,13 +20,11 @@ class Vehicle(models.Model):
         string="Vehicle Type", required=True, default='track')
     state_number = fields.Char('State number', required=True)
     user_company_id = fields.Many2one(
-        'res.company', string='Parent', default=lambda self: self.env.company)
+        'res.company', string='Parent', default=lambda self: self.env.user.company_id.id)
     parent_company_id = fields.Many2one(
         'res.company', 'Company', related='company_id.parent_id')
     company_id = fields.Many2one(
         'res.company', 'Company', required=True, domain="[('parent_id', '=', user_company_id)]")
-    parent_company = fields.Many2one(
-        'res.company', 'Parent Company')
     active = fields.Boolean(default=True)
     location_id = fields.Many2one('stock.location', 'Location', readonly=True)
 
@@ -35,13 +33,9 @@ class Vehicle(models.Model):
          "Vehicle already exists on current company.")
     ]
 
-    @api.depends('env.company')
-    def _compute_parent_company(self):
-        for record in self:
-            record.parent_company = self.env.user.company_id.id
-
     @api.model
     def create(self, vals):
+        print(self.parent_company_id, "++++++++++++++++++++++++++++++++")
         parent_location = self.env['stock.location'].search(
             [('company_id', '=', vals.get('company_id')), ('usage', '=', 'internal'), ], order='id ASC', limit=1)
         location_vals = {
