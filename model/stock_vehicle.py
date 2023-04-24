@@ -19,8 +19,12 @@ class Vehicle(models.Model):
         ('train', 'Train')],
         string="Vehicle Type", required=True, default='track')
     state_number = fields.Char('State number', required=True)
+    user_company_id = fields.Many2one(
+        'res.company', string='Parent', default=lambda self: self.env.company)
     company_id = fields.Many2one(
-        'res.company', 'Company', default=lambda self: self.env.company, required=True)
+        'res.company', 'Company', required=True, domain="[('parent_id', '=', user_company_id)]")
+    parent_company = fields.Many2one(
+        'res.company', 'Parent Company')
     active = fields.Boolean(default=True)
     location_id = fields.Many2one('stock.location', 'Location', readonly=True)
 
@@ -28,6 +32,11 @@ class Vehicle(models.Model):
         ('name_uniq', 'unique (name)',
          "Vehicle already exists on current company.")
     ]
+
+    @api.depends('env.company')
+    def _compute_parent_company(self):
+        for record in self:
+            record.parent_company = self.env.user.company_id.id
 
     @api.model
     def create(self, vals):

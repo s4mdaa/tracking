@@ -8,6 +8,13 @@ class Product(models.Model):
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
+    detailed_type = fields.Selection(selection_add=[
+        ('product', 'Storable Product')
+    ], tracking=True, ondelete={'product': 'set consu'})
+    type = fields.Selection(selection_add=[
+        ('product', 'Storable Product')
+    ], ondelete={'product': 'set consu'})
+
 
 class ProductCategory(models.Model):
     _inherit = 'product.category'
