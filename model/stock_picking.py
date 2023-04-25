@@ -116,7 +116,7 @@ class Picking(models.Model):
     def _compute_source_location(self):
         for rec in self:
             if rec.picking_type == 'delivery':
-                if rec.company_id.is_transfer_company == True:
+                if rec.company_id.company_type == 'transportation':
                     source_location = rec.vehicle_id.location_id
                 else:
                     source_location = self.env['stock.location'].search(
@@ -135,7 +135,7 @@ class Picking(models.Model):
                     [('usage', '=', 'transit'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
                 rec.location_dest_id = destination_location.id
             else:
-                if rec.company_id.is_transfer_company == True:
+                if rec.company_id.company_type == 'transportation':
                     destination_location = rec.vehicle_id.location_id
                 else:
                     destination_location = self.env['stock.location'].search(
@@ -146,7 +146,7 @@ class Picking(models.Model):
     def _compute_available_qty(self):
         for rec in self:
             done_pickings = self.env['stock.picking'].search(
-                [('state', '=', 'done'), ('contract_id', '=', rec.contract_id.id)])
+                [('state', '=', 'done'), ('contract_id', '=', rec.contract_id.id), ('company_id.company_type', '=', 'mining')])
             total_qty = sum(done_pickings.mapped('transfer_qty'))
             rec.available_qty = rec.contract_id.total_qty - total_qty
 
