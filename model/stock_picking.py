@@ -16,11 +16,8 @@ class Picking(models.Model):
         states={'draft': [('readonly', False)]})
 
     company_id = fields.Many2one(
-        'res.company', string='Company', related='contract_id.company_id',
-        readonly=True, store=True, index=True)
-
-    partner_default_company_id = fields.Many2one(
-        'res.company', string='Parent', default=lambda self: self.env.user.company_id.id)
+        'res.company', string='Company', default=lambda self: self.env.user.company_id.id,
+        store=True, index=True)
 
     picking_type = fields.Selection([
         ('receipt', 'Receipt'),
@@ -75,40 +72,40 @@ class Picking(models.Model):
             if rec.transfer_qty > rec.available_qty:
                 raise UserError(
                     'Transfer quantity cannot be greater than available quantity.')
-        self.state = 'done'
-        stock_move_vals = {
-            'name': str(self.location_id.name) + '-' + str(self.location_dest_id.name),
-            'contract_id': self.contract_id.id,
-            'vehicle_id': self.vehicle_id.id,
-            'location_id': self.location_id.id,
-            'location_dest_id': self.location_dest_id.id,
-            'product_id': self.product_id.id,
-            'product_qty': self.transfer_qty,
-            'product_uom': self.product_id.uom_id.id,
-            'description_picking': self.product_id.name,
-            'company_id': self.company_id.id,
-            'date': self.scheduled_date,
-            'picking_id': self.id,
-            'state': self.state,
-        }
-        self.env['stock.move'].sudo().create(stock_move_vals)
-        stock_quant_source = self.env['stock.quant'].search(
-            [('location_id', '=', self.location_id.id)], limit=1)
-        stock_quant_dest = self.env['stock.quant'].search(
-            [('location_id', '=', self.location_dest_id.id)], limit=1)
-        if stock_quant_source:
-            stock_quant_source.quantity -= self.transfer_qty
-        if stock_quant_dest:
-            stock_quant_dest.quantity += self.transfer_qty
-        else:
-            stock_quant_vals = {
-                'location_id': self.location_dest_id.id,
-                'product_id': self.product_id.id,
-                'quantity': self.transfer_qty,
+            rec.state = 'done'
+            stock_move_vals = {
+                'name': str(rec.location_id.name) + '-' + str(rec.location_dest_id.name),
+                'contract_id': rec.contract_id.id,
+                'vehicle_id': rec.vehicle_id.id,
+                'location_id': rec.location_id.id,
+                'location_dest_id': rec.location_dest_id.id,
+                'product_id': rec.product_id.id,
+                'product_qty': rec.transfer_qty,
+                'product_uom': rec.product_id.uom_id.id,
+                'description_picking': rec.product_id.name,
+                'company_id': rec.company_id.id,
+                'date': rec.scheduled_date,
+                'picking_id': rec.id,
+                'state': rec.state,
             }
-            self.env['stock.quant'].sudo().create(stock_quant_vals)
+            self.env['stock.move'].sudo().create(stock_move_vals)
+            stock_quant_source = self.env['stock.quant'].search(
+                [('location_id', '=', rec.location_id.id)], limit=1)
+            stock_quant_dest = self.env['stock.quant'].search(
+                [('location_id', '=', rec.location_dest_id.id)], limit=1)
+            if stock_quant_source:
+                stock_quant_source.quantity -= rec.transfer_qty
+            if stock_quant_dest:
+                stock_quant_dest.quantity += rec.transfer_qty
+            else:
+                stock_quant_vals = {
+                    'location_id': rec.location_dest_id.id,
+                    'product_id': rec.product_id.id,
+                    'quantity': rec.transfer_qty,
+                }
+                self.env['stock.quant'].sudo().create(stock_quant_vals)
 
-        return True
+            return True
 
     @ api.depends('contract_id')
     def _compute_delivery_point(self):
@@ -117,31 +114,26 @@ class Picking(models.Model):
 
     @api.depends('picking_type')
     def _compute_source_location(self):
-        print("SDDDDDDDDDDDDDDDDDDDDDDDDDDDDDs")
         for rec in self:
-            print(rec.partner_default_company_id.id,
-                  "+++++++++++++++++++++++++++++++++")
-            company_id = rec.partner_default_company_id.id
             if rec.picking_type == 'delivery':
                 source_location = self.env['stock.location'].search(
-                    [('usage', '=', 'internal'), ('company_id', '=', company_id)], order='id ASC', limit=1)
+                    [('usage', '=', 'internal'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
                 rec.location_id = source_location.id
             else:
                 source_location = self.env['stock.location'].search(
-                    [('usage', '=', 'transit'), ('company_id', '=', company_id)], order='id ASC', limit=1)
+                    [('usage', '=', 'transit'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
                 rec.location_id = source_location.id
 
     @ api.depends('picking_type')
     def _compute_dest_location(self):
         for rec in self:
-            company_id = rec.partner_default_company_id.id
             if rec.picking_type == 'delivery':
                 destination_location = self.env['stock.location'].search(
-                    [('usage', '=', 'transit'), ('company_id', '=', company_id)], order='id ASC', limit=1)
+                    [('usage', '=', 'transit'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
                 rec.location_dest_id = destination_location.id
             else:
                 destination_location = self.env['stock.location'].search(
-                    [('usage', '=', 'internal'), ('company_id', '=', company_id)], order='id ASC', limit=1)
+                    [('usage', '=', 'internal'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
                 rec.location_dest_id = destination_location.id
 
     @ api.depends('contract_id', 'state')
@@ -158,18 +150,19 @@ class Picking(models.Model):
             if vals.get('transfer_qty') <= 0:
                 raise UserError('Transfer quantity must be greater than zero.')
             now = fields.Date.today().strftime('%y%m%d')
+            company = self.env['res.company'].browse(vals.get('company_id'))
             sequence = self.env['ir.sequence'].sudo().search([
                 ('code', '=', 'stock.picking'),
-                ('prefix', 'like', f'TS-{now}-')
+                ('prefix', 'like',  f'{company.name[:3]}-{now}-')
             ], limit=1)
             if not sequence:
                 sequence = self.env['ir.sequence'].sudo().create({
                     'name': _('Sequence'),
                     'code': 'stock.picking',
-                    'padding': 3,
-                    'prefix': f'TS-{now}-',
+                    'padding': 4,
+                    'prefix': f'{company.name[:3]}-{now}-',
                     'number_increment': 1,
-                    'company_id': self.env.user.company_id.id,
+                    'company_id': vals.get('company_id'),
                 })
             vals['name'] = sequence.next_by_id()
         pickings = super().create(vals_list)

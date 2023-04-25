@@ -27,6 +27,7 @@
         <field eval="12" name="priority"/>
         <field name="arch" type="xml">
             <form string="Transfer">
+                <field name="company_id" invisible="1"/>
                 <header>
                     <button name="action_assign" attrs="{'invisible': [('state', '!=', 'draft')]}" string="Mark as Todo" class="oe_highlight" type="object" data-hotkey="z"/>
                     <button name="action_done" attrs="{'invisible': [('state', '!=', 'assigned')]}" string="Validate" groups="base.group_user" class="oe_highlight" type="object" data-hotkey="z"/>

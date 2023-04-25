@@ -19,10 +19,10 @@
                     <group>
                         <group col="2">
                             <field name="product_id"/>
-                            <field name="total_qty" />
+                            <field name="location_id" options="{'no_create': True}"/>
                         </group>
                         <group col="2">
-                            <field name="location_id" options="{'no_create': True}"/>
+                            <field name="total_qty" />
                             <field name="location_dest_id" options="{'no_create': True}"/>
                         </group>
                     </group>
