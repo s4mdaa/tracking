@@ -11,6 +11,8 @@ class Company(models.Model):
             return False
 
     # used for resupply routes between warehouses that belong to this company
+    is_transfer_company = fields.Boolean(
+        "Is transfer company", default=False)
     internal_transit_location_id = fields.Many2one(
         'stock.location', 'Internal Transit Location', ondelete="restrict", check_company=True)
     stock_move_email_validation = fields.Boolean(

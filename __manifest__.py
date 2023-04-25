@@ -22,6 +22,7 @@
         'views/stock_quant_view.xml',
         'views/stock_contract_view.xml',
         'views/stock_vehicle_view.xml',
+        'views/res_company_view.xml',
     ],
 
 

@@ -112,19 +112,22 @@ class Picking(models.Model):
         for rec in self:
             rec.delivery_point_id = rec.contract_id.location_dest_id.id
 
-    @api.depends('picking_type')
+    @api.depends('picking_type', 'vehicle_id')
     def _compute_source_location(self):
         for rec in self:
             if rec.picking_type == 'delivery':
-                source_location = self.env['stock.location'].search(
-                    [('usage', '=', 'internal'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
+                if rec.company_id.is_transfer_company == True:
+                    source_location = rec.vehicle_id.location_id
+                else:
+                    source_location = self.env['stock.location'].search(
+                        [('usage', '=', 'internal'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
                 rec.location_id = source_location.id
             else:
                 source_location = self.env['stock.location'].search(
                     [('usage', '=', 'transit'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
                 rec.location_id = source_location.id
 
-    @ api.depends('picking_type')
+    @ api.depends('picking_type', 'vehicle_id')
     def _compute_dest_location(self):
         for rec in self:
             if rec.picking_type == 'delivery':
@@ -132,8 +135,11 @@ class Picking(models.Model):
                     [('usage', '=', 'transit'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
                 rec.location_dest_id = destination_location.id
             else:
-                destination_location = self.env['stock.location'].search(
-                    [('usage', '=', 'internal'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
+                if rec.company_id.is_transfer_company == True:
+                    destination_location = rec.vehicle_id.location_id
+                else:
+                    destination_location = self.env['stock.location'].search(
+                        [('usage', '=', 'internal'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
                 rec.location_dest_id = destination_location.id
 
     @ api.depends('contract_id', 'state')
@@ -151,16 +157,17 @@ class Picking(models.Model):
                 raise UserError('Transfer quantity must be greater than zero.')
             now = fields.Date.today().strftime('%y%m%d')
             company = self.env['res.company'].browse(vals.get('company_id'))
+            prefix = f'{company.name[:3]}-{now}-'
             sequence = self.env['ir.sequence'].sudo().search([
                 ('code', '=', 'stock.picking'),
-                ('prefix', 'like',  f'{company.name[:3]}-{now}-')
+                ('prefix', 'like',  prefix)
             ], limit=1)
             if not sequence:
                 sequence = self.env['ir.sequence'].sudo().create({
                     'name': _('Sequence'),
                     'code': 'stock.picking',
                     'padding': 4,
-                    'prefix': f'{company.name[:3]}-{now}-',
+                    'prefix': prefix,
                     'number_increment': 1,
                     'company_id': vals.get('company_id'),
                 })
