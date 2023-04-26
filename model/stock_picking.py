@@ -33,8 +33,8 @@ class Picking(models.Model):
         'Total Quantity', related='contract_id.total_qty', readonly=True)
     available_qty = fields.Integer(
         'Available Quantity', compute='_compute_available_qty', readonly=True)
-    transfer_qty = fields.Integer('Demand', required=True, default=1,
-                                  states={'done': [('readonly', True)], 'cancel': [('readonly', True)]})
+    transfer_qty = fields.Integer('Demand', required=True, states={
+                                  'done': [('readonly', True)], 'cancel': [('readonly', True)]})
     note = fields.Html('Note', readonly=True,
                        states={'draft': [('readonly', False)]})
     location_dest_id = fields.Many2one(
@@ -42,7 +42,9 @@ class Picking(models.Model):
     location_id = fields.Many2one(
         'stock.location', 'Source Location', compute='_compute_source_location', readonly=True)
     delivery_point_id = fields.Many2one(
-        'stock.location', 'Delivery Point', compute='_compute_delivery_point', readonly=True)
+        'stock.location', 'Delivery Point', compute='_compute_main_location', readonly=True)
+    source_point_id = fields.Many2one(
+        'stock.location', 'Source Point', compute='_compute_main_location', readonly=True)
     product_id = fields.Many2one(
         related='contract_id.product_id', readonly=True)
     priority = fields.Selection(
@@ -108,9 +110,10 @@ class Picking(models.Model):
             return True
 
     @ api.depends('contract_id')
-    def _compute_delivery_point(self):
+    def _compute_main_location(self):
         for rec in self:
             rec.delivery_point_id = rec.contract_id.location_dest_id.id
+            rec.source_point_id = rec.contract_id.location_id.id
 
     @api.depends('picking_type', 'vehicle_id')
     def _compute_source_location(self):

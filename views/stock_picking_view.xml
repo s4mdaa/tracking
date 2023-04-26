@@ -41,22 +41,29 @@
                             <field name="name" attrs="{'invisible': [('name','=','/')]}"/>
                         </h1>
                     </div>
-                    <group>
-                        <group>
+                    <group string="Main Information" name="main_info">
+                        <group col="2">
                             <field name="contract_id"/>
+                            <field name="source_point_id"/>
+                            <field name="total_qty"/>
+                        </group>
+                        <group col="2">
                             <field name="vehicle_id"/>
+                            <field name="delivery_point_id"/>
+                            <field name="available_qty"/>
+                        </group>
+                    </group>
+                    <group string="Move Information" name="move_info">
+                        <group col="2">
+                            <field name="location_id"/>
                             <field name="picking_type"/>
-                            <field name="transfer_qty"/>
-                            <field name="scheduled_date"/>
+                            <field name="product_id"/>
                             <field name="note"/>
                         </group>
-                        <group>
-                            <field name="location_id"/>
+                        <group col="2">
                             <field name="location_dest_id"/>
-                            <field name="delivery_point_id"/>
-                            <field name="product_id"/>
-                            <field name="total_qty"/>
-                            <field name="available_qty"/>
+                            <field name="scheduled_date"/>
+                            <field name="transfer_qty"/>
                         </group>
                     </group>
                 </sheet>
