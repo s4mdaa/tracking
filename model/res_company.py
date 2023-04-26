@@ -11,8 +11,8 @@ class Company(models.Model):
             return False
 
     # used for resupply routes between warehouses that belong to this company
-    company_type = fields.Selection([('transportation', 'Transportation'), ('mining', 'Mining')],
-        "Company Type", default='transportation', required=True)
+    company_type = fields.Selection(
+        [('transport', 'Transportation'), ('mining', 'Mining')], "Company Type")
     internal_transit_location_id = fields.Many2one(
         'stock.location', 'Internal Transit Location', ondelete="restrict", check_company=True)
     stock_move_email_validation = fields.Boolean(

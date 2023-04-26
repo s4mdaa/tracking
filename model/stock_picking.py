@@ -116,7 +116,7 @@ class Picking(models.Model):
     def _compute_source_location(self):
         for rec in self:
             if rec.picking_type == 'delivery':
-                if rec.company_id.company_type == 'transportation':
+                if rec.company_id.company_type == 'transport':
                     source_location = rec.vehicle_id.location_id
                 else:
                     source_location = self.env['stock.location'].search(
@@ -135,7 +135,7 @@ class Picking(models.Model):
                     [('usage', '=', 'transit'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
                 rec.location_dest_id = destination_location.id
             else:
-                if rec.company_id.company_type == 'transportation':
+                if rec.company_id.company_type == 'transport':
                     destination_location = rec.vehicle_id.location_id
                 else:
                     destination_location = self.env['stock.location'].search(
