@@ -12,6 +12,7 @@
         'security/ir.model.access.csv',
 
         'data/stock_data.xml',
+        'data/ir_cron_data.xml',
 
         'views/menu_view.xml',
         'views/product_view.xml',

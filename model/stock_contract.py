@@ -1,4 +1,7 @@
 from odoo import fields, models
+import requests
+from datetime import datetime, timedelta
+import pytz
 
 
 class Contract(models.Model):
@@ -18,11 +21,10 @@ class Contract(models.Model):
         ('cancel', 'Cancelled')
     ], string='Status', group_expand='_expand_states', copy=False,
         tracking=True, help='Status of the contract', default='draft')
-    date_start = fields.Date(
-        'Start Date', default=fields.Date.today, tracking=True, index=True)
-    date_end = fields.Date('End Date', tracking=True,
-                           help="End date of the contract (if it's a fixed-term contract).")
+    date = fields.Datetime('Date')
     source_company_id = fields.Many2one('res.company', 'Source Company')
+    auction = fields.Char('Auction')
+    price = fields.Float('Price')
     destination_company_id = fields.Many2one(
         'res.company', 'Destination Company')
     active = fields.Boolean(default=True)
@@ -31,8 +33,51 @@ class Contract(models.Model):
     location_dest_id = fields.Many2one(
         'stock.location', 'Destination Location', domain=[('usage', '=', 'internal')])
     total_qty = fields.Integer('Quantity')
+    amount = fields.Float('Amount')
 
     _sql_constraints = [
         ('name_uniq', 'unique (name)',
          "Contract already exists.")
     ]
+
+    def _get_contract_info(self):
+        session = requests.Session()
+
+        # Login
+        login_url = 'http://spectre-dev.online:9000/login'
+        payload = {
+            'username': 'admin01',
+            'password': 'a'
+        }
+        response = session.post(login_url, data=payload)
+
+        # Check login response status code
+        if response.status_code == 200:
+
+            # Get contract info using the same session object
+            trade_url = 'http://spectre-dev.online:8080/ts/trade/public/all'
+            response = session.get(trade_url)
+
+            trade_url = 'http://spectre-dev.online:8080/ts/trade/public/all'
+            response = session.get(trade_url)
+
+            if response.status_code == 200:
+                data = response.json()
+                for trade in data:
+                    contractObj = self.env['stock.contract'].search(
+                        [('name', '=', trade['id'])], limit=1)
+                    if not contractObj:
+                        date = datetime.strptime(
+                            trade['date'], '%Y-%m-%dT%H:%M:%S.%f%z')
+                        tradeDate = date.replace(
+                            tzinfo=None) - timedelta(hours=8)
+                        stock_contract_vals = {
+                            'name': trade['id'],
+                            'amount': trade['amount'],
+                            'price': trade['value'],
+                            'auction': trade['auction'],
+                            'date':  tradeDate,
+                            'total_qty': 6400 * trade['amount'],
+                        }
+                        self.env['stock.contract'].sudo().create(
+                            stock_contract_vals)

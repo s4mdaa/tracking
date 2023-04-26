@@ -20,10 +20,14 @@
                         <group col="2">
                             <field name="product_id"/>
                             <field name="location_id" options="{'no_create': True}"/>
+                            <field name="auction"/>
+                            <field name="price"/>
                         </group>
                         <group col="2">
+                            <field name="amount"/>
                             <field name="total_qty" />
                             <field name="location_dest_id" options="{'no_create': True}"/>
+                            <field name="date"/>
                         </group>
                     </group>
                 </sheet>
@@ -36,12 +40,16 @@
         <field name="model">stock.contract</field>
         <field eval="50" name="priority"/>
         <field name="arch" type="xml">
-            <tree delete="false" string="Contracts">
+            <tree string="Contracts">
                 <field name="name" />
                 <field name="product_id"/>
+                <field name="auction"/>
                 <field name="location_id" />
                 <field name="location_dest_id"/>
+                <field name="price"/>
+                <field name="amount"/>
                 <field name="total_qty" />
+                <field name="date" />
             </tree>
         </field>
     </record>
