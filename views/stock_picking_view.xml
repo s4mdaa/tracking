@@ -4,7 +4,7 @@
         <field name="name">stock.picking.tree</field>
         <field name="model">stock.picking</field>
         <field name="arch" type="xml">
-            <tree string="Picking list">
+            <tree string="Picking list" default_order="scheduled_date desc">
                 <header>
                 </header>
                 <field name="priority" optional="show" widget="priority" nolabel="1"/>
