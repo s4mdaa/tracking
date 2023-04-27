@@ -1,0 +1,1197 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tracking
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-27 02:30+0000\n"
+"PO-Revision-Date: 2023-04-27 02:30+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_product_product__detailed_type
+#: model:ir.model.fields,help:tracking.field_product_template__detailed_type
+msgid ""
+"A storable product is a product for which you manage stock. The Inventory app has to be installed.\n"
+"A consumable product is a product for which stock is not managed.\n"
+"A service is a non-material product you provide."
+msgstr ""
+"Үлдэгдэл тооцох барааны хувьд та тэдгээр барааны нөөцийг хянах боломжтой юм. Үүний тулд Inventory app суулгасан байх шаардлагатай.\n"
+"Үлдэгдэл тооцохгүй бараа бол нөөцийг хянаж бүртгэх шаардлагагүй бараа юм.\n"
+"Үйлчилгээ бол таны ханган үзүүлдэг материаллаг бус ажил үйлчилгээ болно."
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__message_needaction
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__active
+#: model:ir.model.fields,field_description:tracking.field_stock_location__active
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__active
+#: model:ir.model.fields,field_description:tracking.field_stock_warehouse__active
+#: model_terms:ir.ui.view,arch_db:tracking.vehicle_search
+msgid "Active"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_ids
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_exception_decoration
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_state
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_type_icon
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.view_location_form
+msgid "Additional Information"
+msgstr "Нэмэлт мэдээлэл"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_warehouse__partner_id
+msgid "Address"
+msgstr "Харилцагч"
+
+#. module: tracking
+#: model:res.groups,name:tracking.group_tracking_admin
+msgid "Admin"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__amount
+msgid "Amount"
+msgstr "Багц"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_res_company__annual_inventory_month
+msgid "Annual Inventory Month"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_res_company__annual_inventory_month
+msgid ""
+"Annual inventory month for products not in a location with a cyclic "
+"inventory date. Set to no month if no automatic annual inventory."
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__res_company__annual_inventory_month__4
+msgid "April"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.view_location_form
+msgid "Archived"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__message_attachment_count
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: tracking
+#: model:ir.ui.menu,name:tracking.menu_attribute_action
+msgid "Attributes"
+msgstr "Шинж чанар"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__auction
+msgid "Auction"
+msgstr "Дуудлага худалдаа"
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__res_company__annual_inventory_month__8
+msgid "August"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__available_qty
+msgid "Available Quantity"
+msgstr "Үлдсэн тоо хэмжээ"
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_location__active
+msgid ""
+"By unchecking the active field, you may hide a location without deleting it."
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.view_picking_form
+msgid "Cancel"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_contract__state__cancel
+#: model:ir.model.fields.selection,name:tracking.selection__stock_move__state__cancel
+#: model:ir.model.fields.selection,name:tracking.selection__stock_picking__state__cancel
+msgid "Cancelled"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_location__scrap_location
+msgid ""
+"Check this box to allow using this location to put scrapped/damaged goods."
+msgstr ""
+
+#. module: tracking
+#: model:ir.model,name:tracking.model_res_company
+msgid "Companies"
+msgstr "Компаниуд"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__company_id
+#: model:ir.model.fields,field_description:tracking.field_stock_location__company_id
+#: model:ir.model.fields,field_description:tracking.field_stock_move__company_id
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__company_id
+#: model:ir.model.fields,field_description:tracking.field_stock_quant__company_id
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__company_id
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__parent_company_id
+#: model:ir.model.fields,field_description:tracking.field_stock_warehouse__company_id
+msgid "Company"
+msgstr "Компани"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_res_company__company_type
+msgid "Company Type"
+msgstr "Компанийн төрөл"
+
+#. module: tracking
+#: model:ir.ui.menu,name:tracking.config_root_menu
+msgid "Configuration"
+msgstr "Тохиргоо"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_move__contract_id
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__contract_id
+msgid "Contract"
+msgstr "Гэрээ"
+
+#. module: tracking
+#: model:ir.model.constraint,message:tracking.constraint_stock_contract_name_uniq
+msgid "Contract already exists."
+msgstr "Гэрэ аль хэдийн үүссэн байна"
+
+#. module: tracking
+#: model:ir.actions.act_window,name:tracking.stock_contract_action
+#: model:ir.ui.menu,name:tracking.stock_contract_menu
+#: model_terms:ir.ui.view,arch_db:tracking.view_contract_tree
+msgid "Contracts"
+msgstr "Гэрээ"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__create_uid
+#: model:ir.model.fields,field_description:tracking.field_stock_location__create_uid
+#: model:ir.model.fields,field_description:tracking.field_stock_move__create_uid
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__create_uid
+#: model:ir.model.fields,field_description:tracking.field_stock_quant__create_uid
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__create_uid
+#: model:ir.model.fields,field_description:tracking.field_stock_warehouse__create_uid
+msgid "Created by"
+msgstr "Үүсгэсэн этгээд"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__create_date
+#: model:ir.model.fields,field_description:tracking.field_stock_location__create_date
+#: model:ir.model.fields,field_description:tracking.field_stock_move__create_date
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__create_date
+#: model:ir.model.fields,field_description:tracking.field_stock_quant__create_date
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__create_date
+#: model:ir.model.fields,field_description:tracking.field_stock_warehouse__create_date
+msgid "Created on"
+msgstr "Үүсгэсэн огноо"
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_location__usage__customer
+msgid "Customer Location"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__date
+msgid "Date"
+msgstr "Огноо"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_move__date
+msgid "Date Scheduled"
+msgstr "Товлогдсон огноо"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_res_company__annual_inventory_day
+msgid "Day of the month"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_res_company__annual_inventory_day
+msgid ""
+"Day of the month when the annual inventory should occur. If zero or negative, then the first day of the month will be selected instead.\n"
+"        If greater than the last day of a month, then the last day of the month will be selected instead."
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__res_company__annual_inventory_month__12
+msgid "December"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_product_product__uom_id
+#: model:ir.model.fields,help:tracking.field_product_template__uom_id
+#: model:ir.model.fields,help:tracking.field_stock_quant__product_uom_id
+msgid "Default unit of measure used for all stock operations."
+msgstr "Агуулахын үйл ажиллагаанд ашиглагдах үндсэн хэмжих нэгж"
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_picking__picking_type__delivery
+msgid "Delivery"
+msgstr "Хүргэх"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__delivery_point_id
+msgid "Delivery Point"
+msgstr "Хүргэлтийн цэг"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__transfer_qty
+msgid "Demand"
+msgstr "Шилжүүлэх Тоо хэмжээ"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_move__name
+msgid "Description"
+msgstr "Тайлбар"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_move__description_picking
+msgid "Description of Picking"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__destination_company_id
+msgid "Destination Company"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__location_dest_id
+#: model:ir.model.fields,field_description:tracking.field_stock_move__location_dest_id
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__location_dest_id
+msgid "Destination Location"
+msgstr "Хүргэх байршил"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_move__location_dest_usage
+msgid "Destination Location Type"
+msgstr "Хүргэх байршилын төрөл"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__display_name
+#: model:ir.model.fields,field_description:tracking.field_stock_location__display_name
+#: model:ir.model.fields,field_description:tracking.field_stock_move__display_name
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__display_name
+#: model:ir.model.fields,field_description:tracking.field_stock_quant__display_name
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__display_name
+#: model:ir.model.fields,field_description:tracking.field_stock_warehouse__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_move__state__done
+#: model:ir.model.fields.selection,name:tracking.selection__stock_picking__state__done
+msgid "Done"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_move__state__draft
+#: model:ir.model.fields.selection,name:tracking.selection__stock_picking__state__draft
+msgid "Draft"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_res_company__stock_move_email_validation
+msgid "Email Confirmation picking"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_res_company__stock_mail_confirmation_template_id
+msgid "Email Template confirmation picking"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_res_company__stock_mail_confirmation_template_id
+msgid "Email sent to the customer once the order is done."
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_contract__state__close
+msgid "Expired"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__res_company__annual_inventory_month__2
+msgid "February"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__message_follower_ids
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__message_partner_ids
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_picking__activity_type_icon
+#: model:ir.model.fields,help:tracking.field_stock_vehicle__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.view_move_tree
+msgid "From"
+msgstr "Гарсан"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_location__complete_name
+msgid "Full Location Name"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__has_message
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_location__posz
+msgid "Height (Z)"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__id
+#: model:ir.model.fields,field_description:tracking.field_stock_location__id
+#: model:ir.model.fields,field_description:tracking.field_stock_move__id
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__id
+#: model:ir.model.fields,field_description:tracking.field_stock_quant__id
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__id
+#: model:ir.model.fields,field_description:tracking.field_stock_warehouse__id
+msgid "ID"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_exception_icon
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_picking__activity_exception_icon
+#: model:ir.model.fields,help:tracking.field_stock_vehicle__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_picking__message_needaction
+#: model:ir.model.fields,help:tracking.field_stock_vehicle__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_picking__message_has_error
+#: model:ir.model.fields,help:tracking.field_stock_picking__message_has_sms_error
+#: model:ir.model.fields,help:tracking.field_stock_vehicle__message_has_error
+#: model:ir.model.fields,help:tracking.field_stock_vehicle__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_location__usage__internal
+msgid "Internal Location"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_res_company__internal_transit_location_id
+msgid "Internal Transit Location"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model,name:tracking.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_location__usage__inventory
+msgid "Inventory Loss"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.view_stock_quant_tree
+msgid "Inventory Valuation"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__message_is_follower
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_location__scrap_location
+msgid "Is a Scrap Location?"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__res_company__annual_inventory_month__1
+msgid "January"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__res_company__annual_inventory_month__7
+msgid "July"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__res_company__annual_inventory_month__6
+msgid "June"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract____last_update
+#: model:ir.model.fields,field_description:tracking.field_stock_location____last_update
+#: model:ir.model.fields,field_description:tracking.field_stock_move____last_update
+#: model:ir.model.fields,field_description:tracking.field_stock_picking____last_update
+#: model:ir.model.fields,field_description:tracking.field_stock_quant____last_update
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle____last_update
+#: model:ir.model.fields,field_description:tracking.field_stock_warehouse____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__write_uid
+#: model:ir.model.fields,field_description:tracking.field_stock_location__write_uid
+#: model:ir.model.fields,field_description:tracking.field_stock_move__write_uid
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__write_uid
+#: model:ir.model.fields,field_description:tracking.field_stock_quant__write_uid
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__write_uid
+#: model:ir.model.fields,field_description:tracking.field_stock_warehouse__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__write_date
+#: model:ir.model.fields,field_description:tracking.field_stock_location__write_date
+#: model:ir.model.fields,field_description:tracking.field_stock_move__write_date
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__write_date
+#: model:ir.model.fields,field_description:tracking.field_stock_quant__write_date
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__write_date
+#: model:ir.model.fields,field_description:tracking.field_stock_warehouse__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_contract__company_id
+#: model:ir.model.fields,help:tracking.field_stock_location__company_id
+#: model:ir.model.fields,help:tracking.field_stock_quant__company_id
+msgid "Let this field empty if this location is shared between companies"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_quant__location_id
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__location_id
+msgid "Location"
+msgstr "Байршил"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_location__name
+msgid "Location Name"
+msgstr "Байршилын нэр"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_location__usage
+msgid "Location Type"
+msgstr "Байршилын төрөл"
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_move__location_dest_id
+msgid "Location where the system will stock the finished products."
+msgstr ""
+
+#. module: tracking
+#: model:ir.actions.act_window,name:tracking.stock_location_action
+#: model:ir.ui.menu,name:tracking.stock_location_menu
+msgid "Locations"
+msgstr "Байршил"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__message_main_attachment_id
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.view_picking_form
+msgid "Main Information"
+msgstr "Үндсэн мэдээлэл"
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__res_company__annual_inventory_month__3
+msgid "March"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.view_picking_form
+msgid "Mark as Todo"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__res_company__annual_inventory_month__5
+msgid "May"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__message_has_error
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__message_ids
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__res_company__company_type__mining
+msgid "Mining"
+msgstr "Уурхай"
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.view_picking_form
+msgid "Move Information"
+msgstr "Шилжүүлгийн мэдээлэл"
+
+#. module: tracking
+#: model:ir.ui.menu,name:tracking.stock_move_menu
+#: model_terms:ir.ui.view,arch_db:tracking.view_move_tree
+msgid "Moves"
+msgstr "Хөдөлгөөн"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__my_activity_date_deadline
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__name
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__name
+msgid "Name"
+msgstr "Нэр"
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_contract__state__draft
+msgid "New"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_date_deadline
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_summary
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_type_id
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.actions.act_window,help:tracking.stock_contract_action
+msgid "No contract found. Let's create from exchange app!"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.actions.act_window,help:tracking.product_template_action
+msgid "No product found. Let's create one!"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.actions.act_window,help:tracking.stock_vehicle_action
+msgid "No vehicles found. Let's create one!"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_picking__priority__0
+msgid "Normal"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__note
+msgid "Note"
+msgstr "Тайлбар"
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__res_company__annual_inventory_month__11
+msgid "November"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__message_needaction_counter
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__message_has_error_counter
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_picking__message_needaction_counter
+#: model:ir.model.fields,help:tracking.field_stock_vehicle__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_picking__message_has_error_counter
+#: model:ir.model.fields,help:tracking.field_stock_vehicle__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__res_company__annual_inventory_month__10
+msgid "October"
+msgstr ""
+
+#. module: tracking
+#: model:ir.ui.menu,name:tracking.operations_root_menu
+msgid "Operations"
+msgstr "Үйл ажиллагаа"
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_location__posz
+msgid "Optional localization details, for information purpose only"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__user_company_id
+msgid "Parent"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_location__location_id
+msgid "Parent Location"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model,name:tracking.model_stock_picking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__picking_type
+msgid "Picking Type"
+msgstr "Тээвэрлэлтийн төрөл"
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.view_picking_tree
+#: model_terms:ir.ui.view,arch_db:tracking.view_warehouse_tree
+msgid "Picking list"
+msgstr "Тээвэрлэлтийн жагсаалт"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__price
+msgid "Price"
+msgstr "Үнэ"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__priority
+msgid "Priority"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model,name:tracking.model_product_template
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__product_id
+#: model:ir.model.fields,field_description:tracking.field_stock_move__product_id
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__product_id
+#: model:ir.model.fields,field_description:tracking.field_stock_quant__product_id
+msgid "Product"
+msgstr "Бараа"
+
+#. module: tracking
+#: model:ir.ui.menu,name:tracking.product_category_menu
+msgid "Product Categories"
+msgstr "Ангилал"
+
+#. module: tracking
+#: model:ir.actions.act_window,name:tracking.product_category_action
+#: model:ir.model,name:tracking.model_product_category
+msgid "Product Category"
+msgstr "Барааны ангилал"
+
+#. module: tracking
+#: model:ir.actions.act_window,name:tracking.product_template_action
+#: model:ir.model.fields,field_description:tracking.field_stock_move__product_tmpl_id
+#: model:ir.model.fields,field_description:tracking.field_stock_quant__product_tmpl_id
+msgid "Product Template"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_product_product__detailed_type
+#: model:ir.model.fields,field_description:tracking.field_product_template__detailed_type
+msgid "Product Type"
+msgstr "Барааны төрөл"
+
+#. module: tracking
+#: model:ir.model,name:tracking.model_product_product
+msgid "Product Variant"
+msgstr "Барааны хувилбар"
+
+#. module: tracking
+#: model:ir.actions.act_window,name:tracking.product_product_action
+#: model:ir.ui.menu,name:tracking.product_product_menu
+msgid "Product Variants"
+msgstr "Барааны хувилбар"
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_location__usage__production
+msgid "Production"
+msgstr ""
+
+#. module: tracking
+#: model:ir.ui.menu,name:tracking.product_config_menu
+#: model:ir.ui.menu,name:tracking.product_template_menu
+#: model:ir.ui.menu,name:tracking.products_root_menu
+msgid "Products"
+msgstr "Бараа"
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_picking__priority
+msgid ""
+"Products will be reserved first for the transfers with the highest "
+"priorities."
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__total_qty
+#: model:ir.model.fields,field_description:tracking.field_stock_quant__quantity
+#: model_terms:ir.ui.view,arch_db:tracking.view_move_tree
+#: model_terms:ir.ui.view,arch_db:tracking.view_stock_quant_tree
+msgid "Quantity"
+msgstr "Тоо хэмжээ"
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_move__product_qty
+msgid "Quantity in the default UoM of the product"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_quant__quantity
+msgid ""
+"Quantity of products in this quant, in the default unit of measure of the "
+"product"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model,name:tracking.model_stock_quant
+#: model:ir.ui.menu,name:tracking.stock_quant_menu
+msgid "Quants"
+msgstr "Тоо хэмжээ"
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_move__state__assigned
+#: model:ir.model.fields.selection,name:tracking.selection__stock_picking__state__assigned
+msgid "Ready"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_move__product_qty
+msgid "Real Quantity"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_picking__picking_type__receipt
+msgid "Receipt"
+msgstr "Хүлээн авах"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_move__reference
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__name
+msgid "Reference"
+msgstr "Тээвэрлэлт"
+
+#. module: tracking
+#: model:ir.ui.menu,name:tracking.reporting_root_menu
+msgid "Reporting"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_user_id
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_contract__state__open
+msgid "Running"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__message_has_sms_error
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__scheduled_date
+msgid "Scheduled Date"
+msgstr "Огноо"
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_move__date
+msgid "Scheduled date until move is done, then date of actual move processing"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__res_company__annual_inventory_month__9
+msgid "September"
+msgstr ""
+
+#. module: tracking
+#. odoo-python
+#: code:addons/tracking/model/stock_picking.py:0
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__sequence
+#: model:ir.model.fields,field_description:tracking.field_stock_move__sequence
+#, python-format
+msgid "Sequence"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_move__location_id
+msgid ""
+"Sets a location if you produce at a fixed location. This can be a partner "
+"location if you subcontract the manufacturing operations."
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_warehouse__code
+msgid "Short Name"
+msgstr "Товчилсон нэр"
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_warehouse__code
+msgid "Short name used to identify your warehouse"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__source_company_id
+msgid "Source Company"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__location_id
+#: model:ir.model.fields,field_description:tracking.field_stock_move__location_id
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__location_id
+msgid "Source Location"
+msgstr "Гарах байршил"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_move__location_usage
+msgid "Гарах байршилын төрөл"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__source_point_id
+msgid "Source Point"
+msgstr "Анхны цэг"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__state_number
+msgid "State number"
+msgstr "Улсын дугаар"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__state
+#: model:ir.model.fields,field_description:tracking.field_stock_move__state
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__state
+msgid "Status"
+msgstr "Төлөв"
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_picking__activity_state
+#: model:ir.model.fields,help:tracking.field_stock_vehicle__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_contract__state
+msgid "Status of the contract"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model,name:tracking.model_stock_contract
+msgid "Stock Contract"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.view_contract_form
+msgid "Stock Contracts"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.view_location_form
+#: model_terms:ir.ui.view,arch_db:tracking.view_location_tree
+msgid "Stock Location"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model,name:tracking.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: tracking
+#: model:ir.actions.act_window,name:tracking.stock_move_action
+msgid "Stock Moves"
+msgstr ""
+
+#. module: tracking
+#: model:ir.actions.act_window,name:tracking.stock_quant_action
+msgid "Stock Quant"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model,name:tracking.model_stock_vehicle
+msgid "Stock Vehicle"
+msgstr ""
+
+#. module: tracking
+#: model:ir.actions.server,name:tracking.ir_cron_module_get_contract_info_ir_actions_server
+#: model:ir.cron,cron_name:tracking.ir_cron_module_get_contract_info
+msgid "Stock: Get contract info"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__product_template__detailed_type__product
+#: model:ir.model.fields.selection,name:tracking.selection__product_template__type__product
+msgid "Storable Product"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_warehouse__company_id
+msgid "The company is automatically set from your user preferences."
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_location__location_id
+msgid ""
+"The parent location that includes this location. Example : The 'Dispatch "
+"Zone' is the 'Gate 1' parent location."
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.view_move_tree
+msgid "To"
+msgstr "Очсон"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__total_qty
+#: model_terms:ir.ui.view,arch_db:tracking.view_move_tree
+#: model_terms:ir.ui.view,arch_db:tracking.view_stock_quant_tree
+msgid "Total Quantity"
+msgstr "Нийт тоо хэмжээ"
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_vehicle__vehicle_type__track
+msgid "Track"
+msgstr "Ачааны машин"
+
+#. module: tracking
+#: model_terms:ir.actions.act_window,help:tracking.product_template_action
+msgid "Track your stock quantities by creating storable products."
+msgstr ""
+
+#. module: tracking
+#: model:ir.module.category,name:tracking.tracking_category
+#: model:ir.ui.menu,name:tracking.tracking_root_menu
+msgid "Tracking"
+msgstr "Тээвэр"
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_vehicle__vehicle_type__train
+msgid "Train"
+msgstr "Галт тэрэг"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_move__picking_id
+#: model_terms:ir.ui.view,arch_db:tracking.view_picking_form
+#: model_terms:ir.ui.view,arch_db:tracking.view_warehouse_form
+msgid "Transfer"
+msgstr ""
+
+#. module: tracking
+#: model:ir.actions.act_window,name:tracking.stock_transfer_action
+#: model:ir.ui.menu,name:tracking.stock_transfer_menu
+msgid "Transfers"
+msgstr "Тээвэрлэлт"
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_location__usage__transit
+msgid "Transit Location"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__res_company__company_type__transport
+msgid "Transport"
+msgstr "Тээвэрлэлт"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_product_product__type
+#: model:ir.model.fields,field_description:tracking.field_product_template__type
+msgid "Type"
+msgstr "Төрөл"
+
+#. module: tracking
+#: model:ir.model.fields,help:tracking.field_stock_picking__activity_exception_decoration
+#: model:ir.model.fields,help:tracking.field_stock_vehicle__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_quant__product_uom_id
+#: model_terms:ir.ui.view,arch_db:tracking.view_move_tree
+msgid "Unit"
+msgstr "Нэгж"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_product_product__uom_id
+#: model:ir.model.fields,field_description:tracking.field_product_template__uom_id
+msgid "Unit of Measure"
+msgstr "Хэмжих нэгж"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_move__product_uom
+msgid "UoM"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_picking__priority__1
+msgid "Urgent"
+msgstr ""
+
+#. module: tracking
+#: model:res.groups,name:tracking.group_tracking_user
+msgid "User"
+msgstr "Хэрэглэгч"
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.view_picking_form
+msgid "Validate"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_move__vehicle_id
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__vehicle_id
+msgid "Vehicle"
+msgstr "Тээврийн хэрэгсэл"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_vehicle__vehicle_type
+msgid "Vehicle Type"
+msgstr "Тээврийн хэрэгслийн төрөл"
+
+#. module: tracking
+#: model:ir.model.constraint,message:tracking.constraint_stock_vehicle_name_uniq
+msgid "Vehicle already exists on current company."
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.vehicle_search
+msgid "Vehicle search"
+msgstr "Тээврийн хэрэгсэл хайх"
+
+#. module: tracking
+#: model:ir.actions.act_window,name:tracking.stock_vehicle_action
+#: model:ir.ui.menu,name:tracking.stock_vehicle_menu
+#: model_terms:ir.ui.view,arch_db:tracking.view_vehicle_tree
+msgid "Vehicles"
+msgstr "Тээврийн хэрэгсэл"
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_location__usage__supplier
+msgid "Vendor Location"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields.selection,name:tracking.selection__stock_location__usage__view
+msgid "View"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model,name:tracking.model_stock_warehouse
+#: model:ir.model.fields,field_description:tracking.field_stock_warehouse__name
+msgid "Warehouse"
+msgstr "Агуулах"
+
+#. module: tracking
+#: model:ir.ui.menu,name:tracking.warehouse_config_menu
+msgid "Warehouse Management"
+msgstr "Агуулахын тохиргоо"
+
+#. module: tracking
+#: model:ir.actions.act_window,name:tracking.stock_warehouse_action
+#: model:ir.ui.menu,name:tracking.stock_warehouse_menu
+msgid "Warehouses"
+msgstr "Агуулах"
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.view_warehouse_form
+msgid "e.g. CW"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.view_warehouse_form
+msgid "e.g. Central Warehouse"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.view_location_form
+msgid "e.g. Physical Locations"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.view_location_form
+msgid "e.g. Spare Stock"
+msgstr ""
