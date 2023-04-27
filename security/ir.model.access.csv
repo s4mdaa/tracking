@@ -29,3 +29,6 @@ access_stock_contract_user,stock.contract.user,model_stock_contract,tracking.gro
 
 access_stock_vehicle_admin,stock.vehicle.admin,model_stock_vehicle,tracking.group_tracking_admin,1,1,1,1
 access_stock_vehicle_user,stock.vehicle.user,model_stock_vehicle,tracking.group_tracking_user,1,0,0,0
+
+access_stock_picking_line_admin,stock.picking.line.admin,model_stock_picking_line,tracking.group_tracking_admin,1,1,1,1
+access_stock_picking_line_user,stock.picking.line.user,model_stock_picking_line,tracking.group_tracking_user,1,0,0,0

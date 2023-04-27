@@ -11,13 +11,15 @@ class Picking(models.Model):
     name = fields.Char(
         'Reference', default='/',
         copy=False, index='trigram', readonly=True)
-    vehicle_id = fields.Many2one(
-        'stock.vehicle', 'Vehicle', required=True, readonly=True,
-        states={'draft': [('readonly', False)]})
 
     company_id = fields.Many2one(
         'res.company', string='Company', default=lambda self: self.env.user.company_id.id,
         store=True, index=True)
+
+    company_type = fields.Selection(related='company_id.company_type')
+
+    picking_line_ids = fields.One2many(
+        'stock.picking.line', 'picking_id', string="Picking Lines", copy=True)
 
     picking_type = fields.Selection([
         ('receipt', 'Receipt'),
@@ -33,14 +35,6 @@ class Picking(models.Model):
         'Total Quantity', related='contract_id.total_qty', readonly=True)
     available_qty = fields.Integer(
         'Available Quantity', compute='_compute_available_qty', readonly=True)
-    transfer_qty = fields.Integer('Demand', required=True, states={
-                                  'done': [('readonly', True)], 'cancel': [('readonly', True)]})
-    note = fields.Html('Note', readonly=True,
-                       states={'draft': [('readonly', False)]})
-    location_dest_id = fields.Many2one(
-        'stock.location', 'Destination Location', compute='_compute_dest_location', readonly=True)
-    location_id = fields.Many2one(
-        'stock.location', 'Source Location', compute='_compute_source_location', readonly=True)
     delivery_point_id = fields.Many2one(
         'stock.location', 'Delivery Point', compute='_compute_main_location', readonly=True)
     source_point_id = fields.Many2one(
@@ -50,10 +44,6 @@ class Picking(models.Model):
     priority = fields.Selection(
         PROCUREMENT_PRIORITIES, string='Priority', default='0',
         help="Products will be reserved first for the transfers with the highest priorities.")
-    scheduled_date = fields.Datetime(
-        'Scheduled Date', store=True,
-        index=True, default=fields.Datetime.now, tracking=True, readonly=True,
-        states={'draft': [('readonly', False)]})
     state = fields.Selection([
         ('draft', 'Draft'),
         ('assigned', 'Ready'),
@@ -71,42 +61,81 @@ class Picking(models.Model):
 
     def action_done(self):
         for rec in self:
-            if rec.transfer_qty > rec.available_qty:
+            if sum(rec.picking_line_ids.mapped('transfer_qty')) > rec.available_qty:
                 raise UserError(
                     'Transfer quantity cannot be greater than available quantity.')
             rec.state = 'done'
-            stock_move_vals = {
-                'name': str(rec.location_id.name) + '-' + str(rec.location_dest_id.name),
-                'contract_id': rec.contract_id.id,
-                'vehicle_id': rec.vehicle_id.id,
-                'location_id': rec.location_id.id,
-                'location_dest_id': rec.location_dest_id.id,
-                'product_id': rec.product_id.id,
-                'product_qty': rec.transfer_qty,
-                'product_uom': rec.product_id.uom_id.id,
-                'description_picking': rec.product_id.name,
-                'company_id': rec.company_id.id,
-                'date': rec.scheduled_date,
-                'picking_id': rec.id,
-                'state': rec.state,
-            }
-            self.env['stock.move'].sudo().create(stock_move_vals)
-            stock_quant_source = self.env['stock.quant'].search(
-                [('location_id', '=', rec.location_id.id)], limit=1)
-            stock_quant_dest = self.env['stock.quant'].search(
-                [('location_id', '=', rec.location_dest_id.id)], limit=1)
-            if stock_quant_source:
-                stock_quant_source.quantity -= rec.transfer_qty
-            if stock_quant_dest:
-                stock_quant_dest.quantity += rec.transfer_qty
-            else:
-                stock_quant_vals = {
-                    'location_id': rec.location_dest_id.id,
+            for picking_line in rec.picking_line_ids:
+                picking_line.state = 'done'
+                source_location = self.env['stock.location'].search(
+                    [('usage', '=', 'transit'), ('company_id', '=', picking_line.vehicle_id.company_id.id)], order='id ASC', limit=1)
+                destination_location = picking_line.vehicle_id.location_id
+                stock_move_vals = {
+                    'name': str(source_location.name) + '-' + str(destination_location.name),
+                    'contract_id': rec.contract_id.id,
+                    'vehicle_id': picking_line.vehicle_id.id,
+                    'location_id': source_location.id,
+                    'location_dest_id': destination_location.id,
                     'product_id': rec.product_id.id,
-                    'quantity': rec.transfer_qty,
+                    'product_qty': picking_line.transfer_qty,
+                    'product_uom': rec.product_id.uom_id.id,
+                    'description_picking': rec.product_id.name,
+                    'company_id': rec.company_id.id,
+                    'date': picking_line.scheduled_date,
+                    'picking_id': rec.id,
+                    'state': picking_line.state,
                 }
-                self.env['stock.quant'].sudo().create(stock_quant_vals)
-
+                self.env['stock.move'].sudo().create(stock_move_vals)
+                stock_quant_source = self.env['stock.quant'].search(
+                    [('location_id', '=', source_location.id)], limit=1)
+                stock_quant_dest = self.env['stock.quant'].search(
+                    [('location_id', '=', destination_location.id)], limit=1)
+                if stock_quant_source:
+                    stock_quant_source.quantity -= picking_line.transfer_qty
+                if stock_quant_dest:
+                    stock_quant_dest.quantity += picking_line.transfer_qty
+                else:
+                    stock_quant_vals = {
+                        'location_id': destination_location.id,
+                        'product_id': rec.product_id.id,
+                        'quantity': picking_line.transfer_qty,
+                    }
+                    self.env['stock.quant'].sudo().create(stock_quant_vals)
+                source_location = self.env['stock.location'].search(
+                    [('usage', '=', 'internal'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
+                destination_location = self.env['stock.location'].search(
+                    [('usage', '=', 'transit'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
+                stock_move_vals = {
+                    'name': str(source_location.name) + '-' + str(destination_location.name),
+                    'contract_id': rec.contract_id.id,
+                    'vehicle_id': picking_line.vehicle_id.id,
+                    'location_id': source_location.id,
+                    'location_dest_id': destination_location.id,
+                    'product_id': rec.product_id.id,
+                    'product_qty': picking_line.transfer_qty,
+                    'product_uom': rec.product_id.uom_id.id,
+                    'description_picking': rec.product_id.name,
+                    'company_id': rec.company_id.id,
+                    'date': picking_line.scheduled_date,
+                    'picking_id': rec.id,
+                    'state': picking_line.state,
+                }
+                self.env['stock.move'].sudo().create(stock_move_vals)
+                stock_quant_source = self.env['stock.quant'].search(
+                    [('location_id', '=', source_location.id)], limit=1)
+                stock_quant_dest = self.env['stock.quant'].search(
+                    [('location_id', '=', destination_location.id)], limit=1)
+                if stock_quant_source:
+                    stock_quant_source.quantity -= picking_line.transfer_qty
+                if stock_quant_dest:
+                    stock_quant_dest.quantity += picking_line.transfer_qty
+                else:
+                    stock_quant_vals = {
+                        'location_id': destination_location.id,
+                        'product_id': rec.product_id.id,
+                        'quantity': picking_line.transfer_qty,
+                    }
+                    self.env['stock.quant'].sudo().create(stock_quant_vals)
             return True
 
     @ api.depends('contract_id')
@@ -115,49 +144,17 @@ class Picking(models.Model):
             rec.delivery_point_id = rec.contract_id.location_dest_id.id
             rec.source_point_id = rec.contract_id.location_id.id
 
-    @api.depends('picking_type', 'vehicle_id')
-    def _compute_source_location(self):
-        for rec in self:
-            if rec.picking_type == 'delivery':
-                if rec.company_id.company_type == 'transport':
-                    source_location = rec.vehicle_id.location_id
-                else:
-                    source_location = self.env['stock.location'].search(
-                        [('usage', '=', 'internal'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
-                rec.location_id = source_location.id
-            else:
-                source_location = self.env['stock.location'].search(
-                    [('usage', '=', 'transit'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
-                rec.location_id = source_location.id
-
-    @ api.depends('picking_type', 'vehicle_id')
-    def _compute_dest_location(self):
-        for rec in self:
-            if rec.picking_type == 'delivery':
-                destination_location = self.env['stock.location'].search(
-                    [('usage', '=', 'transit'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
-                rec.location_dest_id = destination_location.id
-            else:
-                if rec.company_id.company_type == 'transport':
-                    destination_location = rec.vehicle_id.location_id
-                else:
-                    destination_location = self.env['stock.location'].search(
-                        [('usage', '=', 'internal'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
-                rec.location_dest_id = destination_location.id
-
     @ api.depends('contract_id', 'state')
     def _compute_available_qty(self):
         for rec in self:
-            done_pickings = self.env['stock.picking'].search(
-                [('state', '=', 'done'), ('contract_id', '=', rec.contract_id.id), ('company_id.company_type', '=', 'mining')])
-            total_qty = sum(done_pickings.mapped('transfer_qty'))
+            picking_lines = self.env['stock.picking.line'].search(
+                [('picking_id', '=', rec.id), ('state', '=', 'done')])
+            total_qty = sum(picking_lines.mapped('transfer_qty'))
             rec.available_qty = rec.contract_id.total_qty - total_qty
 
     @ api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            if vals.get('transfer_qty') <= 0:
-                raise UserError('Transfer quantity must be greater than zero.')
             now = fields.Date.today().strftime('%y%m%d')
             company = self.env['res.company'].browse(vals.get('company_id'))
             prefix = f'{company.name[:3]}-{now}-'
@@ -177,3 +174,30 @@ class Picking(models.Model):
             vals['name'] = sequence.next_by_id()
         pickings = super().create(vals_list)
         return pickings
+
+
+class PickingLine(models.Model):
+    _name = "stock.picking.line"
+    _description = "Picking Line"
+
+    picking_id = fields.Many2one(
+        'stock.picking')
+    vehicle_id = fields.Many2one(
+        'stock.vehicle', 'Vehicle', required=True)
+    transfer_qty = fields.Integer('Demand')
+    note = fields.Html('Note')
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('done', 'Done'),
+    ], string='Status', default='draft', copy=False, index=True, readonly=True, store=True, tracking=True)
+    scheduled_date = fields.Datetime(
+        'Scheduled Date', store=True,
+        index=True, default=fields.Datetime.now)
+
+    @ api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get('transfer_qty') <= 0:
+                raise UserError('Transfer quantity must be greater than zero.')
+        picking_lines = super().create(vals_list)
+        return picking_lines

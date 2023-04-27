@@ -6,7 +6,7 @@ class Location(models.Model):
     _description = "Inventory Locations"
     _check_company_auto = True
 
-    name = fields.Char('Location Name', required=True)
+    name = fields.Char('Location Name', required=True, translate=True)
     active = fields.Boolean(
         'Active', default=True, help="By unchecking the active field, you may hide a location without deleting it.")
     usage = fields.Selection([
@@ -25,7 +25,7 @@ class Location(models.Model):
         'res.company', 'Company', index=True,
         help='Let this field empty if this location is shared between companies')
     complete_name = fields.Char(
-        "Full Location Name", compute='_compute_complete_name', recursive=True, store=True)
+        "Full Location Name", compute='_compute_complete_name', recursive=True, store=True, translate=True)
     posz = fields.Integer('Height (Z)', default=0,
                           help="Optional localization details, for information purpose only")
     scrap_location = fields.Boolean('Is a Scrap Location?', default=False,

@@ -6,7 +6,7 @@
         <field name="model">stock.quant</field>
         <field eval="10" name="priority"/>
         <field name="arch" type="xml">
-            <tree string="Inventory Valuation" js_class="inventory_report_list" create="0" delete="0">
+            <tree string="Inventory Valuation" create="0" delete="0">
                 <field name="product_id"/>
                 <field name="location_id"/>
                 <field name="quantity" string="Quantity" sum="Total Quantity"/>
@@ -20,7 +20,7 @@
         <field name="name">Stock Quant</field>
         <field name="res_model">stock.quant</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree</field>
     </record>
 
     <menuitem id="stock_quant_menu" name="Quants" action="stock_quant_action" parent="reporting_root_menu" sequence="1"/>

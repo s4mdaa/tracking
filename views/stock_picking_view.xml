@@ -4,18 +4,15 @@
         <field name="name">stock.picking.tree</field>
         <field name="model">stock.picking</field>
         <field name="arch" type="xml">
-            <tree string="Picking list" default_order="scheduled_date desc">
+            <tree string="Picking list" default_order="create_date desc">
                 <header>
                 </header>
                 <field name="priority" optional="show" widget="priority" nolabel="1"/>
                 <field name="name"/>
                 <field name="contract_id"/>
-                <field name="vehicle_id"/>
-                <field name="location_id"/>
-                <field name="location_dest_id"/>
                 <field name="product_id"/>
                 <field name="total_qty"/>
-                <field name="transfer_qty"/>
+                <field name="available_qty"/>
                 <field name="state" widget='badge' optional="show" decoration-danger="state=='cancel'" decoration-info="state== 'assigned'" decoration-muted="state == 'draft'" decoration-success="state == 'done'" decoration-warning="state not in ('draft','cancel','done','assigned')"/>
             </tree>
         </field>
@@ -27,6 +24,7 @@
         <field eval="12" name="priority"/>
         <field name="arch" type="xml">
             <form string="Transfer">
+                <field name="company_type" invisible="1"/>
                 <field name="company_id" invisible="1"/>
                 <header>
                     <button name="action_assign" attrs="{'invisible': [('state', '!=', 'draft')]}" string="Mark as Todo" class="oe_highlight" type="object" data-hotkey="z"/>
@@ -41,30 +39,30 @@
                             <field name="name" attrs="{'invisible': [('name','=','/')]}"/>
                         </h1>
                     </div>
-                    <group string="Main Information" name="main_info">
+                    <group string="Contract Information" name="contract_info">
                         <group col="2">
                             <field name="contract_id"/>
                             <field name="source_point_id"/>
                             <field name="total_qty"/>
                         </group>
                         <group col="2">
-                            <field name="vehicle_id"/>
+                            <field name="product_id"/>
                             <field name="delivery_point_id"/>
                             <field name="available_qty"/>
                         </group>
                     </group>
                     <group string="Move Information" name="move_info">
                         <group col="2">
-                            <field name="location_id"/>
-                            <field name="picking_type"/>
-                            <field name="product_id"/>
-                            <field name="note"/>
+                            <field name="picking_type" attrs="{'invisible': [('company_type', '=', 'mining')]}"/>
                         </group>
-                        <group col="2">
-                            <field name="location_dest_id"/>
-                            <field name="scheduled_date"/>
-                            <field name="transfer_qty"/>
-                        </group>
+                        <field name="picking_line_ids" attrs="{'readonly': [('state', '!=', 'draft')]}" mode="tree,kanban">
+                            <tree string="Moves" editable="bottom">
+                                <field name="vehicle_id" />
+                                <field name="transfer_qty" />
+                                <field name="scheduled_date" />
+                                <!-- <field name="note"/> -->
+                            </tree>
+                        </field>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
