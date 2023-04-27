@@ -852,7 +852,7 @@ msgstr "Тээвэрлэлт"
 #. module: tracking
 #: model:ir.ui.menu,name:tracking.reporting_root_menu
 msgid "Reporting"
-msgstr ""
+msgstr "Тайлан"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_user_id
