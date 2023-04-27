@@ -380,7 +380,7 @@ msgstr "Гарсан"
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_location__complete_name
 msgid "Full Location Name"
-msgstr ""
+msgstr "Нэр"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__has_message
@@ -714,7 +714,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_location__location_id
 msgid "Parent Location"
-msgstr ""
+msgstr "Эцэг байршил"
 
 #. module: tracking
 #: model:ir.model,name:tracking.model_stock_picking
