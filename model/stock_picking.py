@@ -47,11 +47,12 @@ class Picking(models.Model):
         help="Products will be reserved first for the transfers with the highest priorities.")
     state = fields.Selection([
         ('draft', 'Draft'),
+        ('edit', 'Edit'),
         ('done', 'Done'),
     ], string='Status', default='draft', copy=False, index=True, readonly=True, store=True, tracking=True)
 
-    def action_draft(self):
-        self.state = 'draft'
+    def action_edit(self):
+        self.state = 'edit'
         return True
 
     def action_done(self):
