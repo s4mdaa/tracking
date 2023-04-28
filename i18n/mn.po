@@ -818,7 +818,7 @@ msgstr "Барааны ангилал"
 #: model:ir.actions.act_window,name:tracking.product_template_action
 #: model:ir.model.fields,field_description:tracking.field_stock_move__product_tmpl_id
 #: model:ir.model.fields,field_description:tracking.field_stock_quant__product_tmpl_id
-msgid "Product Template"
+msgid "Бараа"
 msgstr ""
 
 #. module: tracking
@@ -1040,12 +1040,12 @@ msgstr ""
 #. module: tracking
 #: model:ir.actions.act_window,name:tracking.stock_move_action
 msgid "Stock Moves"
-msgstr ""
+msgstr "Хөдөлгөөн"
 
 #. module: tracking
 #: model:ir.actions.act_window,name:tracking.stock_quant_action
 msgid "Stock Quant"
-msgstr ""
+msgstr "Тоо хэмжээ"
 
 #. module: tracking
 #: model:ir.model,name:tracking.model_stock_vehicle

@@ -77,6 +77,7 @@ class Picking(models.Model):
                             timedelta(seconds=1)
                     else:
                         scheduled_date = picking_line.scheduled_date
+                    print(source_location.company_id.name)
                     stock_move_vals = {
                         'name': str(source_location.name) + '-' + str(destination_location.name),
                         'contract_id': rec.contract_id.id,
@@ -87,7 +88,7 @@ class Picking(models.Model):
                         'product_qty': picking_line.transfer_qty,
                         'product_uom': rec.product_id.uom_id.id,
                         'description_picking': rec.product_id.name,
-                        'company_id': rec.company_id.id,
+                        'company_id': source_location.company_id.id,
                         'date': scheduled_date,
                         'picking_id': rec.id,
                         'state': picking_line.state,
@@ -120,6 +121,7 @@ class Picking(models.Model):
                     else:
                         scheduled_date = picking_line.scheduled_date - \
                             timedelta(seconds=1)
+                    print(source_location.company_id.name)
                     stock_move_vals = {
                         'name': str(source_location.name) + '-' + str(destination_location.name),
                         'contract_id': rec.contract_id.id,
@@ -130,7 +132,7 @@ class Picking(models.Model):
                         'product_qty': picking_line.transfer_qty,
                         'product_uom': rec.product_id.uom_id.id,
                         'description_picking': rec.product_id.name,
-                        'company_id': rec.company_id.id,
+                        'company_id': source_location.company_id.id,
                         'date': scheduled_date,
                         'picking_id': rec.id,
                         'state': picking_line.state,
