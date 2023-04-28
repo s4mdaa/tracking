@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-27 10:23+0000\n"
-"PO-Revision-Date: 2023-04-27 10:23+0000\n"
+"POT-Creation-Date: 2023-04-28 04:52+0000\n"
+"PO-Revision-Date: 2023-04-28 04:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -40,7 +40,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:tracking.field_stock_warehouse__active
 #: model_terms:ir.ui.view,arch_db:tracking.vehicle_search
 msgid "Active"
-msgstr ""
+msgstr "Идэвхтэй"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_ids
@@ -141,14 +141,8 @@ msgid ""
 msgstr ""
 
 #. module: tracking
-#: model_terms:ir.ui.view,arch_db:tracking.view_picking_form
-msgid "Cancel"
-msgstr ""
-
-#. module: tracking
 #: model:ir.model.fields.selection,name:tracking.selection__stock_contract__state__cancel
 #: model:ir.model.fields.selection,name:tracking.selection__stock_move__state__cancel
-#: model:ir.model.fields.selection,name:tracking.selection__stock_picking__state__cancel
 msgid "Cancelled"
 msgstr ""
 
@@ -207,7 +201,7 @@ msgstr "Гэрэ аль хэдийн үүссэн байна"
 #: model:ir.ui.menu,name:tracking.stock_contract_menu
 #: model_terms:ir.ui.view,arch_db:tracking.view_contract_tree
 msgid "Contracts"
-msgstr "Гэрээнүүд"
+msgstr "Гэрээ"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__create_uid
@@ -285,7 +279,7 @@ msgstr "Хүргэх"
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__delivery_point_id
 msgid "Delivery Point"
-msgstr "Эцсийн цэг"
+msgstr "Хүргэлтийн цэг"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_picking_line__transfer_qty
@@ -579,11 +573,6 @@ msgid "March"
 msgstr ""
 
 #. module: tracking
-#: model_terms:ir.ui.view,arch_db:tracking.view_picking_form
-msgid "Mark as Todo"
-msgstr ""
-
-#. module: tracking
 #: model:ir.model.fields.selection,name:tracking.selection__res_company__annual_inventory_month__5
 msgid "May"
 msgstr ""
@@ -739,12 +728,12 @@ msgstr "Харилцагч"
 
 #. module: tracking
 #: model:stock.location,complete_name:tracking.stock_location_customers
-msgid "Partners/Захиалагч"
+msgid "Partners/Customers"
 msgstr "Харилцагч/Хүлэ"
 
 #. module: tracking
 #: model:stock.location,complete_name:tracking.stock_location_suppliers
-msgid "Partners/Нийлүүлэгч"
+msgid "Partners/Vendors"
 msgstr ""
 
 #. module: tracking
@@ -881,7 +870,6 @@ msgstr "Тоо хэмжээ"
 
 #. module: tracking
 #: model:ir.model.fields.selection,name:tracking.selection__stock_move__state__assigned
-#: model:ir.model.fields.selection,name:tracking.selection__stock_picking__state__assigned
 msgid "Ready"
 msgstr "Бэлэн"
 
@@ -905,6 +893,11 @@ msgstr "Тээвэрлэлт"
 #: model:ir.ui.menu,name:tracking.reporting_root_menu
 msgid "Reporting"
 msgstr "Тайлан"
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.view_picking_form
+msgid "Reset to Draft"
+msgstr "Ноороглох"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_user_id
@@ -1076,7 +1069,7 @@ msgstr ""
 #. module: tracking
 #: model_terms:ir.ui.view,arch_db:tracking.view_move_tree
 msgid "To"
-msgstr "Хүргэгдсэн"
+msgstr "Очсон"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__total_qty
@@ -1177,7 +1170,7 @@ msgstr "Хэрэглэгч"
 #. module: tracking
 #: model_terms:ir.ui.view,arch_db:tracking.view_picking_form
 msgid "Validate"
-msgstr ""
+msgstr "Шилжүүлэх"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_move__vehicle_id
@@ -1255,24 +1248,4 @@ msgstr ""
 #: model:ir.model.fields,help:tracking.field_stock_picking__website_message_ids
 #: model:ir.model.fields,help:tracking.field_stock_vehicle__website_message_ids
 msgid "Website communication history"
-msgstr ""
-
-#. module: tracking
-#: model_terms:ir.ui.view,arch_db:tracking.view_warehouse_form
-msgid "e.g. CW"
-msgstr ""
-
-#. module: tracking
-#: model_terms:ir.ui.view,arch_db:tracking.view_warehouse_form
-msgid "e.g. Central Warehouse"
-msgstr ""
-
-#. module: tracking
-#: model_terms:ir.ui.view,arch_db:tracking.view_location_form
-msgid "e.g. Physical Locations"
-msgstr ""
-
-#. module: tracking
-#: model_terms:ir.ui.view,arch_db:tracking.view_location_form
-msgid "e.g. Spare Stock"
 msgstr ""

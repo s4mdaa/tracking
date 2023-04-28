@@ -7,7 +7,6 @@
         <field name="arch" type="xml">
             <form string="Stock Contracts" delete="0">
                 <header>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,open,close" />
                 </header>
                 <sheet>
                     <div class="oe_title">

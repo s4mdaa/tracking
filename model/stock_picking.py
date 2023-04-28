@@ -46,21 +46,17 @@ class Picking(models.Model):
         help="Products will be reserved first for the transfers with the highest priorities.")
     state = fields.Selection([
         ('draft', 'Draft'),
-        ('assigned', 'Ready'),
         ('done', 'Done'),
-        ('cancel', 'Cancelled'),
     ], string='Status', default='draft', copy=False, index=True, readonly=True, store=True, tracking=True)
 
-    def action_assign(self):
-        self.state = 'assigned'
-        return True
-
-    def action_cancel(self):
-        self.state = 'cancel'
+    def action_draft(self):
+        self.state = 'draft'
         return True
 
     def action_done(self):
         for rec in self:
+            if len(rec.picking_line_ids) == 0:
+                raise UserError('Шилжүүлгийн мэдээлэл хоосон байна')
             if sum(rec.picking_line_ids.mapped('transfer_qty')) > rec.available_qty:
                 raise UserError(
                     'Transfer quantity cannot be greater than available quantity.')
