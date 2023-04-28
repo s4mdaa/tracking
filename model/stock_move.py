@@ -18,7 +18,7 @@ class Move(models.Model):
         'product.product', 'Product',
         check_company=True,
         domain="[('type', 'in', ['product', 'consu']), '|', ('company_id', '=', False), ('company_id', '=', company_id)]", index=True, required=True,
-        states={'done': [('readonly', True)]})
+        states={'moved': [('readonly', True)]})
     product_qty = fields.Float(
         'Real Quantity', compute='_compute_product_qty',
         digits=0, store=True, compute_sudo=True,
@@ -41,12 +41,11 @@ class Move(models.Model):
         check_company=True,
         help="Location where the system will stock the finished products.")
     picking_id = fields.Many2one('stock.picking', 'Transfer', index=True, states={
-                                 'done': [('readonly', True)]}, check_company=True)
+                                 'moved': [('readonly', True)]}, check_company=True)
     state = fields.Selection([
         ('draft', 'Draft'),
-        ('assigned', 'Ready'),
-        ('done', 'Done'),
-        ('cancel', 'Cancelled'),
+        ('moving', 'Moving'),
+        ('moved', 'Moved'),
     ], string='Status', default='draft', copy=False, index=True, readonly=True, store=True, tracking=True)
     reference = fields.Char(compute='_compute_reference',
                             string="Reference", store=True)

@@ -7,7 +7,7 @@
         <field eval="8" name="priority"/>
         <field name="arch" type="xml">
             <tree string="Moves" create="0" default_order="date desc">
-                <field name="date" decoration-danger="(state not in ('cancel','done')) and date > current_date"/>
+                <field name="date" decoration-danger="(state not in ('cancel','moved')) and date > current_date"/>
                 <field name="location_usage" invisible="1"/>
                 <field name="location_dest_usage" invisible="1"/>
                 <field name="reference"/>
@@ -19,7 +19,7 @@
                 <field name="product_qty" string="Quantity" sum="Total Quantity" decoration-danger="(location_usage in ('internal','transit')) and (location_dest_usage not in ('internal','transit'))" decoration-success="(location_usage not in ('internal','transit')) and (location_dest_usage in ('internal','transit'))"/>
                 <field name="product_uom" options="{'no_open': True, 'no_create': True}" string="Unit"/>
                 <field name="company_id"/>
-                <field name="state" widget='badge' optional="show" decoration-danger="state=='cancel'" decoration-info="state== 'assigned'" decoration-muted="state == 'draft'" decoration-success="state == 'done'" decoration-warning="state not in ('draft','cancel','done','assigned')"/>
+                <field name="state" widget='badge' optional="show" decoration-info="state== 'moving'" decoration-muted="state == 'draft'" decoration-success="state == 'moved'" />
             </tree>
         </field>
     </record>

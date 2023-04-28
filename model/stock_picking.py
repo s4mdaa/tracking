@@ -26,7 +26,7 @@ class Picking(models.Model):
         ('receipt', 'Receipt'),
         ('delivery', 'Delivery')],
         string="Picking Type", required=True, readonly=True,
-        states={'draft': [('readonly', False)]}, default='receipt')
+        states={'draft': [('readonly', False)]}, default='delivery')
 
     contract_id = fields.Many2one(
         'stock.contract', 'Contract', required=True, readonly=True,
@@ -47,12 +47,12 @@ class Picking(models.Model):
         help="Products will be reserved first for the transfers with the highest priorities.")
     state = fields.Selection([
         ('draft', 'Draft'),
-        ('edit', 'Edit'),
-        ('done', 'Done'),
+        ('moving', 'Moving'),
+        ('moved', 'Moved'),
     ], string='Status', default='draft', copy=False, index=True, readonly=True, store=True, tracking=True)
 
     def action_edit(self):
-        self.state = 'edit'
+        self.state = 'moving'
         return True
 
     def action_done(self):
@@ -62,10 +62,10 @@ class Picking(models.Model):
             if sum(rec.picking_line_ids.mapped('transfer_qty')) > rec.available_qty:
                 raise UserError(
                     'Transfer quantity cannot be greater than available quantity.')
-            rec.state = 'done'
+            rec.state = 'moved'
             for picking_line in rec.picking_line_ids:
-                if picking_line.state != 'done':
-                    picking_line.state = 'done'
+                if picking_line.state != 'moved':
+                    picking_line.state = 'moved'
                     source_location = self.env['stock.location'].search(
                         [('usage', '=', 'transit'), ('company_id', '=', picking_line.vehicle_id.company_id.id)], order='id ASC', limit=1)
                     destination_location = picking_line.vehicle_id.location_id
@@ -165,7 +165,7 @@ class Picking(models.Model):
     def _compute_available_qty(self):
         for rec in self:
             picking_lines = self.env['stock.picking.line'].search(
-                [('picking_id', '=', rec.id), ('state', '=', 'done')])
+                [('picking_id', '=', rec.id), ('state', '=', 'moved')])
             total_qty = sum(picking_lines.mapped('transfer_qty'))
             rec.available_qty = rec.contract_id.total_qty - total_qty
 
@@ -205,7 +205,7 @@ class PickingLine(models.Model):
     note = fields.Html('Note')
     state = fields.Selection([
         ('draft', 'Draft'),
-        ('done', 'Done'),
+        ('moved', 'Moved'),
     ], string='Status', default='draft', copy=False, index=True, readonly=True, store=True, tracking=True)
     scheduled_date = fields.Datetime(
         'Scheduled Date', store=True,

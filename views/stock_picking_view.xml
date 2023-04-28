@@ -13,7 +13,7 @@
                 <field name="product_id"/>
                 <field name="total_qty"/>
                 <field name="available_qty"/>
-                <field name="state" widget='badge' optional="show" decoration-danger="state=='cancel'" decoration-info="state== 'assigned'" decoration-muted="state == 'draft'" decoration-success="state == 'done'" decoration-warning="state not in ('draft','cancel','done','assigned')"/>
+                <field name="state" widget='badge' optional="show" decoration-info="state== 'moving'" decoration-muted="state == 'draft'" decoration-success="state == 'moved'" />
             </tree>
         </field>
     </record>
@@ -27,9 +27,9 @@
                 <field name="company_type" invisible="1"/>
                 <field name="company_id" invisible="1"/>
                 <header>
-                    <button name="action_edit" attrs="{'invisible': [('state', '!=', 'done')]}" string="Add Transfer" class="oe_highlight" type="object" data-hotkey="z"/>
-                    <button name="action_done" attrs="{'invisible': [('state', '=', 'done')]}" string="Validate" class="oe_highlight" type="object" data-hotkey="z" confirm="Are you sure making the transfer?"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft, done" />
+                    <button name="action_edit" attrs="{'invisible': [('state', '!=', 'moved')]}" string="Add Transfer" class="oe_highlight" type="object" data-hotkey="z"/>
+                    <button name="action_done" attrs="{'invisible': [('state', '=', 'moved')]}" string="Validate" class="oe_highlight" type="object" data-hotkey="z" confirm="Are you sure making the transfer?"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft, moved" />
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -54,12 +54,12 @@
                         <group col="2">
                             <field name="picking_type" attrs="{'invisible': [('company_type', '!=', 'warehouse')]}"/>
                         </group>
-                        <field name="picking_line_ids" attrs="{'readonly': [('state', '=', 'done')]}" mode="tree,kanban">
+                        <field name="picking_line_ids" attrs="{'readonly': [('state', '=', 'moved')]}" mode="tree,kanban">
                             <tree string="Moves" editable="bottom" delete="false">
                                 <field name="state" invisible="1"/>
-                                <field name="vehicle_id" attrs="{'readonly': [('state', '=', 'done')]}"/>
-                                <field name="transfer_qty" attrs="{'readonly': [('state', '=', 'done')]}"/>
-                                <field name="scheduled_date" attrs="{'readonly': [('state', '=', 'done')]}" />
+                                <field name="vehicle_id" attrs="{'readonly': [('state', '=', 'moved')]}"/>
+                                <field name="transfer_qty" attrs="{'readonly': [('state', '=', 'moved')]}"/>
+                                <field name="scheduled_date" attrs="{'readonly': [('state', '=', 'moved')]}" />
                             </tree>
                         </field>
                     </group>
