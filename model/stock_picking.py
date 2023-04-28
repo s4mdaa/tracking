@@ -1,6 +1,7 @@
 from odoo import SUPERUSER_ID, _, api, fields, models
 from odoo.addons.stock.models.stock_move import PROCUREMENT_PRIORITIES
 from odoo.exceptions import UserError
+from datetime import timedelta
 
 
 class Picking(models.Model):
@@ -62,76 +63,77 @@ class Picking(models.Model):
                     'Transfer quantity cannot be greater than available quantity.')
             rec.state = 'done'
             for picking_line in rec.picking_line_ids:
-                picking_line.state = 'done'
-                source_location = self.env['stock.location'].search(
-                    [('usage', '=', 'transit'), ('company_id', '=', picking_line.vehicle_id.company_id.id)], order='id ASC', limit=1)
-                destination_location = picking_line.vehicle_id.location_id
-                stock_move_vals = {
-                    'name': str(source_location.name) + '-' + str(destination_location.name),
-                    'contract_id': rec.contract_id.id,
-                    'vehicle_id': picking_line.vehicle_id.id,
-                    'location_id': source_location.id,
-                    'location_dest_id': destination_location.id,
-                    'product_id': rec.product_id.id,
-                    'product_qty': picking_line.transfer_qty,
-                    'product_uom': rec.product_id.uom_id.id,
-                    'description_picking': rec.product_id.name,
-                    'company_id': rec.company_id.id,
-                    'date': picking_line.scheduled_date,
-                    'picking_id': rec.id,
-                    'state': picking_line.state,
-                }
-                self.env['stock.move'].sudo().create(stock_move_vals)
-                stock_quant_source = self.env['stock.quant'].search(
-                    [('location_id', '=', source_location.id)], limit=1)
-                stock_quant_dest = self.env['stock.quant'].search(
-                    [('location_id', '=', destination_location.id)], limit=1)
-                if stock_quant_source:
-                    stock_quant_source.quantity -= picking_line.transfer_qty
-                if stock_quant_dest:
-                    stock_quant_dest.quantity += picking_line.transfer_qty
-                else:
-                    stock_quant_vals = {
-                        'location_id': destination_location.id,
+                if picking_line.state != 'done':
+                    picking_line.state = 'done'
+                    source_location = self.env['stock.location'].search(
+                        [('usage', '=', 'transit'), ('company_id', '=', picking_line.vehicle_id.company_id.id)], order='id ASC', limit=1)
+                    destination_location = picking_line.vehicle_id.location_id
+                    stock_move_vals = {
+                        'name': str(source_location.name) + '-' + str(destination_location.name),
+                        'contract_id': rec.contract_id.id,
+                        'vehicle_id': picking_line.vehicle_id.id,
+                        'location_id': source_location.id,
+                        'location_dest_id': destination_location.id,
                         'product_id': rec.product_id.id,
-                        'quantity': picking_line.transfer_qty,
+                        'product_qty': picking_line.transfer_qty,
+                        'product_uom': rec.product_id.uom_id.id,
+                        'description_picking': rec.product_id.name,
+                        'company_id': rec.company_id.id,
+                        'date': picking_line.scheduled_date,
+                        'picking_id': rec.id,
+                        'state': picking_line.state,
                     }
-                    self.env['stock.quant'].sudo().create(stock_quant_vals)
-                source_location = self.env['stock.location'].search(
-                    [('usage', '=', 'internal'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
-                destination_location = self.env['stock.location'].search(
-                    [('usage', '=', 'transit'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
-                stock_move_vals = {
-                    'name': str(source_location.name) + '-' + str(destination_location.name),
-                    'contract_id': rec.contract_id.id,
-                    'vehicle_id': picking_line.vehicle_id.id,
-                    'location_id': source_location.id,
-                    'location_dest_id': destination_location.id,
-                    'product_id': rec.product_id.id,
-                    'product_qty': picking_line.transfer_qty,
-                    'product_uom': rec.product_id.uom_id.id,
-                    'description_picking': rec.product_id.name,
-                    'company_id': rec.company_id.id,
-                    'date': picking_line.scheduled_date,
-                    'picking_id': rec.id,
-                    'state': picking_line.state,
-                }
-                self.env['stock.move'].sudo().create(stock_move_vals)
-                stock_quant_source = self.env['stock.quant'].search(
-                    [('location_id', '=', source_location.id)], limit=1)
-                stock_quant_dest = self.env['stock.quant'].search(
-                    [('location_id', '=', destination_location.id)], limit=1)
-                if stock_quant_source:
-                    stock_quant_source.quantity -= picking_line.transfer_qty
-                if stock_quant_dest:
-                    stock_quant_dest.quantity += picking_line.transfer_qty
-                else:
-                    stock_quant_vals = {
-                        'location_id': destination_location.id,
+                    self.env['stock.move'].sudo().create(stock_move_vals)
+                    stock_quant_source = self.env['stock.quant'].search(
+                        [('location_id', '=', source_location.id)], limit=1)
+                    stock_quant_dest = self.env['stock.quant'].search(
+                        [('location_id', '=', destination_location.id)], limit=1)
+                    if stock_quant_source:
+                        stock_quant_source.quantity -= picking_line.transfer_qty
+                    if stock_quant_dest:
+                        stock_quant_dest.quantity += picking_line.transfer_qty
+                    else:
+                        stock_quant_vals = {
+                            'location_id': destination_location.id,
+                            'product_id': rec.product_id.id,
+                            'quantity': picking_line.transfer_qty,
+                        }
+                        self.env['stock.quant'].sudo().create(stock_quant_vals)
+                    source_location = self.env['stock.location'].search(
+                        [('usage', '=', 'internal'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
+                    destination_location = self.env['stock.location'].search(
+                        [('usage', '=', 'transit'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
+                    stock_move_vals = {
+                        'name': str(source_location.name) + '-' + str(destination_location.name),
+                        'contract_id': rec.contract_id.id,
+                        'vehicle_id': picking_line.vehicle_id.id,
+                        'location_id': source_location.id,
+                        'location_dest_id': destination_location.id,
                         'product_id': rec.product_id.id,
-                        'quantity': picking_line.transfer_qty,
+                        'product_qty': picking_line.transfer_qty,
+                        'product_uom': rec.product_id.uom_id.id,
+                        'description_picking': rec.product_id.name,
+                        'company_id': rec.company_id.id,
+                        'date': picking_line.scheduled_date - timedelta(seconds=1),
+                        'picking_id': rec.id,
+                        'state': picking_line.state,
                     }
-                    self.env['stock.quant'].sudo().create(stock_quant_vals)
+                    self.env['stock.move'].sudo().create(stock_move_vals)
+                    stock_quant_source = self.env['stock.quant'].search(
+                        [('location_id', '=', source_location.id)], limit=1)
+                    stock_quant_dest = self.env['stock.quant'].search(
+                        [('location_id', '=', destination_location.id)], limit=1)
+                    if stock_quant_source:
+                        stock_quant_source.quantity -= picking_line.transfer_qty
+                    if stock_quant_dest:
+                        stock_quant_dest.quantity += picking_line.transfer_qty
+                    else:
+                        stock_quant_vals = {
+                            'location_id': destination_location.id,
+                            'product_id': rec.product_id.id,
+                            'quantity': picking_line.transfer_qty,
+                        }
+                        self.env['stock.quant'].sudo().create(stock_quant_vals)
             return True
 
     @ api.depends('contract_id')
