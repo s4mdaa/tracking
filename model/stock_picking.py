@@ -69,6 +69,14 @@ class Picking(models.Model):
                     source_location = self.env['stock.location'].search(
                         [('usage', '=', 'transit'), ('company_id', '=', picking_line.vehicle_id.company_id.id)], order='id ASC', limit=1)
                     destination_location = picking_line.vehicle_id.location_id
+                    if rec.picking_type == 'receipt':
+                        temp = destination_location
+                        destination_location = source_location
+                        source_location = temp
+                        scheduled_date = picking_line.scheduled_date - \
+                            timedelta(seconds=1)
+                    else:
+                        scheduled_date = picking_line.scheduled_date
                     stock_move_vals = {
                         'name': str(source_location.name) + '-' + str(destination_location.name),
                         'contract_id': rec.contract_id.id,
@@ -80,7 +88,7 @@ class Picking(models.Model):
                         'product_uom': rec.product_id.uom_id.id,
                         'description_picking': rec.product_id.name,
                         'company_id': rec.company_id.id,
-                        'date': picking_line.scheduled_date,
+                        'date': scheduled_date,
                         'picking_id': rec.id,
                         'state': picking_line.state,
                     }
@@ -104,6 +112,14 @@ class Picking(models.Model):
                         [('usage', '=', 'internal'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
                     destination_location = self.env['stock.location'].search(
                         [('usage', '=', 'transit'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
+                    if rec.picking_type == 'receipt':
+                        temp = destination_location
+                        destination_location = source_location
+                        source_location = temp
+                        scheduled_date = picking_line.scheduled_date
+                    else:
+                        scheduled_date = picking_line.scheduled_date - \
+                            timedelta(seconds=1)
                     stock_move_vals = {
                         'name': str(source_location.name) + '-' + str(destination_location.name),
                         'contract_id': rec.contract_id.id,
@@ -115,7 +131,7 @@ class Picking(models.Model):
                         'product_uom': rec.product_id.uom_id.id,
                         'description_picking': rec.product_id.name,
                         'company_id': rec.company_id.id,
-                        'date': picking_line.scheduled_date - timedelta(seconds=1),
+                        'date': scheduled_date,
                         'picking_id': rec.id,
                         'state': picking_line.state,
                     }
