@@ -33,7 +33,8 @@ class Contract(models.Model):
         'stock.location', 'Source Location', domain=[('usage', '=', 'internal')])
     location_dest_id = fields.Many2one(
         'stock.location', 'Destination Location', domain=[('usage', '=', 'internal')])
-    total_qty = fields.Integer('Quantity', compute='_compute_total_qty')
+    total_qty = fields.Integer(
+        'Quantity', compute='_compute_total_qty', store=True)
     amount = fields.Float('Amount')
     contract_line_ids = fields.One2many(
         'stock.contract.line', 'contract_id', string="Contract Lines", copy=True)
@@ -109,11 +110,11 @@ class Contract(models.Model):
                     'number_increment': 1,
                     'company_id': vals.get('company_id'),
                 })
-            contract.name = sequence.next_by_id()
+            contract.write({'name': sequence.next_by_id()})
             stock_contract_line_source_vals = {
-                'location_id': vals.get('location_id'),
-                'product_id': vals.get('product_id'),
-                'quantity': vals.get('total_qty'),
+                'location_id': contract.location_id.id,
+                'product_id': contract.product_id.id,
+                'quantity': contract.total_qty,
                 'contract_id': contract.id
             }
             self.env['stock.contract.line'].sudo().create(
