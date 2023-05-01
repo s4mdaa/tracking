@@ -10,6 +10,7 @@ class Contract(models.Model):
     _order = 'sequence, id'
 
     name = fields.Char('Name')
+    reference = fields.Char('Reference')
     sequence = fields.Integer('Sequence', default=10)
     company_id = fields.Many2one(
         'res.company', 'Company', related='location_id.company_id')
@@ -21,7 +22,7 @@ class Contract(models.Model):
         ('cancel', 'Cancelled')
     ], string='Status', group_expand='_expand_states', copy=False,
         tracking=True, help='Status of the contract', default='draft')
-    date = fields.Datetime('Date')
+    date = fields.Datetime('Date', default=fields.Datetime.now)
     source_company_id = fields.Many2one('res.company', 'Source Company')
     auction = fields.Char('Auction')
     price = fields.Float('Price')
@@ -32,7 +33,7 @@ class Contract(models.Model):
         'stock.location', 'Source Location', domain=[('usage', '=', 'internal')])
     location_dest_id = fields.Many2one(
         'stock.location', 'Destination Location', domain=[('usage', '=', 'internal')])
-    total_qty = fields.Integer('Quantity')
+    total_qty = fields.Integer('Quantity', compute='_compute_total_qty')
     amount = fields.Float('Amount')
     contract_line_ids = fields.One2many(
         'stock.contract.line', 'contract_id', string="Contract Lines", copy=True)
@@ -41,6 +42,11 @@ class Contract(models.Model):
         ('name_uniq', 'unique (name)',
          "Contract already exists.")
     ]
+
+    @ api.depends('amount')
+    def _compute_total_qty(self):
+        for rec in self:
+            rec.total_qty = rec.amount * 6400
 
     def _get_contract_info(self):
         session = requests.Session()
@@ -74,7 +80,7 @@ class Contract(models.Model):
                         tradeDate = date.replace(
                             tzinfo=None) - timedelta(hours=8)
                         stock_contract_vals = {
-                            'name': trade['id'],
+                            'reference': trade['id'],
                             'amount': trade['amount'],
                             'price': trade['value'],
                             'auction': trade['auction'],
@@ -88,6 +94,22 @@ class Contract(models.Model):
     def create(self, vals_list):
         contracts = super().create(vals_list)
         for contract, vals in zip(contracts, vals_list):
+            now = fields.Date.today().strftime('%y%m%d')
+            prefix = f'CT-{now}-'
+            sequence = self.env['ir.sequence'].sudo().search([
+                ('code', '=', 'stock.contract'),
+                ('prefix', 'like',  prefix)
+            ], limit=1)
+            if not sequence:
+                sequence = self.env['ir.sequence'].sudo().create({
+                    'name': _('Sequence'),
+                    'code': 'stock.contract',
+                    'padding': 2,
+                    'prefix': prefix,
+                    'number_increment': 1,
+                    'company_id': vals.get('company_id'),
+                })
+            contract.name = sequence.next_by_id()
             stock_contract_line_source_vals = {
                 'location_id': vals.get('location_id'),
                 'product_id': vals.get('product_id'),

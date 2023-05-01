@@ -118,7 +118,7 @@ class Picking(models.Model):
             'date': scheduled_date,
             'picking_id': rec.id,
             'state': picking_line.state,
-        }
+        }   
         self.env['stock.move'].sudo().create(stock_move_vals)
 
     def _create_per_contract_line(self, location, rec, picking_line, is_destination):
