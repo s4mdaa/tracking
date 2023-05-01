@@ -15,7 +15,7 @@
                             <field name="name"/>
                         </h1>
                     </div>
-                    <group>
+                    <group string="Contract Information" name="contract_info">
                         <group col="2">
                             <field name="product_id"/>
                             <field name="location_id" options="{'no_create': True}"/>
@@ -28,6 +28,19 @@
                             <field name="location_dest_id" options="{'no_create': True}"/>
                             <field name="date"/>
                         </group>
+                    </group>
+
+                    <group string="Contract Line Information" name="contract_line_info">
+                        <group col="2"/>
+                        <field name="contract_line_ids" mode="tree,kanban" readonly="1" domain="[('quantity', '!=', 0)]">
+                            <tree string="Moves" editable="bottom" delete="false">
+                                <field name="product_id" />
+                                <field name="product_uom_id" />
+                                <field name="location_id" />
+                                <field name="quantity" />
+                                <field name="company_id" />
+                            </tree>
+                        </field>
                     </group>
                 </sheet>
             </form>

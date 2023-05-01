@@ -27,6 +27,9 @@ access_stock_picking_user,stock.picking.user,model_stock_picking,tracking.group_
 access_stock_contract_admin,stock.contract.admin,model_stock_contract,tracking.group_tracking_admin,1,1,1,1
 access_stock_contract_user,stock.contract.user,model_stock_contract,tracking.group_tracking_user,1,0,0,0
 
+access_stock_contract_line_admin,stock.contract.line.admin,model_stock_contract_line,tracking.group_tracking_admin,1,1,1,1
+access_stock_contract_line_user,stock.contract.line.user,model_stock_contract_line,tracking.group_tracking_user,1,0,0,0
+
 access_stock_vehicle_admin,stock.vehicle.admin,model_stock_vehicle,tracking.group_tracking_admin,1,1,1,1
 access_stock_vehicle_user,stock.vehicle.user,model_stock_vehicle,tracking.group_tracking_user,1,0,0,0
 

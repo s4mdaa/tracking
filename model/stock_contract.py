@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import _, api, fields, models
 import requests
 from datetime import datetime, timedelta
 import pytz
@@ -34,6 +34,8 @@ class Contract(models.Model):
         'stock.location', 'Destination Location', domain=[('usage', '=', 'internal')])
     total_qty = fields.Integer('Quantity')
     amount = fields.Float('Amount')
+    contract_line_ids = fields.One2many(
+        'stock.contract.line', 'contract_id', string="Contract Lines", copy=True)
 
     _sql_constraints = [
         ('name_uniq', 'unique (name)',
@@ -81,3 +83,44 @@ class Contract(models.Model):
                         }
                         self.env['stock.contract'].sudo().create(
                             stock_contract_vals)
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        contracts = super().create(vals_list)
+        for contract, vals in zip(contracts, vals_list):
+            stock_contract_line_source_vals = {
+                'location_id': vals.get('location_id'),
+                'product_id': vals.get('product_id'),
+                'quantity': vals.get('total_qty'),
+                'contract_id': contract.id
+            }
+            self.env['stock.contract.line'].sudo().create(
+                stock_contract_line_source_vals)
+        return contracts
+
+    def _get_security_by_rule_action(self):
+        return {}
+
+
+class ContractLine(models.Model):
+    _name = 'stock.contract.line'
+    _description = "Stock Contract Line"
+
+    contract_id = fields.Many2one(
+        'stock.contract', 'Contract')
+    product_id = fields.Many2one(
+        'product.product', 'Product')
+    product_tmpl_id = fields.Many2one(
+        'product.template', string='Product Template',
+        related='product_id.product_tmpl_id')
+    product_uom_id = fields.Many2one(
+        'uom.uom', 'Unit',
+        readonly=True, related='product_id.uom_id')
+    company_id = fields.Many2one(
+        related='location_id.company_id', string='Company', store=True, readonly=True)
+    location_id = fields.Many2one(
+        'stock.location', 'Location', auto_join=True, ondelete='restrict', required=True, index=True, check_company=True)
+    quantity = fields.Float(
+        'Quantity',
+        help='Quantity of products in this quant, in the default unit of measure of the product',
+        readonly=True, digits='Product Unit of Measure')
