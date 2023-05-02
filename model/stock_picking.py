@@ -66,45 +66,32 @@ class Picking(models.Model):
             for picking_line in rec.picking_line_ids:
                 if picking_line.state != 'moved':
                     picking_line.state = 'moved'
-                    source_location = self.env['stock.location'].search(
-                        [('usage', '=', 'transit'), ('company_id', '=', picking_line.vehicle_id.company_id.id)], order='id ASC', limit=1)
-                    destination_location = picking_line.vehicle_id.location_id
-                    if rec.picking_type == 'receipt':
-                        temp = destination_location
-                        destination_location = source_location
-                        source_location = temp
-                        scheduled_date = picking_line.scheduled_date - \
-                            timedelta(seconds=1)
-                        rec._create_per_contract_line(
-                            source_location, rec, picking_line, is_destination=False)
-                    else:
+                    locations = [
+                        {'source': self.env['stock.location'].search([('usage', '=', 'transit'), ('company_id', '=', picking_line.vehicle_id.company_id.id)], order='id ASC', limit=1),
+                         'destination': picking_line.vehicle_id.location_id,
+                         'is_destination': True},
+                        {'source': self.env['stock.location'].search([('usage', '=', 'internal'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1),
+                         'destination': self.env['stock.location'].search([('usage', '=', 'transit'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1),
+                         'is_destination': False}
+                    ]
+                    for location in locations:
                         scheduled_date = picking_line.scheduled_date
+                        if (rec.picking_type != 'receipt' and not location['is_destination']) or (rec.picking_type == 'receipt' and location['is_destination']):
+                            scheduled_date = picking_line.scheduled_date - \
+                                timedelta(seconds=1)
+                        if rec.picking_type == 'receipt':
+                            temp = location['destination']
+                            location['destination'] = location['source']
+                            location['source'] = temp
+                            location['is_destination'] = not location['is_destination']
+
                         rec._create_per_contract_line(
-                            destination_location, rec, picking_line, is_destination=True)
-                    rec._create_per_stock_move(
-                        source_location, destination_location, rec, picking_line, scheduled_date)
-                    rec._create_per_stock_quants(
-                        source_location, destination_location, picking_line, rec)
-                    source_location = self.env['stock.location'].search(
-                        [('usage', '=', 'internal'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
-                    destination_location = self.env['stock.location'].search(
-                        [('usage', '=', 'transit'), ('company_id', '=', rec.company_id.id)], order='id ASC', limit=1)
-                    if rec.picking_type == 'receipt':
-                        temp = destination_location
-                        destination_location = source_location
-                        source_location = temp
-                        scheduled_date = picking_line.scheduled_date
-                        rec._create_per_contract_line(
-                            destination_location, rec, picking_line, is_destination=True)
-                    else:
-                        scheduled_date = picking_line.scheduled_date - \
-                            timedelta(seconds=1)
-                        rec._create_per_contract_line(
-                            source_location, rec, picking_line, is_destination=False)
-                    rec._create_per_stock_move(
-                        source_location, destination_location, rec, picking_line, scheduled_date)
-                    rec._create_per_stock_quants(
-                        source_location, destination_location, picking_line, rec)
+                            location['destination'] if location['is_destination'] else location['source'],
+                            rec, picking_line, location['is_destination'])
+                        rec._create_per_stock_move(
+                            location['source'], location['destination'], rec, picking_line, scheduled_date)
+                        rec._create_per_stock_quants(
+                            location['source'], location['destination'], picking_line, rec)
             return True
 
     def _create_per_stock_move(self, source_location, destination_location, rec, picking_line, scheduled_date):
@@ -127,15 +114,12 @@ class Picking(models.Model):
 
     def _create_per_contract_line(self, location, rec, picking_line, is_destination):
         if location.usage == 'internal':
-            print("SSSSSSSSSSSSSSSSSSSSSSS")
             stock_contract_line = self.env['stock.contract.line'].search(
                 [('location_id', '=', location.id), ('contract_id', '=', rec.contract_id.id)], limit=1)
             if stock_contract_line:
-                print("AAAAAAAAAAAAAAAAAAA")
                 if is_destination == True:
                     stock_contract_line.quantity += picking_line.transfer_qty
                 else:
-                    print("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ")
                     stock_contract_line.quantity -= picking_line.transfer_qty
             else:
                 stock_contract_line_dest_vals = {
@@ -148,30 +132,30 @@ class Picking(models.Model):
                     stock_contract_line_dest_vals)
 
     def _create_per_stock_quants(self, source_location, destination_location, picking_line, rec):
-        stock_quant_source = self.env['stock.quant'].search(
-            [('location_id', '=', source_location.id)], limit=1)
-        stock_quant_dest = self.env['stock.quant'].search(
-            [('location_id', '=', destination_location.id)], limit=1)
-        if stock_quant_dest:
-            stock_quant_dest.quantity += picking_line.transfer_qty
-        else:
-            stock_quant_dest_vals = {
-                'location_id': destination_location.id,
-                'product_id': rec.product_id.id,
-                'quantity': picking_line.transfer_qty,
-            }
-            self.env['stock.quant'].sudo().create(
-                stock_quant_dest_vals)
-        if stock_quant_source:
-            stock_quant_source.quantity -= picking_line.transfer_qty
-        else:
-            stock_quant_source_vals = {
+        quant_params = [
+            {
                 'location_id': source_location.id,
                 'product_id': rec.product_id.id,
                 'quantity': -(picking_line.transfer_qty),
-            }
-            self.env['stock.quant'].sudo().create(
-                stock_quant_source_vals)
+            },
+            {
+                'location_id': destination_location.id,
+                'product_id': rec.product_id.id,
+                'quantity': picking_line.transfer_qty,
+            },
+        ]
+        for params in quant_params:
+            stock_quant = self.env['stock.quant'].search(
+                [('location_id', '=', params['location_id'])], limit=1)
+            if stock_quant:
+                stock_quant.quantity += params['quantity']
+            else:
+                stock_quant_vals = {
+                    'location_id': params['location_id'],
+                    'product_id': params['product_id'],
+                    'quantity': params['quantity'],
+                }
+                self.env['stock.quant'].sudo().create(stock_quant_vals)
 
     @ api.depends('contract_id')
     def _compute_company_name(self):
