@@ -1,0 +1,39 @@
+.MessagingMenuContainer {
+        display: none;
+}
+.o_debug_manager {
+        display: none;
+}
+
+.o_ActivityMenuView {
+        display: none;
+}
+
+.header_to_do_list {
+        display: none;
+}
+
+.debug_activator {
+        display: none;
+}
+
+body.o_web_client.top_menu_vertical .o_main_navbar .o_menu_systray .vertical_sidemenu_behaviour {
+        display: none !important;
+}
+
+.o-dropdown--menu a:nth-child(1),
+.o-dropdown--menu a:nth-child(2) {
+    display: none;
+}
+
+.o-dropdown--menu span:nth-child(1){
+    display: none;
+}
+
+.o-dropdown--menu .dropdown-divider {
+    display: none;
+}
+
+.greeting {
+        display: none;
+    }

@@ -35,7 +35,6 @@ class Vehicle(models.Model):
 
     @api.model
     def create(self, vals):
-        print(self.parent_company_id, "++++++++++++++++++++++++++++++++")
         parent_location = self.env['stock.location'].search(
             [('company_id', '=', vals.get('company_id')), ('usage', '=', 'internal'), ], order='id ASC', limit=1)
         location_vals = {

@@ -1,0 +1,10 @@
+<templates id="template" xml:space="preserve">
+
+	<t t-name="tracking.UserMenuInherit" t-inherit="web.UserMenu" t-inherit-mode="extension" owl="1">
+		<xpath expr="//span[hasclass('text-truncate')]" position="replace">
+			<span class="oe_topbar_name text-truncate">
+				<t t-esc="user.name"/>
+			</span>
+		</xpath>
+	</t>
+</templates>

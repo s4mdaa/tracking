@@ -6,7 +6,7 @@
     'summary': 'Product transfort tracking managment module',
     'version': '1.0.0',
     'license': 'OPL-1',
-    'depends': ['product'],
+    'depends': ['product', 'mail', 'web'],
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
@@ -25,6 +25,12 @@
         'views/stock_vehicle_view.xml',
         'views/res_company_view.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            '/tracking/static/src/xml/base.xml',
+            "/tracking/static/src/scss/sidemenu.scss",
+        ]
+    },
 
 
     # Author

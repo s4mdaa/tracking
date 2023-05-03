@@ -203,7 +203,10 @@ class PickingLine(models.Model):
         'stock.picking')
     vehicle_id = fields.Many2one(
         'stock.vehicle', 'Vehicle', required=True)
-    transfer_qty = fields.Integer('Demand')
+    transfer_qty = fields.Float(
+        'Demand',
+        digits='Product Unit of Measure',
+        default=0.0, required=True)
     note = fields.Html('Note')
     state = fields.Selection([
         ('draft', 'Draft'),
