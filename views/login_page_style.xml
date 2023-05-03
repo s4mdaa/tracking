@@ -4,5 +4,26 @@
         <xpath expr="//div[hasclass('card-body')]//div[contains(@t-attf-class, 'text-center pb-3 border-bottom')]/img" position="attributes">
             <attribute name="t-attf-src">/tracking/static/icon/company_logo.png</attribute>
         </xpath>
+        <xpath expr="//div[hasclass('card-body')]//div[hasclass('border-top')]" position="replace">
+        </xpath>
+    </template>
+    <template id="tracking.login" inherit_id="web.login" name="Tracking Sign up - Reset Password">
+        <xpath expr="//a[@t-if='signup_enabled']" position="replace">
+        </xpath>
+        <xpath expr="//a[@t-if='reset_password_enabled']" position="replace">
+        </xpath>
+        <xpath expr="//t[@t-if='debug']" position="replace">
+        </xpath>
+        <xpath expr="//div[hasclass('mb-3')]" position="replace">
+        </xpath>
+        <xpath expr="//div[hasclass('field-login')]/input" position="attributes">
+            <attribute name="placeholder">Имэйл</attribute>
+        </xpath>
+        <xpath expr="//input[@id='password']" position="attributes">
+            <attribute name="placeholder">Нууц үг</attribute>
+        </xpath>
+        <xpath expr="//button[hasclass('btn-primary')]" position="replace">
+            <button type="submit" class="btn btn-primary">Нэвтрэх</button>
+        </xpath>
     </template>
 </odoo>

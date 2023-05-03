@@ -414,12 +414,12 @@ msgstr "Нэр"
 #. module: tracking
 #: model_terms:ir.ui.view,arch_db:tracking.stock_picking_search
 msgid "Group By Company"
-msgstr ""
+msgstr "Компаниар бүлэглэх"
 
 #. module: tracking
 #: model_terms:ir.ui.view,arch_db:tracking.stock_picking_search
 msgid "Group By Contract"
-msgstr ""
+msgstr "Гэрээгээр бүлэглэх"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__has_message
@@ -1304,3 +1304,9 @@ msgstr ""
 #: model:ir.model.fields,help:tracking.field_stock_vehicle__website_message_ids
 msgid "Website communication history"
 msgstr ""
+
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.login
+msgid "Email"
+msgstr "Имэйл"

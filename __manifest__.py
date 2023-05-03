@@ -31,7 +31,7 @@
     'assets': {
         'web.assets_backend': [
             '/tracking/static/src/xml/base.xml',
-            "/tracking/static/src/scss/sidemenu.scss",
+            "/tracking/static/src/scss/custom.scss",
         ]
     },
 
