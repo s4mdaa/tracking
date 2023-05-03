@@ -23,7 +23,10 @@
         'views/stock_quant_view.xml',
         'views/stock_contract_view.xml',
         'views/stock_vehicle_view.xml',
-        'views/res_company_view.xml',
+        'views/login_page_style.xml',
+
+
+        'views/product_view.xml',
     ],
     'assets': {
         'web.assets_backend': [
