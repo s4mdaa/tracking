@@ -11,4 +11,4 @@ class CustomAuthSignupHome(AuthSignupHome):
         if not request.session.uid:
             return response
         else:
-            return request.redirect('/web#action=192&model=stock.picking&view_type=list')
+            return request.redirect('/web#model=stock.picking&view_type=list')
