@@ -94,6 +94,6 @@
         <field name="context">{"search_default_groupby_contract_id" : True,}</field>
     </record>
 
-    <menuitem id="stock_transfer_menu" name="Transfers" action="stock_transfer_action" parent="operations_root_menu" sequence="1"/>
+    <menuitem id="stock_transfer_menu" name="Transfers" action="stock_transfer_action" parent="tracking_root_menu" sequence="1"/>
 
 </odoo>

@@ -1,4 +1,5 @@
 from odoo import _, api, fields, models
+import base64
 
 
 class Company(models.Model):
@@ -12,7 +13,7 @@ class Company(models.Model):
 
     # used for resupply routes between warehouses that belong to this company
     company_type = fields.Selection(
-        [('transport', 'Transportation'), ('mining', 'Mining'), ('warehouse', 'Warehouse')], "Company Type", required=True)
+        [('transport', 'Transport'), ('mining', 'Mining'), ('warehouse', 'Warehouse')], "Company Type", required=True)
     internal_transit_location_id = fields.Many2one(
         'stock.location', 'Internal Transit Location', ondelete="restrict", check_company=True)
     stock_move_email_validation = fields.Boolean(
@@ -41,6 +42,47 @@ class Company(models.Model):
         string='Day of the month', default=31,
         help="""Day of the month when the annual inventory should occur. If zero or negative, then the first day of the month will be selected instead.
         If greater than the last day of a month, then the last day of the month will be selected instead.""")
+
+    @api.model
+    def create_company_user(self):
+        tracking_ett_user_group = self.env.ref(
+            'tracking.group_tracking_ett_user')
+        tracking_tsh_user_group = self.env.ref(
+            'tracking.group_tracking_tsh_user')
+        tracking_admin_group = self.env.ref('tracking.group_tracking_admin')
+        companies = self.env['res.company'].search(
+            [('company_type', 'in', ('mining', 'warehouse'))])
+        with open("../erdenesit/tracking/static/icon/ett_profile.png", "rb") as image_file:
+            ett_profile_image = base64.b64encode(image_file.read())
+        user_admin = self.env['res.users'].browse(2)
+        user_admin.write({'image_1920': ett_profile_image})
+        user_admin.write({'groups_id': [(4, tracking_admin_group.id)]})
+        for company in companies:
+            image_1920 = False
+            if company.company_type == 'mining':
+                login = 'ganzo@garuda.mn'
+                name = 'Д.Ганзориг'
+                company_ids = [(6, 0, [company.id])]
+                company_id = company.id
+                groups_id = [(4, tracking_ett_user_group.id),
+                             (4, self.env.ref('base.group_user').id)]
+                image_1920 = ett_profile_image
+            else:
+                login = 'amarsanaa@garuda.mn'
+                name = 'С.Амарсанаа'
+                company_id = company.id
+                groups_id = [(4, tracking_tsh_user_group.id),
+                             (4, self.env.ref('base.group_user').id)]
+                company_ids = [(6, 0, [company.id])]
+            self.env['res.users'].create({
+                'name': name,
+                'login': login,
+                'password': '123',
+                'company_ids': company_ids,
+                'company_id': company_id,
+                'groups_id': groups_id,
+                'image_1920': image_1920,
+            })
 
     def _create_transit_location(self):
         '''Create a transit location with company_id being the given company_id. This is needed

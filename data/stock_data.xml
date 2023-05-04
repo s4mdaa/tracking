@@ -32,11 +32,29 @@
             <field name="usage">customer</field>
             <field name="company_id"></field>
         </record>
-        
         <record id="stock_location_locations_transit" model="stock.location">
             <field name="name">Transit Locations</field>
             <field name="usage">transit</field>
             <field name="company_id"></field>
+        </record>
+
+
+        <!-- Resource: res.company -->
+        <record id="base.main_company" model="res.company">
+            <field name="name">ЭТТ ХХК</field>
+            <field name="company_type">mining</field>
+            <field name="website">https://ett.mn/mn</field>
+            <field name="email">info@erdenestt.mn</field>
+            <field name="phone">+976 7505-5555</field>
+            <field name="street">Монгол улс, Улаанбаатар хот, Чингэлтэй дүүрэг, 1-р хороо. Жигжиджавын гудамж-8 Финанс төв</field>
+        </record>
+        <record id="res_company_tsh" model="res.company">
+            <field name="name">Цагаан хад ХХК</field>
+            <field name="company_type">warehouse</field>
+        </record>
+        <record id="res_company_nt" model="res.company">
+            <field name="name">Нэмэх тээвэр ХХК</field>
+            <field name="company_type">transport</field>
         </record>
 
         <!-- create the transit location for each company existing -->
@@ -46,5 +64,6 @@
         <function model="res.company" name="create_missing_production_location"/>
         <function model="res.company" name="create_missing_scrap_location"/>
         <function model="res.company" name="create_missing_scrap_sequence"/>
+        <function model="res.company" name="create_company_user"/>
     </data>
 </odoo>

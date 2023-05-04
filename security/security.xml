@@ -11,10 +11,18 @@
             <field name="name">Admin</field>
             <field name="category_id" ref="tracking.tracking_category" />
         </record>
-        <record id="group_tracking_user" model="res.groups">
-            <field name="name">User</field>
+        <record id="group_tracking_ett_user" model="res.groups">
+            <field name="name">ETT User</field>
             <field name="category_id" ref="tracking.tracking_category" />
         </record>
+        <record id="group_tracking_tsh_user" model="res.groups">
+            <field name="name">TSH User</field>
+            <field name="category_id" ref="tracking.tracking_category" />
+        </record>
+        <!-- <record id="group_tracking_nt_user" model="res.groups">
+            <field name="name">NT User</field>
+            <field name="category_id" ref="tracking.tracking_category" />
+        </record> -->
     </data>
     <data noupdate="1">
         <record model="ir.rule" id="stock_picking_rule">
