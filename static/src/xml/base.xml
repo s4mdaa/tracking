@@ -7,4 +7,13 @@
 			</span>
 		</xpath>
 	</t>
+	<t t-inherit="web.NavBar" t-inherit-mode="extension" owl="1">
+		<xpath expr="//nav[hasclass('o_main_navbar')]//div[hasclass('o_company_logo')]" position="replace">
+			<div class="o_company_logo">
+				<t t-if="currentCompany">
+					<img class="img img-fluid company_logo" t-attf-src="/tracking/static/icon/company_logo_white.png"/>
+				</t>
+			</div>
+		</xpath>
+	</t>
 </templates>

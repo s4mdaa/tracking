@@ -305,7 +305,7 @@ msgstr "Хүргэх"
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__delivery_company
 msgid "Delivery Point"
-msgstr ""
+msgstr "Эцсийн цэг"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_picking_line__transfer_qty
@@ -1019,7 +1019,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__source_company
 msgid "Source Point"
-msgstr ""
+msgstr "Эхний цэг"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__state_number
