@@ -11,11 +11,4 @@
     <record id="mail.menu_root_discuss" model="ir.ui.menu">
         <field name="active" eval="False"/>
     </record>
-
-    <template id="assets_backend" inherit_id="web.assets_backend">
-        <xpath expr="//div[@class='o_apps']" position="attributes">
-            <attribute name="groups">tracking.group_tracking_admin</attribute>
-            <attribute name="invisible">1</attribute>
-        </xpath>
-    </template>
 </odoo>	
