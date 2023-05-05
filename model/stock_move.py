@@ -34,13 +34,13 @@ class Move(models.Model):
         auto_join=True, index=True, required=True,
         help="Sets a location if you produce at a fixed location. This can be a partner location if you subcontract the manufacturing operations.")
     source_company_id = fields.Many2one(
-        'res.company', 'Company', related='location_id.company_id', store=True)
+        'res.company', 'Dest Company')
     location_dest_id = fields.Many2one(
         'stock.location', 'Destination Location',
         auto_join=True, index=True, required=True,
         help="Location where the system will stock the finished products.")
     dest_company_id = fields.Many2one(
-        'res.company', 'Company', related='location_dest_id.company_id', store=True)
+        'res.company', 'Source Company')
     picking_id = fields.Many2one('stock.picking', 'Transfer', index=True, states={
                                  'moved': [('readonly', True)]})
     state = fields.Selection([

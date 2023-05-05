@@ -112,6 +112,8 @@ class Picking(models.Model):
             'date': scheduled_date,
             'picking_id': rec.id,
             'state': picking_line.state,
+            'source_company_id': source_location.sudo().company_id.id,
+            'dest_company_id': destination_location.sudo().company_id.id
         }
         self.env['stock.move'].sudo().create(stock_move_vals)
 
