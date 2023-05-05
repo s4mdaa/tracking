@@ -51,6 +51,9 @@ class Picking(models.Model):
         ('moved', 'Moved'),
     ], string='Status', default='draft', copy=False, index=True, readonly=True, store=True, tracking=True)
 
+    parent_company_id = fields.Many2one(
+        'res.company', 'Company', related='company_id.parent_id')
+
     def action_edit(self):
         self.state = 'moving'
         return True
@@ -160,8 +163,8 @@ class Picking(models.Model):
     @ api.depends('contract_id')
     def _compute_company_name(self):
         for rec in self:
-            rec.source_company = rec.contract_id.location_id.company_id.name
-            rec.delivery_company = rec.contract_id.location_dest_id.company_id.name
+            rec.source_company = rec.contract_id.location_id.sudo().company_id.name
+            rec.delivery_company = rec.contract_id.location_dest_id.sudo().company_id.name
 
     @ api.depends('contract_id', 'state')
     def _compute_available_qty(self):

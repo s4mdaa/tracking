@@ -16,7 +16,6 @@ class Move(models.Model):
         index=True, required=True)
     product_id = fields.Many2one(
         'product.product', 'Product',
-        check_company=True,
         domain="[('type', 'in', ['product', 'consu']), '|', ('company_id', '=', False), ('company_id', '=', company_id)]", index=True, required=True,
         states={'moved': [('readonly', True)]})
     product_qty = fields.Float(
@@ -33,15 +32,13 @@ class Move(models.Model):
     location_id = fields.Many2one(
         'stock.location', 'Source Location',
         auto_join=True, index=True, required=True,
-        check_company=True,
         help="Sets a location if you produce at a fixed location. This can be a partner location if you subcontract the manufacturing operations.")
     location_dest_id = fields.Many2one(
         'stock.location', 'Destination Location',
         auto_join=True, index=True, required=True,
-        check_company=True,
         help="Location where the system will stock the finished products.")
     picking_id = fields.Many2one('stock.picking', 'Transfer', index=True, states={
-                                 'moved': [('readonly', True)]}, check_company=True)
+                                 'moved': [('readonly', True)]})
     state = fields.Selection([
         ('draft', 'Draft'),
         ('moving', 'Moving'),

@@ -24,7 +24,7 @@ class Vehicle(models.Model):
     parent_company_id = fields.Many2one(
         'res.company', 'Company', related='company_id.parent_id')
     company_id = fields.Many2one(
-        'res.company', 'Company', required=True, domain="[('parent_id', '=', user_company_id)]")
+        'res.company', 'Company', required=True, domain="[('parent_id', '=', user_company_id), ('company_type', '=', 'transport')]")
     active = fields.Boolean(default=True)
     location_id = fields.Many2one('stock.location', 'Location', readonly=True)
 

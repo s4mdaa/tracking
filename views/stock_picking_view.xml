@@ -28,6 +28,7 @@
             <form string="Transfer">
                 <field name="company_type" invisible="1"/>
                 <field name="company_id" invisible="1"/>
+                <field name="parent_company_id" invisible="1"/>
                 <header>
                     <button name="action_edit" attrs="{'invisible': [('state', '!=', 'moved')]}" string="Add Transfer" class="oe_highlight" type="object" data-hotkey="z"/>
                     <button name="action_done" attrs="{'invisible': [('state', '=', 'moved')]}" string="Validate" class="oe_highlight" type="object" data-hotkey="z" confirm="Are you sure making the transfer?"/>

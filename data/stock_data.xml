@@ -51,10 +51,12 @@
         <record id="res_company_tsh" model="res.company">
             <field name="name">Цагаан хад ХХК</field>
             <field name="company_type">warehouse</field>
+            <field name="parent_id" ref="base.main_company"/>
         </record>
         <record id="res_company_nt" model="res.company">
             <field name="name">Нэмэх тээвэр ХХК</field>
             <field name="company_type">transport</field>
+            <field name="parent_id" ref="base.main_company"/>
         </record>
 
         <!-- create the transit location for each company existing -->

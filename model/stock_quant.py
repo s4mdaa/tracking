@@ -6,7 +6,7 @@ class Quant(models.Model):
     _description = 'Quants'
 
     product_id = fields.Many2one(
-        'product.product', 'Product', ondelete='restrict', required=True, index=True, check_company=True)
+        'product.product', 'Product', ondelete='restrict', required=True, index=True)
     product_tmpl_id = fields.Many2one(
         'product.template', string='Product Template',
         related='product_id.product_tmpl_id')
@@ -16,7 +16,7 @@ class Quant(models.Model):
     company_id = fields.Many2one(
         related='location_id.company_id', string='Company', store=True, readonly=True)
     location_id = fields.Many2one(
-        'stock.location', 'Location', auto_join=True, ondelete='restrict', required=True, index=True, check_company=True)
+        'stock.location', 'Location', auto_join=True, ondelete='restrict', required=True, index=True)
     quantity = fields.Float(
         'Quantity',
         help='Quantity of products in this quant, in the default unit of measure of the product',

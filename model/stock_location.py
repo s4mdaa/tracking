@@ -4,7 +4,6 @@ from odoo import _, api, fields, models
 class Location(models.Model):
     _name = "stock.location"
     _description = "Inventory Locations"
-    _check_company_auto = True
 
     name = fields.Char('Location Name', required=True, translate=True)
     active = fields.Boolean(

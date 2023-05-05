@@ -15,7 +15,7 @@ class Company(models.Model):
     company_type = fields.Selection(
         [('transport', 'Transport'), ('mining', 'Mining'), ('warehouse', 'Warehouse')], "Company Type", required=True)
     internal_transit_location_id = fields.Many2one(
-        'stock.location', 'Internal Transit Location', ondelete="restrict", check_company=True)
+        'stock.location', 'Internal Transit Location', ondelete="restrict")
     stock_move_email_validation = fields.Boolean(
         "Email Confirmation picking", default=False)
     stock_mail_confirmation_template_id = fields.Many2one('mail.template', string="Email Template confirmation picking",

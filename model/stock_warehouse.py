@@ -4,7 +4,6 @@ from odoo import _, _lt, api, fields, models
 class Warehouse(models.Model):
     _name = "stock.warehouse"
     _description = "Warehouse"
-    _check_company_auto = True
 
     def _default_name(self):
         count = self.env['stock.warehouse'].with_context(

@@ -6,6 +6,7 @@
         <field eval="1" name="priority"/>
         <field name="arch" type="xml">
             <form string="Stock Contracts" delete="0">
+                <field name="parent_company_id" invisible="1"/>
                 <header>
                 </header>
                 <sheet>

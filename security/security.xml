@@ -26,16 +26,21 @@
     </data>
     <data noupdate="1">
         <record model="ir.rule" id="stock_picking_rule">
-            <field name="name">stock_picking multi-company</field>
-            <field name="model_id" search="[('model','=','stock.picking')]" model="ir.model"/>
-            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+            <field name="name">Stock picking multi-company</field>
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="domain_force">['|',('company_id', '=', company_id), ('parent_company_id', '=', company_id)]</field>
         </record>
-        <!-- <record model="ir.rule" id="stock_contract_comp_rule">
+        <record model="ir.rule" id="stock_contract_comp_rule">
             <field name="name">Contract multi-company</field>
             <field name="model_id" ref="model_stock_contract"/>
-            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
-        </record> -->
-        <record model="ir.rule" id="stock_warehouse_comp_rule">
+            <field name="domain_force">['|',('company_id', '=', company_id), ('parent_company_id', '=', company_id)]</field>
+        </record>
+        <record model="ir.rule" id="stock_vehicle_comp_rule">
+            <field name="name">Vehicle multi-company</field>
+            <field name="model_id" ref="model_stock_vehicle"/>
+            <field name="domain_force">['|',('company_id', '=', company_id), ('parent_company_id', '=', company_id)]</field>
+        </record>
+        <!-- <record model="ir.rule" id="stock_warehouse_comp_rule">
             <field name="name">Warehouse multi-company</field>
             <field name="model_id" ref="model_stock_warehouse"/>
             <field name="domain_force">[('company_id', 'in', company_ids)]</field>
@@ -44,6 +49,6 @@
             <field name="name">Location multi-company</field>
             <field name="model_id" ref="model_stock_location"/>
             <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
-        </record>
+        </record> -->
     </data>
 </odoo>

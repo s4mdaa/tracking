@@ -38,6 +38,8 @@ class Contract(models.Model):
     amount = fields.Float('Amount')
     contract_line_ids = fields.One2many(
         'stock.contract.line', 'contract_id', string="Contract Lines", copy=True)
+    parent_company_id = fields.Many2one(
+        'res.company', 'Company', related='company_id.parent_id')
 
     _sql_constraints = [
         ('name_uniq', 'unique (name)',
@@ -142,7 +144,7 @@ class ContractLine(models.Model):
     company_id = fields.Many2one(
         related='location_id.company_id', string='Company', store=True, readonly=True)
     location_id = fields.Many2one(
-        'stock.location', 'Location', auto_join=True, ondelete='restrict', required=True, index=True, check_company=True)
+        'stock.location', 'Location', auto_join=True, ondelete='restrict', required=True, index=True)
     quantity = fields.Float(
         'Quantity',
         help='Quantity of products in this quant, in the default unit of measure of the product',
