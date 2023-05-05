@@ -48,7 +48,7 @@
         <record model="ir.rule" id="stock_move_comp_rule">
             <field name="name">Stock Move multi-company</field>
             <field name="model_id" ref="model_stock_move"/>
-            <field name="domain_force">['|',('company_id', '=', source_company_id), ('company_id', '=', dest_company_id)]</field>
+            <field name="domain_force">['|',('source_company_id', '=', company_id), ('dest_company_id', '=', company_id)]</field>
         </record>
     </data>
 </odoo>
