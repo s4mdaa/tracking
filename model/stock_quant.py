@@ -21,3 +21,5 @@ class Quant(models.Model):
         'Quantity',
         help='Quantity of products in this quant, in the default unit of measure of the product',
         readonly=True, digits='Product Unit of Measure')
+    parent_company_id = fields.Many2one(
+        'res.company', 'Company', related='company_id.parent_id')
