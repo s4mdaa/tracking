@@ -1105,7 +1105,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:tracking.selection__product_template__detailed_type__product
 #: model:ir.model.fields.selection,name:tracking.selection__product_template__type__product
 msgid "Storable Product"
-msgstr ""
+msgstr "Нөөцлөх боломжтой"
 
 #. module: tracking
 #: model:ir.model.fields,help:tracking.field_stock_warehouse__company_id

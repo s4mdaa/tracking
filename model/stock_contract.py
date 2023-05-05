@@ -72,6 +72,18 @@ class Contract(models.Model):
             trade_url = 'http://spectre-dev.online:8080/ts/trade/public/all'
             response = session.get(trade_url)
 
+            mining_company = self.env['res.company'].search(
+                [('company_type', '=', 'mining')], order='id ASC', limit=1)
+            warehouse_company = self.env['res.company'].search(
+                [('company_type', '=', 'warehouse')], order='id ASC', limit=1)
+
+            location_id = self.env['stock.location'].search(
+                [('company_id', '=', mining_company.id), ('usage', '=', 'internal')], order='id ASC', limit=1)
+            location_dest_id = self.env['stock.location'].search(
+                [('company_id', '=', warehouse_company.id), ('usage', '=', 'internal')], order='id ASC', limit=1)
+            product_id = self.env['product.product'].search(
+                [('name', '=', 'Нүүрс01')], order='id ASC', limit=1)
+
             if response.status_code == 200:
                 data = response.json()
                 for trade in data:
@@ -85,8 +97,11 @@ class Contract(models.Model):
                         stock_contract_vals = {
                             'reference': trade['id'],
                             'amount': trade['amount'],
+                            'product_id': product_id.id,
                             'price': trade['value'],
                             'auction': trade['auction'],
+                            'location_id': location_id.id,
+                            'location_dest_id': location_dest_id.id,
                             'date':  tradeDate,
                             'total_qty': 6400 * trade['amount'],
                         }
