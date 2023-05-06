@@ -22,6 +22,12 @@ class ProductTemplate(models.Model):
             [('name', '=', 't')], limit=1)
         return default_uom_weight.id
 
+    @api.model
+    def delete_product_templates_with_variants(self):
+        templates = self.env['product.template'].search(
+            [('product_variant_count', '=', 1), ('name', '!=', 'Нүүрс01')])
+        templates.unlink()
+
 
 class ProductCategory(models.Model):
     _inherit = 'product.category'

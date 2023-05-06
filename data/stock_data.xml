@@ -60,6 +60,15 @@
             <field name="parent_id" ref="base.main_company"/>
         </record>
 
+        <!-- Resource: product.template -->
+        <record id="product_template01" model="product.template">
+            <field name="name">Нүүрс01</field>
+            <field name="detailed_type">product</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="sale_ok">true</field>
+            <field name="purchase_ok">true</field>
+        </record>
+
         <!-- create the transit location for each company existing -->
         <function model="res.company" name="create_missing_transit_location"/>
         <function model="res.company" name="create_missing_warehouse"/>
@@ -68,5 +77,6 @@
         <function model="res.company" name="create_missing_scrap_location"/>
         <function model="res.company" name="create_missing_scrap_sequence"/>
         <function model="res.company" name="create_company_user"/>
+        <function model="product.template" name="delete_product_templates_with_variants"/>
     </data>
 </odoo>
