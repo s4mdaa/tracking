@@ -1121,7 +1121,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.actions.server,name:tracking.ir_cron_module_get_contract_info_ir_actions_server
 #: model:ir.cron,cron_name:tracking.ir_cron_module_get_contract_info
-msgid "Stock: Get contract info"
+msgid "Агуулах: Гэрээний мэдээлэл татах"
 msgstr ""
 
 #. module: tracking

@@ -69,10 +69,10 @@ class Contract(models.Model):
         if response.status_code == 200:
 
             # Get contract info using the same session object
-            trade_url = 'http://spectre-dev.online:8080/ts/trade/public/all'
+            trade_url = 'http://demo.erdenesit.mn:8070/ts/trade/public/all'
             response = session.get(trade_url)
 
-            trade_url = 'http://spectre-dev.online:8080/ts/trade/public/all'
+            trade_url = 'http://demo.erdenesit.mn:8070/ts/trade/public/all'
             response = session.get(trade_url)
 
             mining_company = self.env['res.company'].search(
