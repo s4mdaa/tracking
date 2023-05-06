@@ -63,7 +63,7 @@ class Company(models.Model):
         for company in companies:
             image_1920 = False
             if company.company_type == 'mining':
-                login = 'ganzo@garuda.mn'
+                login = 'ganzo@erdenesit.mn'
                 name = 'Д.Ганзориг'
                 company_ids = [(6, 0, [company.id])]
                 company_id = company.id
@@ -71,7 +71,7 @@ class Company(models.Model):
                              (4, self.env.ref('base.group_user').id)]
                 image_1920 = ett_profile_image
             else:
-                login = 'amarsanaa@garuda.mn'
+                login = 'amarsanaa@erdenesit.mn'
                 name = 'С.Амарсанаа'
                 company_id = company.id
                 groups_id = [(4, tracking_tsh_user_group.id),

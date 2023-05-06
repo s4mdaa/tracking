@@ -43,6 +43,7 @@
         <record id="base.main_company" model="res.company">
             <field name="name">ЭТТ ХХК</field>
             <field name="company_type">mining</field>
+            <field name="currency_id">2</field>
             <field name="website">https://ett.mn/mn</field>
             <field name="email">info@erdenestt.mn</field>
             <field name="phone">+976 7505-5555</field>
