@@ -5,7 +5,7 @@
         <field name="model">stock.vehicle</field>
         <field eval="1" name="priority"/>
         <field name="arch" type="xml">
-            <form string="" delete="0">
+            <form string="Stock Vehicles" delete="0">
                 <field name="parent_company_id" invisible="1"/>
                 <sheet>
                     <div class="oe_title" attrs="{'invisible': ['|',('company_id','=',False), ('state_number', '=', False)]}">
@@ -25,11 +25,6 @@
                         </group>
                     </group>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids"/>
-                    <field name="activity_ids"/>
-                    <field name="message_ids"/>
-                </div>
             </form>
         </field>
     </record>
@@ -39,7 +34,7 @@
         <field name="model">stock.vehicle</field>
         <field eval="50" name="priority"/>
         <field name="arch" type="xml">
-            <tree string="Vehicles" delete="false">
+            <tree string="Vehicles">
                 <field name="name" />
                 <field name="vehicle_type" />
                 <field name="state_number" />
@@ -47,20 +42,10 @@
             </tree>
         </field>
     </record>
-    <record model='ir.ui.view' id='vehicle_search'>
-        <field name="name">Vehicle search</field>
-        <field name="model">stock.vehicle</field>
-        <field name="arch" type="xml">
-            <search string="Vehicle search">
-                <filter string="Active" name="groupby_active" domain="[('active','=',True)]" />
-            </search>
-        </field>
-    </record>
     <record id="stock_vehicle_action" model="ir.actions.act_window">
         <field name="name">Vehicles</field>
         <field name="res_model">stock.vehicle</field>
         <field name="view_mode">tree,form</field>
-        <field name="context">{"search_default_groupby_active" : True,}</field>
     </record>
     <menuitem id="stock_vehicle_menu" name="Vehicles" action="stock_vehicle_action" parent="reporting_root_menu" sequence="4"/>
 </odoo>

@@ -231,8 +231,10 @@ class Company(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
+        currency_usd = self.env['res.currency'].browse(2)
         companies = super().create(vals_list)
         for company in companies:
+            company.currency_id = currency_usd.id
             company.sudo()._create_per_company_locations()
             company.sudo()._create_per_company_sequences()
             company.sudo()._create_per_company_picking_types()
