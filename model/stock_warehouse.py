@@ -36,7 +36,7 @@ class Warehouse(models.Model):
             })
 
             self.env['stock.location'].create({
-                'name': 'Stock',
+                'name': 'Нөөц',
                 'usage': 'internal',
                 'location_id': view_location and view_location.id or False,
                 'company_id': vals.get('company_id'),

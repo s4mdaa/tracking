@@ -5,7 +5,7 @@ class Location(models.Model):
     _name = "stock.location"
     _description = "Inventory Locations"
 
-    name = fields.Char('Location Name', required=True, translate=True)
+    name = fields.Char(string='Location Name', required=True, translate=True)
     active = fields.Boolean(
         'Active', default=True, help="By unchecking the active field, you may hide a location without deleting it.")
     usage = fields.Selection([

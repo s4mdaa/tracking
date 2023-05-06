@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-01 03:49+0000\n"
-"PO-Revision-Date: 2023-05-01 03:49+0000\n"
+"POT-Creation-Date: 2023-05-06 07:44+0000\n"
+"PO-Revision-Date: 2023-05-06 07:44+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -130,13 +130,14 @@ msgid "Attributes"
 msgstr "Шинж чанар"
 
 #. module: tracking
-#: model:ir.model.fields,field_description:tracking.field_stock_contract__auction
-msgid "Auction"
-msgstr "Дуудлага худалдаа"
-
-#. module: tracking
 #: model:ir.model.fields.selection,name:tracking.selection__res_company__annual_inventory_month__8
 msgid "August"
+msgstr ""
+
+#. module: tracking
+#: model:res.company,prevent_auto_save_warning:tracking.res_company_nt
+#: model:res.company,prevent_auto_save_warning:tracking.res_company_tsh
+msgid "Autosave is disabled, Click on save button."
 msgstr ""
 
 #. module: tracking
@@ -168,11 +169,14 @@ msgstr "Компаниуд"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__company_id
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__parent_company_id
 #: model:ir.model.fields,field_description:tracking.field_stock_contract_line__company_id
 #: model:ir.model.fields,field_description:tracking.field_stock_location__company_id
 #: model:ir.model.fields,field_description:tracking.field_stock_move__company_id
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__company_id
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__parent_company_id
 #: model:ir.model.fields,field_description:tracking.field_stock_quant__company_id
+#: model:ir.model.fields,field_description:tracking.field_stock_quant__parent_company_id
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__company_id
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__parent_company_id
 #: model:ir.model.fields,field_description:tracking.field_stock_warehouse__company_id
@@ -198,6 +202,11 @@ msgid "Contract"
 msgstr "Гэрээ"
 
 #. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__contract_id
+msgid "Contract ID"
+msgstr "Гэрээний дугаар"
+
+#. module: tracking
 #: model_terms:ir.ui.view,arch_db:tracking.view_contract_form
 #: model_terms:ir.ui.view,arch_db:tracking.view_picking_form
 msgid "Contract Information"
@@ -210,7 +219,6 @@ msgstr "Барааны мэдээлэл"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__contract_line_ids
-#: model_terms:ir.ui.view,arch_db:tracking.view_contract_form
 msgid "Contract Lines"
 msgstr ""
 
@@ -263,11 +271,6 @@ msgid "Customers"
 msgstr ""
 
 #. module: tracking
-#: model:ir.model.fields,field_description:tracking.field_stock_contract__date
-msgid "Date"
-msgstr "Огноо"
-
-#. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_move__date
 msgid "Date Scheduled"
 msgstr "Товлогдсон огноо"
@@ -303,6 +306,11 @@ msgid "Delivery"
 msgstr "Хүргэх"
 
 #. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__delivery_date
+msgid "Delivery Date"
+msgstr "Хүргэгдэх огноо"
+
+#. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__delivery_company
 msgid "Delivery Point"
 msgstr "Эцсийн цэг"
@@ -320,6 +328,11 @@ msgstr "Тайлбар"
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_move__description_picking
 msgid "Description of Picking"
+msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_move__source_company_id
+msgid "Dest Company"
 msgstr ""
 
 #. module: tracking
@@ -357,6 +370,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:tracking.selection__stock_picking_line__state__draft
 msgid "Draft"
 msgstr "Ноорог"
+
+#. module: tracking
+#: model:res.groups,name:tracking.group_tracking_ett_user
+msgid "ETT User"
+msgstr ""
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_res_company__stock_move_email_validation
@@ -565,6 +583,8 @@ msgstr ""
 #: model:ir.model.fields,help:tracking.field_stock_contract__company_id
 #: model:ir.model.fields,help:tracking.field_stock_contract_line__company_id
 #: model:ir.model.fields,help:tracking.field_stock_location__company_id
+#: model:ir.model.fields,help:tracking.field_stock_move__dest_company_id
+#: model:ir.model.fields,help:tracking.field_stock_move__source_company_id
 #: model:ir.model.fields,help:tracking.field_stock_quant__company_id
 msgid "Let this field empty if this location is shared between companies"
 msgstr ""
@@ -644,6 +664,7 @@ msgstr "Шилжүүлсэн"
 
 #. module: tracking
 #: model:ir.ui.menu,name:tracking.stock_move_menu
+#: model_terms:ir.ui.view,arch_db:tracking.view_contract_form
 #: model_terms:ir.ui.view,arch_db:tracking.view_move_tree
 #: model_terms:ir.ui.view,arch_db:tracking.view_picking_form
 msgid "Moves"
@@ -665,7 +686,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__name
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__name
 msgid "Name"
-msgstr "Нэр"
+msgstr "Гэрээний дугаар"
 
 #. module: tracking
 #: model:ir.model.fields.selection,name:tracking.selection__stock_contract__state__draft
@@ -693,7 +714,7 @@ msgstr ""
 #. module: tracking
 #: model_terms:ir.actions.act_window,help:tracking.stock_contract_action
 msgid "No contract found. Let's create from exchange app!"
-msgstr ""
+msgstr "Гэрээ бүртгэгдээгүй байна"
 
 #. module: tracking
 #: model_terms:ir.actions.act_window,help:tracking.product_template_action
@@ -748,11 +769,6 @@ msgstr ""
 #: model:ir.model.fields.selection,name:tracking.selection__res_company__annual_inventory_month__10
 msgid "October"
 msgstr ""
-
-#. module: tracking
-#: model:ir.ui.menu,name:tracking.operations_root_menu
-msgid "Operations"
-msgstr "Үйл ажиллагаа"
 
 #. module: tracking
 #: model:ir.model.fields,help:tracking.field_stock_location__posz
@@ -932,6 +948,11 @@ msgid "Receipt"
 msgstr "Хүлээн авах"
 
 #. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__reference_id
+msgid "Ref ID"
+msgstr "Арилжааны дугаар"
+
+#. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_move__reference
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__name
 msgid "Reference"
@@ -976,6 +997,7 @@ msgstr ""
 
 #. module: tracking
 #. odoo-python
+#: code:addons/tracking/model/stock_contract.py:0
 #: code:addons/tracking/model/stock_picking.py:0
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__sequence
 #: model:ir.model.fields,field_description:tracking.field_stock_move__sequence
@@ -1002,6 +1024,7 @@ msgstr ""
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__source_company_id
+#: model:ir.model.fields,field_description:tracking.field_stock_move__dest_company_id
 msgid "Source Company"
 msgstr ""
 
@@ -1108,6 +1131,16 @@ msgid "Storable Product"
 msgstr "Нөөцлөх боломжтой"
 
 #. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__symbol
+msgid "Symbol"
+msgstr "Симбол"
+
+#. module: tracking
+#: model:res.groups,name:tracking.group_tracking_tsh_user
+msgid "TSH User"
+msgstr ""
+
+#. module: tracking
 #: model:ir.model.fields,help:tracking.field_stock_warehouse__company_id
 msgid "The company is automatically set from your user preferences."
 msgstr ""
@@ -1148,6 +1181,11 @@ msgid "Tracking"
 msgstr "Тээвэр"
 
 #. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__trade_date
+msgid "Trade Date"
+msgstr "Арилжсан огноо"
+
+#. module: tracking
 #: model:ir.model.fields.selection,name:tracking.selection__stock_vehicle__vehicle_type__train
 msgid "Train"
 msgstr "Галт тэрэг"
@@ -1178,7 +1216,7 @@ msgstr "Дамжин өнгөрөх байршил"
 
 #. module: tracking
 #: model:ir.model.fields.selection,name:tracking.selection__res_company__company_type__transport
-msgid "Transportation"
+msgid "Transport"
 msgstr "Тээвэрлэлт"
 
 #. module: tracking
@@ -1215,11 +1253,6 @@ msgstr ""
 #: model:ir.model.fields.selection,name:tracking.selection__stock_picking__priority__1
 msgid "Urgent"
 msgstr ""
-
-#. module: tracking
-#: model:res.groups,name:tracking.group_tracking_user
-msgid "User"
-msgstr "Хэрэглэгч"
 
 #. module: tracking
 #: model_terms:ir.ui.view,arch_db:tracking.view_picking_form
@@ -1305,8 +1338,17 @@ msgstr ""
 msgid "Website communication history"
 msgstr ""
 
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.login
+msgid "Имэйл"
+msgstr ""
 
 #. module: tracking
 #: model_terms:ir.ui.view,arch_db:tracking.login
-msgid "Email"
-msgstr "Имэйл"
+msgid "Нууц үг"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.login
+msgid "Нэвтрэх"
+msgstr ""

@@ -11,9 +11,9 @@
                 </header>
                 <sheet>
                     <div class="oe_title">
-                        <label for="name"/>
+                        <label for="contract_id"/>
                         <h1 class="d-flex">
-                            <field name="name" readonly="1"/>
+                            <field name="contract_id" readonly="1"/>
                         </h1>
                     </div>
                     <group string="Contract Information" name="contract_info">
@@ -22,13 +22,14 @@
                             <field name="location_id" options="{'no_create': True}"/>
                             <field name="amount"/>
                             <field name="price"/>
-                            <field name="auction"/>
+                            <field name="trade_date"/>
+                            <field name="symbol"/>
                         </group>
                         <group col="2">
-                            <field name="reference"/>
+                            <field name="reference_id"/>
                             <field name="location_dest_id" options="{'no_create': True}"/>
                             <field name="total_qty" />
-                            <field name="date"/>
+                            <field name="delivery_date"/>
                         </group>
                     </group>
 
@@ -55,16 +56,16 @@
         <field eval="50" name="priority"/>
         <field name="arch" type="xml">
             <tree string="Contracts">
-                <field name="name" />
-                <field name="reference"/>
+                <field name="contract_id" />
+                <field name="reference_id"/>
                 <field name="product_id"/>
-                <field name="auction"/>
+                <field name="symbol"/>
                 <field name="location_id" />
                 <field name="location_dest_id"/>
-                <field name="price"/>
                 <field name="amount"/>
                 <field name="total_qty" />
-                <field name="date" />
+                <field name="trade_date" />
+                <field name="delivery_date" />
             </tree>
         </field>
     </record>

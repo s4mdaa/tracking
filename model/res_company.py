@@ -55,8 +55,11 @@ class Company(models.Model):
         with open("../erdenesit/tracking/static/icon/ett_profile.png", "rb") as image_file:
             ett_profile_image = base64.b64encode(image_file.read())
         user_admin = self.env['res.users'].browse(2)
-        user_admin.write({'image_1920': ett_profile_image})
-        user_admin.write({'groups_id': [(4, tracking_admin_group.id)]})
+        user_admin.write({
+            'name': 'Д.Самданжигмэд',
+            'image_1920': ett_profile_image,
+            'groups_id': [(4, tracking_admin_group.id)]
+        })
         for company in companies:
             image_1920 = False
             if company.company_type == 'mining':

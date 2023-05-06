@@ -10,7 +10,8 @@ class Contract(models.Model):
     _order = 'sequence, id'
 
     name = fields.Char('Name')
-    reference = fields.Char('Reference')
+    contract_id = fields.Char('Contract ID', related='name')
+    reference_id = fields.Char('Ref ID')
     sequence = fields.Integer('Sequence', default=10)
     company_id = fields.Many2one(
         'res.company', 'Company', related='location_id.company_id')
@@ -22,9 +23,11 @@ class Contract(models.Model):
         ('cancel', 'Cancelled')
     ], string='Status', group_expand='_expand_states', copy=False,
         tracking=True, help='Status of the contract', default='draft')
-    date = fields.Datetime('Date', default=fields.Datetime.now)
+    trade_date = fields.Datetime('Trade Date', default=fields.Datetime.now)
+    delivery_date = fields.Date(
+        'Delivery Date', default=fields.Datetime.now)
     source_company_id = fields.Many2one('res.company', 'Source Company')
-    auction = fields.Char('Auction')
+    symbol = fields.Char('Symbol')
     price = fields.Float('Price')
     destination_company_id = fields.Many2one(
         'res.company', 'Destination Company')
@@ -92,17 +95,19 @@ class Contract(models.Model):
                     if not contractObj:
                         date = datetime.strptime(
                             trade['date'], '%Y-%m-%dT%H:%M:%S.%f%z')
-                        tradeDate = date.replace(
+                        tradeDateTime = date.replace(
                             tzinfo=None) - timedelta(hours=8)
+                        deliveryDate = tradeDateTime.date()
                         stock_contract_vals = {
-                            'reference': trade['id'],
+                            'reference_id': trade['id'],
                             'amount': trade['amount'],
                             'product_id': product_id.id,
                             'price': trade['value'],
-                            'auction': trade['auction'],
+                            'symbol': trade['auction'],
                             'location_id': location_id.id,
                             'location_dest_id': location_dest_id.id,
-                            'date':  tradeDate,
+                            'trade_date':  tradeDateTime,
+                            'delivery_date':  deliveryDate.replace(month=date.month+1),
                             'total_qty': 6400 * trade['amount'],
                         }
                         self.env['stock.contract'].sudo().create(
