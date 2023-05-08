@@ -112,13 +112,17 @@ class CustomAuthSignupHome(AuthSignupHome):
         picking_id = request.env['stock.picking'].create({
             'contract_id': contract_id.id,
             'company_id': request.env.user.company_id.id,
-            'picking_type': 'delivery'
         })
+        scheduled_date = datetime.now()  # get the current time
+
         for stock_vehicle in stock_vehicles:
+            # add two seconds to the scheduled date
+            scheduled_date += timedelta(seconds=2)
             request.env['stock.picking.line'].create({
                 'vehicle_id': stock_vehicle.id,
                 'transfer_qty': 100,
-                'picking_id': picking_id.id
+                'picking_id': picking_id.id,
+                'scheduled_date': scheduled_date,
             })
         picking_id.action_done()
 
@@ -132,11 +136,16 @@ class CustomAuthSignupHome(AuthSignupHome):
             'company_id': request.env.user.company_id.id,
             'picking_type': 'receipt',
         })
+        scheduled_date = datetime.now()  # get the current time
+
         for stock_vehicle in stock_vehicles:
+            # add two seconds to the scheduled date
+            scheduled_date += timedelta(seconds=2)
             request.env['stock.picking.line'].create({
                 'vehicle_id': stock_vehicle.id,
                 'transfer_qty': 100,
-                'picking_id': picking_id.id
+                'picking_id': picking_id.id,
+                'scheduled_date': scheduled_date,
             })
         picking_id.action_done()
 

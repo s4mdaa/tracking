@@ -98,7 +98,6 @@ class Picking(models.Model):
             return True
 
     def _create_per_stock_move(self, source_location, destination_location, rec, picking_line, scheduled_date):
-        print("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW")
         stock_move_vals = {
             'name': str(source_location.name) + '-' + str(destination_location.name),
             'contract_id': rec.contract_id.id,
