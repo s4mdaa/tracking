@@ -114,10 +114,15 @@ class CustomAuthSignupHome(AuthSignupHome):
             'company_id': request.env.user.company_id.id,
         })
         scheduled_date = datetime.now()  # get the current time
+        is_first_iteration = True
 
         for stock_vehicle in stock_vehicles:
-            # add two seconds to the scheduled date
-            scheduled_date += timedelta(seconds=2)
+            if is_first_iteration:
+                is_first_iteration = False
+            else:
+                # add two seconds to the scheduled date
+                scheduled_date += timedelta(seconds=2)
+
             request.env['stock.picking.line'].create({
                 'vehicle_id': stock_vehicle.id,
                 'transfer_qty': 100,
@@ -137,10 +142,15 @@ class CustomAuthSignupHome(AuthSignupHome):
             'picking_type': 'receipt',
         })
         scheduled_date = datetime.now()  # get the current time
+        is_first_iteration = True
 
         for stock_vehicle in stock_vehicles:
-            # add two seconds to the scheduled date
-            scheduled_date += timedelta(seconds=2)
+            if is_first_iteration:
+                is_first_iteration = False
+            else:
+                # add two seconds to the scheduled date
+                scheduled_date += timedelta(seconds=2)
+
             request.env['stock.picking.line'].create({
                 'vehicle_id': stock_vehicle.id,
                 'transfer_qty': 100,
