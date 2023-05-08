@@ -54,7 +54,6 @@ class CustomAuthSignupHome(AuthSignupHome):
                     product_id = request.env['product.product'].search(
                         [('name', '=', 'Нүүрс0'+str(i))], limit=1)
                     if not product_id:
-                        print(i, "+++++++++++++++++++++++++++++++")
                         i = 1
                         product_id = request.env['product.product'].search(
                             [('name', '=', 'Нүүрс0'+str(i))], limit=1)
@@ -104,3 +103,51 @@ class CustomAuthSignupHome(AuthSignupHome):
     #             'attribute_line_ids': attribute_line_ids,
     #             'detailed_type': 'product'
     #         })
+
+    @http.route('/transfer/create/ett', type='http', auth='user', website=True, sitemap=False)
+    def create_transfer_ett(self):
+        contract_id = request.env['stock.contract'].search(
+            [], order='id ASC', limit=1)
+        stock_vehicles = request.env['stock.vehicle'].search([])
+        picking_id = request.env['stock.picking'].create({
+            'contract_id': contract_id.id,
+            'company_id': request.env.user.company_id.id,
+            'picking_type': 'delivery'
+        })
+        for stock_vehicle in stock_vehicles:
+            request.env['stock.picking.line'].create({
+                'vehicle_id': stock_vehicle.id,
+                'transfer_qty': 100,
+                'picking_id': picking_id.id
+            })
+        picking_id.action_done()
+
+    @http.route('/tranfer/create/tsh', type='http', auth='user', website=True, sitemap=False)
+    def create_transfer_tsh(self):
+        contract_id = request.env['stock.vehicle'].search(
+            [], order='id ASC', limit=1)
+        stock_vehicles = request.env['stock.vehicle'].search([])
+        picking_id = request.env['stock.picking'].create({
+            'contract_id': contract_id.id,
+            'company_id': request.env.user.company_id.id,
+            'picking_type': 'receipt',
+        })
+        for stock_vehicle in stock_vehicles:
+            request.env['stock.picking.line'].create({
+                'vehicle_id': stock_vehicle.id,
+                'transfer_qty': 100,
+                'picking_id': picking_id.id
+            })
+        picking_id.action_done()
+
+    @http.route('/remove_datas', type='http', auth='user', website=True, sitemap=False)
+    def remove_datas(self):
+        stock_pickings = request.env['stock.picking'].sudo().search([])
+        stock_pickings.unlink()
+        stock_moves = request.env['stock.move'].sudo().search([])
+        stock_moves.unlink()
+        stock_quants = request.env['stock.quant'].sudo().search([])
+        stock_quants.unlink()
+        stock_contract_lines = request.env['stock.contract.line'].sudo().search([
+        ])
+        stock_contract_lines.unlink()

@@ -40,7 +40,7 @@
             <field name="model_id" ref="model_stock_vehicle"/>
             <field name="domain_force">['|',('company_id', '=', company_id), ('parent_company_id', '=', company_id)]</field>
         </record>
-        <record model="ir.rule" id="stock_quant_comp_rule">
+        <!-- <record model="ir.rule" id="stock_quant_comp_rule">
             <field name="name">Stock Quant multi-company</field>
             <field name="model_id" ref="model_stock_quant"/>
             <field name="domain_force">['|',('company_id', '=', company_id), ('parent_company_id', '=', company_id)]</field>
@@ -48,7 +48,7 @@
         <record model="ir.rule" id="stock_move_comp_rule">
             <field name="name">Stock Move multi-company</field>
             <field name="model_id" ref="model_stock_move"/>
-            <field name="domain_force">['|',('source_company_id', '=', company_id), ('dest_company_id', '=', company_id)]</field>
-        </record>
+            <field name="domain_force">['|',('source_company_id', '=', company_id), ('dest_company_id', '=', company_id), ('parent_company_id', '')]</field>
+        </record> -->
     </data>
 </odoo>
