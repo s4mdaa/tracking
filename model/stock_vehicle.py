@@ -59,3 +59,14 @@ class Vehicle(models.Model):
             location.location_id = parent_location.id
             location.company_id = vals['company_id']
         return result
+
+    @api.model
+    def create_vehicles(self):
+        company_id = self.env['res.company'].search(
+            [('company_type', '=', 'transport')], limit=1)
+        for i in range(1, 6):
+            self.env['stock.vehicle'].create({
+                'state_number': f'000{i}УАР',
+                'vehicle_type': 'track',
+                'company_id': company_id.id
+            })

@@ -23,10 +23,32 @@ class ProductTemplate(models.Model):
         return default_uom_weight.id
 
     @api.model
-    def delete_product_templates_with_variants(self):
-        templates = self.env['product.template'].search(
-            [('product_variant_count', '=', 1), ('name', '!=', 'Нүүрс01')])
-        templates.unlink()
+    def create_products(self):
+        product_templates = self.env['product.template'].search([])
+        product_templates.unlink()
+        company_id = self.env['res.company'].search(
+            [('company_type', '=', 'mining')], limit=1)
+        for i in range(1, 6):
+            attribute = self.env['product.attribute'].create({
+                'name': f'Attribute0{i}',
+            })
+            attribute_value = self.env['product.attribute.value'].create({
+                'name': f'Value0{i}',
+                'attribute_id': attribute.id
+            })
+            attribute_line_ids = []
+            attribute_line_ids.append(
+                (0, 0, {
+                    'attribute_id': attribute.id,
+                    'value_ids': [(6, 0, [attribute_value.id])]
+                })
+            )
+            self.env['product.template'].create({
+                'name': f'Нүүрс0{i}',
+                'attribute_line_ids': attribute_line_ids,
+                'detailed_type': 'product',
+                'company_id': company_id.id
+            })
 
 
 class ProductCategory(models.Model):
