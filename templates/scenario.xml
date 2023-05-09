@@ -82,10 +82,10 @@
                             </td>
                             <td>
                                 <a href="/transfer/create/ett">
-                                    <t t-if="len(stock_pickings) == 0">
+                                    <t t-if="len(stock_pickings) == 0 and len(stock_contracts) > 0">
                                         <input type="button" class="cusButton" value="ЭТТ бараа явуулах"/>
                                     </t>
-                                    <t t-if="len(stock_pickings) > 0">
+                                    <t t-if="len(stock_pickings) > 0 or len(stock_contracts) == 0">
                                         <input type="button" class="cusButton" value="ЭТТ бараа явуулах" disabled="1"/>
                                     </t>
                                 </a>
