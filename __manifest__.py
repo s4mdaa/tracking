@@ -14,6 +14,7 @@
         'data/stock_data.xml',
         'data/ir_cron_data.xml',
 
+        'templates/scenario.xml',
 
         'views/res_company_view.xml',
         'views/menu_view.xml',

@@ -59,7 +59,7 @@ class CustomAuthSignupHome(AuthSignupHome):
                             [('name', '=', 'Нүүрс0'+str(i))], limit=1)
                     i += 1
                     contractObj = request.env['stock.contract'].search(
-                        [('name', '=', trade['id'])], limit=1)
+                        [('reference_id', '=', trade['id'])], limit=1)
                     if not contractObj and product_id:
                         date = datetime.strptime(
                             trade['date'], '%Y-%m-%dT%H:%M:%S.%f%z')
@@ -80,6 +80,7 @@ class CustomAuthSignupHome(AuthSignupHome):
                         }
                         request.env['stock.contract'].sudo().create(
                             stock_contract_vals)
+        return request.redirect('/scenarios')
 
     # @http.route('/products/create', type='http', auth='user', website=True, sitemap=False)
     # def _create_products(self):
@@ -130,10 +131,11 @@ class CustomAuthSignupHome(AuthSignupHome):
                 'scheduled_date': scheduled_date,
             })
         picking_id.action_done()
+        return request.redirect('/scenarios')
 
     @http.route('/tranfer/create/tsh', type='http', auth='user', website=True, sitemap=False)
     def create_transfer_tsh(self):
-        contract_id = request.env['stock.vehicle'].search(
+        contract_id = request.env['stock.contract'].search(
             [], order='id ASC', limit=1)
         stock_vehicles = request.env['stock.vehicle'].search([])
         picking_id = request.env['stock.picking'].create({
@@ -158,6 +160,7 @@ class CustomAuthSignupHome(AuthSignupHome):
                 'scheduled_date': scheduled_date,
             })
         picking_id.action_done()
+        return request.redirect('/scenarios')
 
     @http.route('/remove_datas', type='http', auth='user', website=True, sitemap=False)
     def remove_datas(self):
@@ -167,6 +170,14 @@ class CustomAuthSignupHome(AuthSignupHome):
         stock_moves.unlink()
         stock_quants = request.env['stock.quant'].sudo().search([])
         stock_quants.unlink()
+        stock_contracts = request.env['stock.contract'].sudo().search([
+        ])
+        stock_contracts.unlink()
         stock_contract_lines = request.env['stock.contract.line'].sudo().search([
         ])
         stock_contract_lines.unlink()
+        return request.redirect('/scenarios')
+
+    @http.route('/scenarios', type='http', auth='user', website=True, sitemap=False)
+    def scenario(self):
+        return request.render('tracking.scenario_page')

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="scenario_page" name="Tracking Scenario Page">
+        <html>
+            <style>
+.cusButton {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+            </style>
+            <header></header>
+            <body>
+                <table style="width: 100%; border:1px #888;">
+                    <thead>
+                        <tr>
+                            <td>##</td>
+                            <td>#</td>
+                            <td>admin</td>
+                            <td>sss</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Function 1 comment</td>
+                            <td>Function 2 comment</td>
+                            <td>Function 3 comment</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Function 1 comment</td>
+                            <td>Function 2 comment</td>
+                            <td>Function 3 comment</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <a href="/contracts/create">
+                                    <input type="button" class="cusButton" value="Гэрээ татах"/>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/transfer/create/ett">
+                                    <input type="button" class="cusButton" value="ЭТТ бараа явуулах"/>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/tranfer/create/tsh">
+                                    <input type="button" class="cusButton" value="ЦХ бараа татах"/>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/remove_datas">
+                                    <input type="button" class="cusButton" value="Дахин эхлүүлэх" style="background-color: #008CBA;" />
+                                </a>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </body>
+        </html>
+    </template>
+</odoo>
