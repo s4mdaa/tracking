@@ -871,7 +871,7 @@ msgstr "Барааны ангилал"
 #: model:ir.model.fields,field_description:tracking.field_stock_move__product_tmpl_id
 #: model:ir.model.fields,field_description:tracking.field_stock_quant__product_tmpl_id
 msgid "Product Template"
-msgstr ""
+msgstr "Бараа"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_product_product__detailed_type
