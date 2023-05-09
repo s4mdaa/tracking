@@ -138,9 +138,12 @@ class CustomAuthSignupHome(AuthSignupHome):
         contract_id = request.env['stock.contract'].search(
             [], order='id ASC', limit=1)
         stock_vehicles = request.env['stock.vehicle'].search([])
+        company_id = request.env['res.company'].search(
+            [('company_type', '=', 'warehouse')])
+        print(company_id.name, "++++++++++++++++++++++++++++")
         picking_id = request.env['stock.picking'].create({
             'contract_id': contract_id.id,
-            'company_id': request.env.user.company_id.id,
+            'company_id': company_id.id,
             'picking_type': 'receipt',
         })
         scheduled_date = datetime.now()  # get the current time
@@ -180,4 +183,15 @@ class CustomAuthSignupHome(AuthSignupHome):
 
     @http.route('/scenarios', type='http', auth='user', website=True, sitemap=False)
     def scenario(self):
-        return request.render('tracking.scenario_page')
+        stock_pickings = request.env['stock.picking'].sudo().search([])
+        stock_moves = request.env['stock.move'].sudo().search([])
+        stock_quants = request.env['stock.quant'].sudo().search([])
+        stock_contracts = request.env['stock.contract'].sudo().search([
+        ])
+        values = ({
+            'stock_pickings': stock_pickings,
+            'stock_moves': stock_moves,
+            'stock_quants': stock_quants,
+            'stock_contracts': stock_contracts,
+        })
+        return request.render('tracking.scenario_page', values)
