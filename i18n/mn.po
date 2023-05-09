@@ -691,7 +691,7 @@ msgstr "Гэрээний дугаар"
 #. module: tracking
 #: model:ir.model.fields.selection,name:tracking.selection__stock_contract__state__draft
 msgid "New"
-msgstr ""
+msgstr "Үүсгэх"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_date_deadline
