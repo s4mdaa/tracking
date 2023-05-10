@@ -7,7 +7,7 @@ from datetime import timedelta
 class Picking(models.Model):
     _name = "stock.picking"
     _inherit = ['mail.thread', 'mail.activity.mixin']
-    _description = "Picking Type"
+    _description = "Stock Picking"
 
     name = fields.Char(
         'Reference', default='/',

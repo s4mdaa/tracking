@@ -7,6 +7,7 @@ import pytz
 class Contract(models.Model):
     _name = 'stock.contract'
     _description = "Stock Contract"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'sequence, id'
 
     name = fields.Char('Name')

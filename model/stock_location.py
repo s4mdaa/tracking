@@ -3,7 +3,7 @@ from odoo import _, api, fields, models
 
 class Location(models.Model):
     _name = "stock.location"
-    _description = "Inventory Locations"
+    _description = "Stock Location"
 
     name = fields.Char(string='Location Name', required=True, translate=True)
     active = fields.Boolean(
