@@ -6,7 +6,7 @@
     'summary': 'Product transfort tracking managment module',
     'version': '1.0.0',
     'license': 'OPL-1',
-    'depends': ['product', 'mail', 'web'],
+    'depends': ['product', 'mail', 'web', 'spiffy_theme_backend'],
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
