@@ -203,6 +203,7 @@ class Picking(models.Model):
 
 class PickingLine(models.Model):
     _name = "stock.picking.line"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Picking Line"
 
     picking_id = fields.Many2one(

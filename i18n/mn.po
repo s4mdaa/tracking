@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-10 07:15+0000\n"
-"PO-Revision-Date: 2023-05-10 07:15+0000\n"
+"POT-Creation-Date: 2023-05-10 07:30+0000\n"
+"PO-Revision-Date: 2023-05-10 07:30+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1352,11 +1352,6 @@ msgstr ""
 #. module: tracking
 #: model_terms:ir.ui.view,arch_db:tracking.login
 msgid "Нэвтрэх"
-msgstr ""
-
-#. module: tracking
-#: model:product.template,name:tracking.product_template01
-msgid "Нүүрс01"
 msgstr ""
 
 #. module: tracking
