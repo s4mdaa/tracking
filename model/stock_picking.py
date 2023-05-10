@@ -94,7 +94,7 @@ class Picking(models.Model):
                         rec._create_per_stock_move(
                             location['source'], location['destination'], rec, picking_line, scheduled_date)
                         rec._create_per_stock_quants(
-                            location['source'], location['destination'], picking_line, rec)
+                            location['source'], location['destination'], picking_line, rec, scheduled_date)
             return True
 
     def _create_per_stock_move(self, source_location, destination_location, rec, picking_line, scheduled_date):
@@ -134,17 +134,19 @@ class Picking(models.Model):
                 self.env['stock.contract.line'].sudo().create(
                     stock_contract_line_dest_vals)
 
-    def _create_per_stock_quants(self, source_location, destination_location, picking_line, rec):
+    def _create_per_stock_quants(self, source_location, destination_location, picking_line, rec, scheduled_date):
         quant_params = [
             {
                 'location_id': source_location.id,
                 'product_id': rec.product_id.id,
                 'quantity': -(picking_line.transfer_qty),
+                'scheduled_date': scheduled_date
             },
             {
                 'location_id': destination_location.id,
                 'product_id': rec.product_id.id,
                 'quantity': picking_line.transfer_qty,
+                'scheduled_date': scheduled_date + timedelta(seconds=1)
             },
         ]
         for params in quant_params:
@@ -157,6 +159,7 @@ class Picking(models.Model):
                     'location_id': params['location_id'],
                     'product_id': params['product_id'],
                     'quantity': params['quantity'],
+                    'scheduled_date': params['scheduled_date']
                 }
                 self.env['stock.quant'].sudo().create(stock_quant_vals)
 

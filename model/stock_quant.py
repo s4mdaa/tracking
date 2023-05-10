@@ -15,6 +15,7 @@ class Quant(models.Model):
         readonly=True, related='product_id.uom_id')
     company_id = fields.Many2one(
         related='location_id.company_id', string='Company', store=True, readonly=True)
+
     location_id = fields.Many2one(
         'stock.location', 'Location', auto_join=True, ondelete='restrict', required=True, index=True)
     quantity = fields.Float(
@@ -23,3 +24,6 @@ class Quant(models.Model):
         readonly=True, digits='Product Unit of Measure')
     parent_company_id = fields.Many2one(
         'res.company', 'Company', related='company_id.parent_id')
+    scheduled_date = fields.Datetime(
+        'Scheduled Date', store=True,
+        index=True, default=fields.Datetime.now)
