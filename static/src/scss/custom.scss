@@ -43,10 +43,14 @@ body.o_web_client.top_menu_vertical .o_main_navbar .o_menu_systray .vertical_sid
         display: none;
 }
 
-// #accordion > li:nth-child(2) {
-// display: none;
-// }
+#accordion > li:nth-child(2) {
+display: none;
+}
 
-// #accordion > li:nth-child(3) {
-//         display: none;
-// }
+#accordion > li:nth-child(3) {
+        display: none;
+}
+
+.o_Chatter_fixedPanel{
+        display: none;
+}
