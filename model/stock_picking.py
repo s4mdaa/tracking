@@ -123,7 +123,10 @@ class Picking(models.Model):
                 if is_destination == True:
                     stock_contract_line.quantity += picking_line.transfer_qty
                 else:
-                    stock_contract_line.quantity -= picking_line.transfer_qty
+                    if picking_line.transfer_qty != stock_contract_line.quantity:
+                        stock_contract_line.quantity = 0
+                    else:
+                        stock_contract_line.quantity -= picking_line.transfer_qty
             else:
                 stock_contract_line_dest_vals = {
                     'location_id': location.id,

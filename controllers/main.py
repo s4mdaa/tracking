@@ -203,6 +203,12 @@ class CustomAuthSignupHome(AuthSignupHome):
             [('company_id', '=', request.env.user.company_id.id), ('usage', '=', 'internal')])
         product_id = request.env['product.product'].search(
             [('name', '=', 'Нүүрс01')], order='id ASC', limit=1)
+        default_lang = self.env['res.lang'].search(
+            [('active', '=', True)])
+        if default_lang.iso_code == 'en':
+            reference = 'ЭТТ-Production'
+        else:
+            reference = 'ЭТТ-Үйлдвэрлэл'
         stock_move_vals = {
             'name': str(location_source.name) + '-' + str(location_destination.name),
             'location_id': location_source.id,
@@ -214,7 +220,7 @@ class CustomAuthSignupHome(AuthSignupHome):
             'company_id': location_source.company_id.id,
             'date': datetime.now(),
             'state': 'moved',
-            'reference': 'Үйлдвэрлэл'
+            'reference': reference
         }
         request.env['stock.move'].sudo().create(stock_move_vals)
         stock_quant_vals = {

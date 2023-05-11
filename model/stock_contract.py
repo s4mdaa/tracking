@@ -38,7 +38,17 @@ class Contract(models.Model):
     location_dest_id = fields.Many2one(
         'stock.location', 'Destination Location', domain=[('usage', '=', 'internal')])
     total_qty = fields.Integer(
-        'Quantity', compute='_compute_total_qty', store=True)
+        'Contract Amount', compute='_compute_qty', store=True)
+    delivered_qty = fields.Integer(
+        'Delivered Quantity', compute='_compute_qty', store=True)
+    incoming_qty = fields.Integer(
+        'Incoming Quantity', compute='_compute_qty', store=True)
+    available_qty = fields.Integer(
+        'Available Quantity', compute='_compute_qty', store=True)
+    depreciation_qty = fields.Integer(
+        'Depreciation Quantity', compute='_compute_qty', store=True)
+    surplus = fields.Integer(
+        'Surplus Quantity', compute='_compute_qty', store=True)
     amount = fields.Float('Amount')
     contract_line_ids = fields.One2many(
         'stock.contract.line', 'contract_id', string="Contract Lines", copy=True)
@@ -50,10 +60,32 @@ class Contract(models.Model):
          "Contract already exists.")
     ]
 
-    @ api.depends('amount')
-    def _compute_total_qty(self):
+    @ api.depends('amount', 'contract_line_ids')
+    def _compute_qty(self):
         for rec in self:
             rec.total_qty = rec.amount * 6400
+            delivered_contract_lines = rec.contract_line_ids.search(
+                [('location_id', '=', rec.location_dest_id.id)])
+            income_contract_lines = rec.contract_line_ids.search(
+                [('location_id', 'not in', [rec.location_dest_id.id, rec.location_id.id])])
+            rec.incoming_qty = sum(
+                income_contract_lines.mapped('quantity'))
+            rec.delivered_qty = sum(
+                delivered_contract_lines.mapped('quantity'))
+            delivered_picking = self.env['stock.picking'].search(
+                [('contract_id', '=', rec.id), ('company_type', '=', 'mining')], limit=1)
+            surplus_or_depreciation = sum(
+                delivered_picking.picking_line_ids.mapped('transfer_qty')) - (rec.delivered_qty + rec.incoming_qty)
+            if surplus_or_depreciation > 0:
+                rec.depreciation_qty = surplus_or_depreciation
+            elif surplus_or_depreciation < 0:
+                rec.surplus = abs(surplus_or_depreciation)
+            else:
+                rec.depreciation_qty = 0
+                rec.surplus = 0
+            rec.available_qty = rec.total_qty - \
+                (sum(
+                    delivered_contract_lines.mapped('quantity')) + surplus_or_depreciation + rec.incoming_qty)
 
     def _get_contract_info(self):
         session = requests.Session()
@@ -114,7 +146,7 @@ class Contract(models.Model):
                         self.env['stock.contract'].sudo().create(
                             stock_contract_vals)
 
-    @api.model_create_multi
+    @ api.model_create_multi
     def create(self, vals_list):
         contracts = super().create(vals_list)
         for contract, vals in zip(contracts, vals_list):

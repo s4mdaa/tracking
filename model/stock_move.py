@@ -75,8 +75,13 @@ class Move(models.Model):
                 move.location_name = move.location_id.location_id.name
                 move.location_dest_name = move.location_dest_id.name
             else:
-                if move.reference == 'Үйлдвэрлэл':
-                    move.location_name = 'Үйлдвэрлэл'
+                if move.reference == 'ЭТТ-Үйлдвэрлэл' or move.reference == 'ETT-Production':
+                    default_lang = self.env['res.lang'].search(
+                        [('active', '=', True)])
+                    if default_lang.iso_code == 'en':
+                        move.location_name = 'Production'
+                    else:
+                        move.location_name = 'Үйлдвэрлэл'
                     move.location_dest_name = move.location_dest_id.name
                 else:
                     move.location_name = move.location_id.name

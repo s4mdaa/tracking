@@ -152,11 +152,6 @@ msgid "Autosave is disabled, Click on save button."
 msgstr ""
 
 #. module: tracking
-#: model:ir.model.fields,field_description:tracking.field_stock_picking__available_qty
-msgid "Available Quantity"
-msgstr "Үлдсэн тоо хэмжээ"
-
-#. module: tracking
 #: model:ir.model.fields,help:tracking.field_stock_location__active
 msgid ""
 "By unchecking the active field, you may hide a location without deleting it."
@@ -1168,6 +1163,38 @@ msgstr "Нөөцлөх боломжтой"
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__symbol
 msgid "Symbol"
 msgstr "Симбол"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__incoming_qty
+msgid "Incoming Quantity"
+msgstr "Замд яваа"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__total_qty
+msgid "Contract Amount"
+msgstr "Гэрээний дүн"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__available_qty
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__available_qty
+msgid "Available Quantity"
+msgstr "Үлдсэн тоо хэмжээ"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__surplus
+msgid "Surplus Quantity"
+msgstr "Илүүдэл"
+
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__depreciation_qty
+msgid "Depreciation Quantity"
+msgstr "Хорогдол"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__delivered_qty
+msgid "Delivered Quantity"
+msgstr "Хүргэгдсэн"
 
 #. module: tracking
 #: model:res.groups,name:tracking.group_tracking_tsh_user
