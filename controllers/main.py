@@ -31,10 +31,10 @@ class CustomAuthSignupHome(AuthSignupHome):
         if response.status_code == 200:
 
             # Get contract info using the same session object
-            trade_url = 'http://demo.erdenesit.mn:8070/ts/trade/public/all'
+            trade_url = 'http://spectre-dev.online:8080/ts/trade/public/all'
             response = session.get(trade_url)
 
-            trade_url = 'http://demo.erdenesit.mn:8070/ts/trade/public/all'
+            trade_url = 'http://spectre-dev.online:8080/ts/trade/public/all'
             response = session.get(trade_url)
 
             mining_company = request.env['res.company'].search(
@@ -140,7 +140,6 @@ class CustomAuthSignupHome(AuthSignupHome):
         stock_vehicles = request.env['stock.vehicle'].search([])
         company_id = request.env['res.company'].search(
             [('company_type', '=', 'warehouse')])
-        print(company_id.name, "++++++++++++++++++++++++++++")
         picking_id = request.env['stock.picking'].create({
             'contract_id': contract_id.id,
             'company_id': company_id.id,
@@ -195,3 +194,33 @@ class CustomAuthSignupHome(AuthSignupHome):
             'stock_contracts': stock_contracts,
         })
         return request.render('tracking.scenario_page', values)
+
+    @http.route('/to_produce_ett', type='http', auth='user', website=True, sitemap=False)
+    def to_produce_ett(self):
+        location_source = request.env['stock.location'].sudo().search(
+            [('company_id', '=', request.env.user.company_id.id), ('usage', '=', 'production')])
+        location_destination = request.env['stock.location'].sudo().search(
+            [('company_id', '=', request.env.user.company_id.id), ('usage', '=', 'internal')])
+        product_id = request.env['product.product'].search(
+            [('name', '=', 'Нүүрс01')], order='id ASC', limit=1)
+        stock_move_vals = {
+            'name': str(location_source.name) + '-' + str(location_destination.name),
+            'location_id': location_source.id,
+            'location_dest_id': location_destination.id,
+            'product_id': product_id.id,
+            'product_qty': 100000,
+            'product_uom': product_id.uom_id.id,
+            'description_picking': product_id.name,
+            'company_id': location_source.company_id.id,
+            'date': datetime.now(),
+            'state': 'moved',
+            'reference': 'Үйлдвэрлэл'
+        }
+        request.env['stock.move'].sudo().create(stock_move_vals)
+        stock_quant_vals = {
+            'location_id': location_destination.id,
+            'product_id': product_id.id,
+            'quantity': 100000,
+            'scheduled_date': datetime.now()
+        }
+        request.env['stock.quant'].sudo().create(stock_quant_vals)

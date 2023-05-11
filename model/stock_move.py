@@ -33,12 +33,14 @@ class Move(models.Model):
         'stock.location', 'Source Location',
         auto_join=True, index=True, required=True,
         help="Sets a location if you produce at a fixed location. This can be a partner location if you subcontract the manufacturing operations.")
+    location_name = fields.Char(compute='_compute_location_name')
     source_company_id = fields.Many2one(
         'res.company', 'Dest Company', related='location_id.company_id')
     location_dest_id = fields.Many2one(
         'stock.location', 'Destination Location',
         auto_join=True, index=True, required=True,
         help="Location where the system will stock the finished products.")
+    location_dest_name = fields.Char(compute='_compute_location_name')
     dest_company_id = fields.Many2one(
         'res.company', 'Source Company', related='location_dest_id.company_id')
     picking_id = fields.Many2one('stock.picking', 'Transfer', index=True, states={
@@ -49,7 +51,7 @@ class Move(models.Model):
         ('moved', 'Moved'),
     ], string='Status', default='draft', copy=False, index=True, readonly=True, store=True, tracking=True)
     reference = fields.Char(compute='_compute_reference',
-                            string="Reference", store=True)
+                            string="Reference", store=True, translate=True)
     contract_id = fields.Many2one(
         'stock.contract', 'Contract')
     vehicle_id = fields.Many2one(
@@ -63,7 +65,22 @@ class Move(models.Model):
     @api.depends('picking_id', 'name')
     def _compute_reference(self):
         for move in self:
-            move.reference = move.picking_id.name if move.picking_id else move.name
+            if not move.reference:
+                move.reference = move.picking_id.name if move.picking_id else move.name
+
+    @api.depends('location_id')
+    def _compute_location_name(self):
+        for move in self:
+            if move.location_id.usage == 'transit':
+                move.location_name = move.location_id.location_id.name
+                move.location_dest_name = move.location_dest_id.name
+            else:
+                if move.reference == 'Үйлдвэрлэл':
+                    move.location_name = 'Үйлдвэрлэл'
+                    move.location_dest_name = move.location_dest_id.name
+                else:
+                    move.location_name = move.location_id.name
+                    move.location_dest_name = move.location_dest_id.location_id.name
 
     @api.depends('product_id')
     def _compute_product_uom(self):

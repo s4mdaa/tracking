@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-10 07:30+0000\n"
-"PO-Revision-Date: 2023-05-10 07:30+0000\n"
+"POT-Creation-Date: 2023-05-10 11:33+0000\n"
+"PO-Revision-Date: 2023-05-10 11:33+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -30,6 +30,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__message_needaction
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__message_needaction
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__message_needaction
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_needaction
 msgid "Action Needed"
 msgstr ""
@@ -45,6 +46,7 @@ msgstr "Идэвхтэй"
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__activity_ids
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_ids
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__activity_ids
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__activity_ids
 msgid "Activities"
 msgstr ""
@@ -52,6 +54,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__activity_exception_decoration
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_exception_decoration
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__activity_exception_decoration
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__activity_exception_decoration
 msgid "Activity Exception Decoration"
 msgstr ""
@@ -59,6 +62,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__activity_state
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_state
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__activity_state
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__activity_state
 msgid "Activity State"
 msgstr ""
@@ -66,6 +70,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__activity_type_icon
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_type_icon
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__activity_type_icon
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__activity_type_icon
 msgid "Activity Type Icon"
 msgstr ""
@@ -125,6 +130,7 @@ msgstr "Та шилжүүлгийг хийхдээ итгэлтэй байна �
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__message_attachment_count
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__message_attachment_count
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__message_attachment_count
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_attachment_count
 msgid "Attachment Count"
 msgstr ""
@@ -323,7 +329,7 @@ msgstr "Эцсийн цэг"
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_picking_line__transfer_qty
 msgid "Demand"
-msgstr ""
+msgstr "Тоо хэмжээ"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_move__name
@@ -415,6 +421,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__message_follower_ids
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__message_follower_ids
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__message_follower_ids
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_follower_ids
 msgid "Followers"
 msgstr ""
@@ -422,6 +429,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__message_partner_ids
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__message_partner_ids
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__message_partner_ids
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_partner_ids
 msgid "Followers (Partners)"
 msgstr ""
@@ -429,6 +437,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,help:tracking.field_stock_contract__activity_type_icon
 #: model:ir.model.fields,help:tracking.field_stock_picking__activity_type_icon
+#: model:ir.model.fields,help:tracking.field_stock_picking_line__activity_type_icon
 #: model:ir.model.fields,help:tracking.field_stock_vehicle__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
 msgstr ""
@@ -446,6 +455,7 @@ msgstr "Нэр"
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__has_message
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__has_message
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__has_message
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__has_message
 msgid "Has Message"
 msgstr ""
@@ -471,6 +481,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__activity_exception_icon
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_exception_icon
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__activity_exception_icon
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__activity_exception_icon
 msgid "Icon"
 msgstr ""
@@ -478,6 +489,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,help:tracking.field_stock_contract__activity_exception_icon
 #: model:ir.model.fields,help:tracking.field_stock_picking__activity_exception_icon
+#: model:ir.model.fields,help:tracking.field_stock_picking_line__activity_exception_icon
 #: model:ir.model.fields,help:tracking.field_stock_vehicle__activity_exception_icon
 msgid "Icon to indicate an exception activity."
 msgstr ""
@@ -485,6 +497,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,help:tracking.field_stock_contract__message_needaction
 #: model:ir.model.fields,help:tracking.field_stock_picking__message_needaction
+#: model:ir.model.fields,help:tracking.field_stock_picking_line__message_needaction
 #: model:ir.model.fields,help:tracking.field_stock_vehicle__message_needaction
 msgid "If checked, new messages require your attention."
 msgstr ""
@@ -494,6 +507,8 @@ msgstr ""
 #: model:ir.model.fields,help:tracking.field_stock_contract__message_has_sms_error
 #: model:ir.model.fields,help:tracking.field_stock_picking__message_has_error
 #: model:ir.model.fields,help:tracking.field_stock_picking__message_has_sms_error
+#: model:ir.model.fields,help:tracking.field_stock_picking_line__message_has_error
+#: model:ir.model.fields,help:tracking.field_stock_picking_line__message_has_sms_error
 #: model:ir.model.fields,help:tracking.field_stock_vehicle__message_has_error
 #: model:ir.model.fields,help:tracking.field_stock_vehicle__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
@@ -522,6 +537,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__message_is_follower
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__message_is_follower
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__message_is_follower
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_is_follower
 msgid "Is Follower"
 msgstr ""
@@ -597,6 +613,7 @@ msgstr ""
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract_line__location_id
+#: model:ir.model.fields,field_description:tracking.field_stock_contract_line__location_name
 #: model:ir.model.fields,field_description:tracking.field_stock_quant__location_id
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__location_id
 msgid "Location"
@@ -626,6 +643,7 @@ msgstr "Байршил"
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__message_main_attachment_id
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__message_main_attachment_id
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__message_main_attachment_id
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_main_attachment_id
 msgid "Main Attachment"
 msgstr ""
@@ -643,6 +661,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__message_has_error
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__message_has_error
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__message_has_error
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_has_error
 msgid "Message Delivery error"
 msgstr ""
@@ -650,6 +669,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__message_ids
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__message_ids
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__message_ids
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_ids
 msgid "Messages"
 msgstr ""
@@ -688,6 +708,7 @@ msgstr "Шилжүүлэг"
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__my_activity_date_deadline
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__my_activity_date_deadline
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__my_activity_date_deadline
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__my_activity_date_deadline
 msgid "My Activity Deadline"
 msgstr ""
@@ -706,6 +727,7 @@ msgstr "Үүсгэх"
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__activity_date_deadline
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_date_deadline
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__activity_date_deadline
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__activity_date_deadline
 msgid "Next Activity Deadline"
 msgstr ""
@@ -713,6 +735,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__activity_summary
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_summary
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__activity_summary
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__activity_summary
 msgid "Next Activity Summary"
 msgstr ""
@@ -720,6 +743,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__activity_type_id
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_type_id
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__activity_type_id
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__activity_type_id
 msgid "Next Activity Type"
 msgstr ""
@@ -742,6 +766,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__message_needaction_counter
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__message_needaction_counter
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__message_needaction_counter
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_needaction_counter
 msgid "Number of Actions"
 msgstr ""
@@ -749,6 +774,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__message_has_error_counter
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__message_has_error_counter
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__message_has_error_counter
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_has_error_counter
 msgid "Number of errors"
 msgstr ""
@@ -756,6 +782,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,help:tracking.field_stock_contract__message_needaction_counter
 #: model:ir.model.fields,help:tracking.field_stock_picking__message_needaction_counter
+#: model:ir.model.fields,help:tracking.field_stock_picking_line__message_needaction_counter
 #: model:ir.model.fields,help:tracking.field_stock_vehicle__message_needaction_counter
 msgid "Number of messages which requires an action"
 msgstr ""
@@ -763,6 +790,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,help:tracking.field_stock_contract__message_has_error_counter
 #: model:ir.model.fields,help:tracking.field_stock_picking__message_has_error_counter
+#: model:ir.model.fields,help:tracking.field_stock_picking_line__message_has_error_counter
 #: model:ir.model.fields,help:tracking.field_stock_vehicle__message_has_error_counter
 msgid "Number of messages with delivery error"
 msgstr ""
@@ -965,6 +993,7 @@ msgstr "Тайлан"
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__activity_user_id
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__activity_user_id
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__activity_user_id
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__activity_user_id
 msgid "Responsible User"
 msgstr ""
@@ -977,6 +1006,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__message_has_sms_error
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__message_has_sms_error
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__message_has_sms_error
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__message_has_sms_error
 msgid "SMS Delivery error"
 msgstr ""
@@ -985,7 +1015,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:tracking.field_stock_picking_line__scheduled_date
 #: model:ir.model.fields,field_description:tracking.field_stock_quant__scheduled_date
 msgid "Scheduled Date"
-msgstr ""
+msgstr "Огноо"
 
 #. module: tracking
 #: model:ir.model.fields,help:tracking.field_stock_move__date
@@ -1062,6 +1092,7 @@ msgstr "Төлөв"
 #. module: tracking
 #: model:ir.model.fields,help:tracking.field_stock_contract__activity_state
 #: model:ir.model.fields,help:tracking.field_stock_picking__activity_state
+#: model:ir.model.fields,help:tracking.field_stock_picking_line__activity_state
 #: model:ir.model.fields,help:tracking.field_stock_vehicle__activity_state
 msgid ""
 "Status based on activities\n"
@@ -1220,6 +1251,7 @@ msgstr "Төрөл"
 #. module: tracking
 #: model:ir.model.fields,help:tracking.field_stock_contract__activity_exception_decoration
 #: model:ir.model.fields,help:tracking.field_stock_picking__activity_exception_decoration
+#: model:ir.model.fields,help:tracking.field_stock_picking_line__activity_exception_decoration
 #: model:ir.model.fields,help:tracking.field_stock_vehicle__activity_exception_decoration
 msgid "Type of the exception activity on record."
 msgstr ""
@@ -1317,6 +1349,7 @@ msgstr "Агуулах"
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__website_message_ids
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__website_message_ids
+#: model:ir.model.fields,field_description:tracking.field_stock_picking_line__website_message_ids
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__website_message_ids
 msgid "Website Messages"
 msgstr ""
@@ -1324,6 +1357,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,help:tracking.field_stock_contract__website_message_ids
 #: model:ir.model.fields,help:tracking.field_stock_picking__website_message_ids
+#: model:ir.model.fields,help:tracking.field_stock_picking_line__website_message_ids
 #: model:ir.model.fields,help:tracking.field_stock_vehicle__website_message_ids
 msgid "Website communication history"
 msgstr ""
@@ -1352,6 +1386,11 @@ msgstr ""
 #. module: tracking
 #: model_terms:ir.ui.view,arch_db:tracking.login
 msgid "Нэвтрэх"
+msgstr ""
+
+#. module: tracking
+#: model:product.template,name:tracking.product_template01
+msgid "Нүүрс01"
 msgstr ""
 
 #. module: tracking

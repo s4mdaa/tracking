@@ -39,7 +39,7 @@
                             <tree string="Moves" editable="bottom" delete="false">
                                 <field name="product_id" />
                                 <field name="product_uom_id" />
-                                <field name="location_id" />
+                                <field name="location_name" />
                                 <field name="quantity" />
                                 <field name="company_id" />
                             </tree>

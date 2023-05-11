@@ -16,11 +16,11 @@
                 <field name="contract_id"/>
                 <field name="vehicle_id"/>
                 <field name="product_id"/>
-                <field name="location_id" options="{'no_create': True}" string="From" decoration-muted="location_usage not in ('internal','transit')"/>
-                <field name="location_dest_id" options="{'no_create': True}" string="To" decoration-muted="location_dest_usage not in ('internal','transit')"/>
+                <field name="company_id"/>
+                <field name="location_name" options="{'no_create': True}" string="From" decoration-muted="location_usage not in ('internal','transit')"/>
+                <field name="location_dest_name" options="{'no_create': True}" string="To" decoration-muted="location_dest_usage not in ('internal','transit')"/>
                 <field name="product_qty" string="Quantity" sum="Total Quantity" decoration-danger="(location_usage in ('internal','transit')) and (location_dest_usage not in ('internal','transit'))" decoration-success="(location_usage not in ('internal','transit')) and (location_dest_usage in ('internal','transit'))"/>
                 <field name="product_uom" options="{'no_open': True, 'no_create': True}" string="Unit"/>
-                <field name="company_id"/>
                 <field name="state" widget='badge' optional="show" decoration-info="state== 'moving'" decoration-muted="state == 'draft'" decoration-success="state == 'moved'" />
             </tree>
         </field>

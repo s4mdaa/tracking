@@ -116,7 +116,7 @@ class Picking(models.Model):
         self.env['stock.move'].sudo().create(stock_move_vals)
 
     def _create_per_contract_line(self, location, rec, picking_line, is_destination):
-        if location.usage == 'internal':
+        if location.usage == 'internal' and location.company_id.company_type != 'mining':
             stock_contract_line = self.env['stock.contract.line'].search(
                 [('location_id', '=', location.id), ('contract_id', '=', rec.contract_id.id)], limit=1)
             if stock_contract_line:

@@ -70,10 +70,10 @@ class Contract(models.Model):
         if response.status_code == 200:
 
             # Get contract info using the same session object
-            trade_url = 'http://demo.erdenesit.mn:8070/ts/trade/public/all'
+            trade_url = 'http://spectre-dev.online:8080/ts/trade/public/all'
             response = session.get(trade_url)
 
-            trade_url = 'http://demo.erdenesit.mn:8070/ts/trade/public/all'
+            trade_url = 'http://spectre-dev.online:8080/ts/trade/public/all'
             response = session.get(trade_url)
 
             mining_company = self.env['res.company'].search(
@@ -134,14 +134,6 @@ class Contract(models.Model):
                     'company_id': vals.get('company_id'),
                 })
             contract.write({'name': sequence.next_by_id()})
-            stock_contract_line_source_vals = {
-                'location_id': contract.location_id.id,
-                'product_id': contract.product_id.id,
-                'quantity': contract.total_qty,
-                'contract_id': contract.id
-            }
-            self.env['stock.contract.line'].sudo().create(
-                stock_contract_line_source_vals)
         return contracts
 
     def _get_security_by_rule_action(self):
@@ -164,6 +156,7 @@ class ContractLine(models.Model):
         readonly=True, related='product_id.uom_id')
     company_id = fields.Many2one(
         related='location_id.company_id', string='Company', store=True, readonly=True)
+    location_name = fields.Char('Location', related='location_id.name')
     location_id = fields.Many2one(
         'stock.location', 'Location', auto_join=True, ondelete='restrict', required=True, index=True)
     quantity = fields.Float(
