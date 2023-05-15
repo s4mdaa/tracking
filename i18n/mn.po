@@ -6,14 +6,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-10 11:33+0000\n"
-"PO-Revision-Date: 2023-05-10 11:33+0000\n"
+"POT-Creation-Date: 2023-05-15 08:52+0000\n"
+"PO-Revision-Date: 2023-05-15 08:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.scenario_page
+msgid "#Коммент"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.scenario_page
+msgid "5 машин"
+msgstr ""
 
 #. module: tracking
 #: model:ir.model.fields,help:tracking.field_product_product__detailed_type
@@ -146,10 +156,24 @@ msgid "August"
 msgstr ""
 
 #. module: tracking
+#: model:res.company,prevent_auto_save_warning:tracking.res_company_er
+#: model:res.company,prevent_auto_save_warning:tracking.res_company_gsb
+#: model:res.company,prevent_auto_save_warning:tracking.res_company_h
+#: model:res.company,prevent_auto_save_warning:tracking.res_company_l
+#: model:res.company,prevent_auto_save_warning:tracking.res_company_mt
 #: model:res.company,prevent_auto_save_warning:tracking.res_company_nt
+#: model:res.company,prevent_auto_save_warning:tracking.res_company_shh
+#: model:res.company,prevent_auto_save_warning:tracking.res_company_tch
 #: model:res.company,prevent_auto_save_warning:tracking.res_company_tsh
+#: model:res.company,prevent_auto_save_warning:tracking.res_company_tt
 msgid "Autosave is disabled, Click on save button."
 msgstr ""
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__available_qty
+#: model:ir.model.fields,field_description:tracking.field_stock_picking__available_qty
+msgid "Available Quantity"
+msgstr "Үлдсэн тоо хэмжээ"
 
 #. module: tracking
 #: model:ir.model.fields,help:tracking.field_stock_location__active
@@ -206,6 +230,11 @@ msgstr "Тохиргоо"
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__contract_id
 msgid "Contract"
 msgstr "Гэрээ"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__total_qty
+msgid "Contract Amount"
+msgstr "Гэрээний дүн"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__contract_id
@@ -307,6 +336,11 @@ msgid "Default unit of measure used for all stock operations."
 msgstr "Агуулахын үйл ажиллагаанд ашиглагдах үндсэн хэмжих нэгж"
 
 #. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__delivered_qty
+msgid "Delivered Quantity"
+msgstr "Хүргэгдсэн"
+
+#. module: tracking
 #: model:ir.model.fields.selection,name:tracking.selection__stock_picking__picking_type__delivery
 msgid "Delivery"
 msgstr "Хүргэх"
@@ -325,6 +359,11 @@ msgstr "Эцсийн цэг"
 #: model:ir.model.fields,field_description:tracking.field_stock_picking_line__transfer_qty
 msgid "Demand"
 msgstr "Тоо хэмжээ"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__depreciation_qty
+msgid "Depreciation Quantity"
+msgstr "Хорогдол"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_move__name
@@ -399,8 +438,7 @@ msgstr ""
 
 #. module: tracking
 #: model_terms:ir.ui.view,arch_db:tracking.scenario_page
-msgid ""
-"Exchange дээрх хийгдсэн арилжааны мэдээллүүдийг tracking систем рүү татах"
+msgid "Exchange системээс татах"
 msgstr ""
 
 #. module: tracking
@@ -510,6 +548,11 @@ msgid "If checked, some messages have a delivery error."
 msgstr ""
 
 #. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__incoming_qty
+msgid "Incoming Quantity"
+msgstr "Замд яваа"
+
+#. module: tracking
 #: model:ir.model.fields.selection,name:tracking.selection__stock_location__usage__internal
 msgid "Internal Location"
 msgstr "Дотоод байршил"
@@ -615,7 +658,13 @@ msgid "Location"
 msgstr "Байршил"
 
 #. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_move__location_dest_name
+msgid "Location Dest Name"
+msgstr ""
+
+#. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_location__name
+#: model:ir.model.fields,field_description:tracking.field_stock_move__location_name
 msgid "Location Name"
 msgstr "Байршилын нэр"
 
@@ -859,11 +908,6 @@ msgid "Picking list"
 msgstr "Тээвэрлэлтийн жагсаалт"
 
 #. module: tracking
-#: model:ir.model.fields,field_description:tracking.field_stock_contract__price
-msgid "Price"
-msgstr "Үнэ"
-
-#. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__priority
 msgid "Priority"
 msgstr ""
@@ -932,7 +976,6 @@ msgid ""
 msgstr ""
 
 #. module: tracking
-#: model:ir.model.fields,field_description:tracking.field_stock_contract__total_qty
 #: model:ir.model.fields,field_description:tracking.field_stock_contract_line__quantity
 #: model:ir.model.fields,field_description:tracking.field_stock_quant__quantity
 #: model_terms:ir.ui.view,arch_db:tracking.view_move_tree
@@ -984,6 +1027,12 @@ msgstr "Тээвэрлэлт"
 #: model:ir.ui.menu,name:tracking.reporting_root_menu
 msgid "Reporting"
 msgstr "Тайлан"
+
+#. module: tracking
+#: model:ir.model.fields,field_description:tracking.field_stock_quant__reserve_quantity
+#: model_terms:ir.ui.view,arch_db:tracking.view_stock_quant_tree
+msgid "Reserve Quantity"
+msgstr "Нөөц тоо хэмжээ"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__activity_user_id
@@ -1160,41 +1209,14 @@ msgid "Storable Product"
 msgstr "Нөөцлөх боломжтой"
 
 #. module: tracking
-#: model:ir.model.fields,field_description:tracking.field_stock_contract__symbol
-msgid "Symbol"
-msgstr "Симбол"
-
-#. module: tracking
-#: model:ir.model.fields,field_description:tracking.field_stock_contract__incoming_qty
-msgid "Incoming Quantity"
-msgstr "Замд яваа"
-
-#. module: tracking
-#: model:ir.model.fields,field_description:tracking.field_stock_contract__total_qty
-msgid "Contract Amount"
-msgstr "Гэрээний дүн"
-
-#. module: tracking
-#: model:ir.model.fields,field_description:tracking.field_stock_contract__available_qty
-#: model:ir.model.fields,field_description:tracking.field_stock_picking__available_qty
-msgid "Available Quantity"
-msgstr "Үлдсэн тоо хэмжээ"
-
-#. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__surplus
 msgid "Surplus Quantity"
 msgstr "Илүүдэл"
 
-
 #. module: tracking
-#: model:ir.model.fields,field_description:tracking.field_stock_contract__depreciation_qty
-msgid "Depreciation Quantity"
-msgstr "Хорогдол"
-
-#. module: tracking
-#: model:ir.model.fields,field_description:tracking.field_stock_contract__delivered_qty
-msgid "Delivered Quantity"
-msgstr "Хүргэгдсэн"
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__symbol
+msgid "Symbol"
+msgstr "Симбол"
 
 #. module: tracking
 #: model:res.groups,name:tracking.group_tracking_tsh_user
@@ -1391,7 +1413,29 @@ msgstr ""
 
 #. module: tracking
 #: model_terms:ir.ui.view,arch_db:tracking.scenario_page
-msgid "Гэрээ болон ачилтын мэдээллүүдийг баазаас цэвэрлэх"
+msgid "Арилжааны буюу гэрээний мэдээлэл татах"
+msgstr ""
+
+#. module: tracking
+#: model:product.template,name:tracking.product_template05
+msgid "Баяжуулсан Коксжих"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.scenario_page
+msgid "Гэрээ 1. 6400 тонн нүүр Цагаан хаданд хүргэх"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.scenario_page
+msgid "Гэрээний дагуу 10 машинд ачилт хийх. Машин тус бүр 70 тонн нүүрс"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.scenario_page
+msgid ""
+"Гэрээний дагуу 10 машинд шилжүүлэгдсэн нүүрсийг хүлээж авах. Машин тус бүр "
+"70 тонн нүүрс"
 msgstr ""
 
 #. module: tracking
@@ -1401,8 +1445,33 @@ msgid "Дамжин өнгөрөх байршил"
 msgstr ""
 
 #. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.scenario_page
+msgid "Дахин эхлүүлэх"
+msgstr ""
+
+#. module: tracking
 #: model_terms:ir.ui.view,arch_db:tracking.login
 msgid "Имэйл"
+msgstr ""
+
+#. module: tracking
+#: model:product.template,name:tracking.product_template03
+msgid "Исэлдэх"
+msgstr ""
+
+#. module: tracking
+#: model:product.template,name:tracking.product_template01
+msgid "Коксжих"
+msgstr ""
+
+#. module: tracking
+#: model:product.template,name:tracking.product_template02
+msgid "Коксжих, боловсруулаагүй"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.scenario_page
+msgid "Мэдээллийн санг цэвэрлэх болон мастер өгөгдөл оруулах"
 msgstr ""
 
 #. module: tracking
@@ -1416,18 +1485,56 @@ msgid "Нэвтрэх"
 msgstr ""
 
 #. module: tracking
-#: model:product.template,name:tracking.product_template01
-msgid "Нүүрс01"
+#: model_terms:ir.ui.view,arch_db:tracking.scenario_page
+msgid "Нэгдсэн өгөгдөл оруулах"
 msgstr ""
 
 #. module: tracking
 #: model_terms:ir.ui.view,arch_db:tracking.scenario_page
-msgid ""
-"Цагаан хад дээр ирсэн тээврийн хэрэгсэл дээрх нүүрсийг цагаан хад талаас "
-"хүлээж авах"
+msgid "Нэмэх тээвэр"
 msgstr ""
 
 #. module: tracking
 #: model_terms:ir.ui.view,arch_db:tracking.scenario_page
-msgid "ЭТТ агуулах дээрх нүүрсийг тээврийн хэрэгсэл рүү ачилт хийх"
+msgid "Нүүрс олборлох, овоолго үүсгэх 100,000 тонн"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.scenario_page
+msgid "Транс чако"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.scenario_page
+msgid "Тээврийн хэрэгсэлээс эцсийн цэг дээр хүлээн авах"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.scenario_page
+msgid "Уурхайгаас тээврийн хэрэгсэл рүү ачих"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.scenario_page
+msgid "Уурхайн ERP системээс авах"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.scenario_page
+msgid "Цагаан хад"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.scenario_page
+msgid "Эрдэнэс таван толгой"
+msgstr ""
+
+#. module: tracking
+#: model:product.template,name:tracking.product_template04
+msgid "Эрчмийн"
+msgstr ""
+
+#. module: tracking
+#: model_terms:ir.ui.view,arch_db:tracking.scenario_page
+msgid "админ01"
 msgstr ""
