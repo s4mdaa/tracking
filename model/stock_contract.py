@@ -29,7 +29,6 @@ class Contract(models.Model):
         'Delivery Date', default=fields.Datetime.now)
     source_company_id = fields.Many2one('res.company', 'Source Company')
     symbol = fields.Char('Symbol')
-    price = fields.Float('Price')
     destination_company_id = fields.Many2one(
         'res.company', 'Destination Company')
     active = fields.Boolean(default=True)
@@ -91,7 +90,7 @@ class Contract(models.Model):
         session = requests.Session()
 
         # Login
-        login_url = 'http://spectre-dev.online:9000/login'
+        login_url = 'http://demo.erdenesit.mn:9000/login'
         payload = {
             'username': 'admin01',
             'password': 'a'
@@ -102,10 +101,10 @@ class Contract(models.Model):
         if response.status_code == 200:
 
             # Get contract info using the same session object
-            trade_url = 'http://spectre-dev.online:8080/ts/trade/public/all'
+            trade_url = 'http://demo.erdenesit.mn:8070/ts/trade/public/all'
             response = session.get(trade_url)
 
-            trade_url = 'http://spectre-dev.online:8080/ts/trade/public/all'
+            trade_url = 'http://demo.erdenesit.mn:8070/ts/trade/public/all'
             response = session.get(trade_url)
 
             mining_company = self.env['res.company'].search(
@@ -118,7 +117,7 @@ class Contract(models.Model):
             location_dest_id = self.env['stock.location'].search(
                 [('company_id', '=', warehouse_company.id), ('usage', '=', 'internal')], order='id ASC', limit=1)
             product_id = self.env['product.product'].search(
-                [('name', '=', 'Нүүрс01')], order='id ASC', limit=1)
+                [('name', '=', 'Коксжих')], order='id ASC', limit=1)
 
             if response.status_code == 200:
                 data = response.json()
@@ -135,8 +134,7 @@ class Contract(models.Model):
                             'reference_id': trade['id'],
                             'amount': trade['amount'],
                             'product_id': product_id.id,
-                            'price': trade['value'],
-                            'symbol': trade['auction'],
+                            'symbol': trade['instrument'],
                             'location_id': location_id.id,
                             'location_dest_id': location_dest_id.id,
                             'trade_date':  tradeDateTime,

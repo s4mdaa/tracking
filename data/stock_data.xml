@@ -49,8 +49,33 @@
             <field name="phone">+976 7505-5555</field>
             <field name="street">Монгол улс, Улаанбаатар хот, Чингэлтэй дүүрэг, 1-р хороо. Жигжиджавын гудамж-8 Финанс төв</field>
         </record>
+        <record id="res_company_er" model="res.company">
+            <field name="name">ЭР ХХК</field>
+            <field name="company_type">mining</field>
+            <field name="parent_id" ref="base.main_company"/>
+        </record>
+        <record id="res_company_tt" model="res.company">
+            <field name="name">Тавантолгой ХК</field>
+            <field name="company_type">mining</field>
+            <field name="parent_id" ref="base.main_company"/>
+        </record>
         <record id="res_company_tsh" model="res.company">
-            <field name="name">Цагаан хад ХХК</field>
+            <field name="name">Цагаан хад</field>
+            <field name="company_type">warehouse</field>
+            <field name="parent_id" ref="base.main_company"/>
+        </record>
+        <record id="res_company_gsb" model="res.company">
+            <field name="name">Гашуун сухайт боомт</field>
+            <field name="company_type">warehouse</field>
+            <field name="parent_id" ref="base.main_company"/>
+        </record>
+        <record id="res_company_h" model="res.company">
+            <field name="name">Ханги мандал боомт</field>
+            <field name="company_type">warehouse</field>
+            <field name="parent_id" ref="base.main_company"/>
+        </record>
+        <record id="res_company_shh" model="res.company">
+            <field name="name">Шивээхүрэн боомт</field>
             <field name="company_type">warehouse</field>
             <field name="parent_id" ref="base.main_company"/>
         </record>
@@ -59,12 +84,55 @@
             <field name="company_type">transport</field>
             <field name="parent_id" ref="base.main_company"/>
         </record>
+        <record id="res_company_tch" model="res.company">
+            <field name="name">Транс чако ХХК</field>
+            <field name="company_type">transport</field>
+            <field name="parent_id" ref="base.main_company"/>
+        </record>
+        <record id="res_company_mt" model="res.company">
+            <field name="name">Тайшир транс ХХК</field>
+            <field name="company_type">transport</field>
+            <field name="parent_id" ref="res_company_er"/>
+        </record>
+        <record id="res_company_l" model="res.company">
+            <field name="name">Ложистикс ХХК</field>
+            <field name="company_type">transport</field>
+            <field name="parent_id" ref="res_company_tt"/>
+        </record>
 
         <!-- Resource: product.template -->
         <record id="product_template01" model="product.template">
-            <field name="name">Нүүрс01</field>
+            <field name="name">Коксжих</field>
             <field name="detailed_type">product</field>
             <field name="company_id" ref="base.main_company"/>
+            <field name="sale_ok">true</field>
+            <field name="purchase_ok">true</field>
+        </record>
+        <record id="product_template02" model="product.template">
+            <field name="name">Коксжих, боловсруулаагүй</field>
+            <field name="detailed_type">product</field>
+            <field name="company_id" ref="res_company_tt"/>
+            <field name="sale_ok">true</field>
+            <field name="purchase_ok">true</field>
+        </record>
+        <record id="product_template03" model="product.template">
+            <field name="name">Исэлдэх</field>
+            <field name="detailed_type">product</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="sale_ok">true</field>
+            <field name="purchase_ok">true</field>
+        </record>
+        <record id="product_template04" model="product.template">
+            <field name="name">Эрчмийн</field>
+            <field name="detailed_type">product</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="sale_ok">true</field>
+            <field name="purchase_ok">true</field>
+        </record>
+        <record id="product_template05" model="product.template">
+            <field name="name">Баяжуулсан Коксжих</field>
+            <field name="detailed_type">product</field>
+            <field name="company_id" ref="res_company_er"/>
             <field name="sale_ok">true</field>
             <field name="purchase_ok">true</field>
         </record>
@@ -77,7 +145,7 @@
         <function model="res.company" name="create_missing_scrap_location"/>
         <function model="res.company" name="create_missing_scrap_sequence"/>
         <function model="res.company" name="create_company_user"/>
-        <function model="product.template" name="create_products"/>
+        <function model="product.template" name="delete_products"/>
         <function model="stock.vehicle" name="create_vehicles"/>
     </data>
 </odoo>

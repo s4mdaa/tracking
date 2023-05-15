@@ -51,7 +51,7 @@ class Company(models.Model):
             'tracking.group_tracking_tsh_user')
         tracking_admin_group = self.env.ref('tracking.group_tracking_admin')
         companies = self.env['res.company'].search(
-            [('company_type', 'in', ('mining', 'warehouse'))])
+            [('name', 'in', ('ЭТТ ХХК', 'Цагаан хад'))])
         with open("../erdenesit/tracking/static/icon/ett_profile.png", "rb") as image_file:
             ett_profile_image = base64.b64encode(image_file.read())
         user_admin = self.env['res.users'].browse(2)
@@ -62,7 +62,7 @@ class Company(models.Model):
         })
         for company in companies:
             image_1920 = False
-            if company.company_type == 'mining':
+            if company.name == 'ЭТТ ХХК':
                 login = 'ganzo@erdenesit.mn'
                 name = 'Д.Ганзориг'
                 company_ids = [(6, 0, [company.id])]
@@ -70,7 +70,7 @@ class Company(models.Model):
                 groups_id = [(4, tracking_ett_user_group.id),
                              (4, self.env.ref('base.group_user').id)]
                 image_1920 = ett_profile_image
-            else:
+            if company.name == 'Цагаан хад':
                 login = 'amarsanaa@erdenesit.mn'
                 name = 'С.Амарсанаа'
                 company_id = company.id
@@ -163,9 +163,10 @@ class Company(models.Model):
             active_test=False).search([]).mapped('company_id')
         company_without_warehouse = company_ids - company_with_warehouse
         for company in company_without_warehouse:
+            code = company.name.replace("ХХК", "").replace("ХК", "")
             self.env['stock.warehouse'].create({
                 'name': company.name,
-                'code': company.name[:5],
+                'code': code,
                 'company_id': company.id,
                 'partner_id': company.partner_id.id,
             })
@@ -239,9 +240,10 @@ class Company(models.Model):
             company.sudo()._create_per_company_sequences()
             company.sudo()._create_per_company_picking_types()
             company.sudo()._create_per_company_rules()
+        code = company.name.replace("ХХК", "").replace("ХК", "")
         self.env['stock.warehouse'].sudo().create([{
             'name': company.name,
-            'code': self.env.context.get('default_code') or company.name[:5],
+            'code': self.env.context.get('default_code') or code,
             'company_id': company.id,
             'partner_id': company.partner_id.id
         } for company in companies])

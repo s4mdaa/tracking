@@ -20,17 +20,16 @@
                         <group col="2">
                             <field name="product_id"/>
                             <field name="location_id" options="{'no_create': True}"/>
-                            <field name="amount"/>
+                            <field name="symbol"/>
                             <field name="trade_date"/>
                             <field name="total_qty" />
                             <field name="incoming_qty" />
                             <field name="depreciation_qty" />
-                            <field name="symbol"/>
                         </group>
                         <group col="2">
                             <field name="reference_id"/>
                             <field name="location_dest_id" options="{'no_create': True}"/>
-                            <field name="price"/>
+                            <field name="amount"/>
                             <field name="delivery_date"/>
                             <field name="delivered_qty" />
                             <field name="available_qty" />
