@@ -100,6 +100,17 @@
             <field name="parent_id" ref="res_company_tt"/>
         </record>
 
+
+        <!-- Resource: uom.uom -->
+        <record id="uom.product_uom_ton" model="uom.uom">
+            <field name="category_id" ref="uom.product_uom_categ_kgm"/>
+            <!-- 'tonne' is the most common spelling in english-speaking countries,
+                    the alternative is 'metric ton' in the US, abbreviated as 'mt' -->
+            <field name="name">тонн</field>
+            <field name="factor_inv" eval="1000"/>
+            <field name="uom_type">bigger</field>
+        </record>
+
         <!-- Resource: product.template -->
         <record id="product_template01" model="product.template">
             <field name="name">Коксжих</field>

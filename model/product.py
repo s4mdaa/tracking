@@ -19,7 +19,7 @@ class ProductTemplate(models.Model):
 
     def _get_default_uom(self):
         default_uom_weight = self.env['uom.uom'].search(
-            [('name', '=', 't')], limit=1)
+            [('name', '=', 'тонн')], limit=1)
         return default_uom_weight.id
 
     @api.model
