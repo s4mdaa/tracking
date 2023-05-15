@@ -52,7 +52,7 @@ class CustomAuthSignupHome(AuthSignupHome):
         picking_id.action_done()
         return request.redirect('/scenarios')
 
-    @ http.route('/tranfer/create/tsh', type='http', auth='user', website=True, sitemap=False)
+    @ http.route('/transfer/create/tsh', type='http', auth='user', website=True, sitemap=False)
     def create_transfer_receipt(self, company_id=False, scheduled_date=False):
         if company_id == False:
             scheduled_date = datetime.now() + timedelta(seconds=30)
@@ -102,14 +102,10 @@ class CustomAuthSignupHome(AuthSignupHome):
 
     @ http.route('/scenarios', type='http', auth='user', website=True, sitemap=False)
     def scenario(self):
-        stock_pickings = request.env['stock.picking'].sudo().search(
-            [('company_id', '=', request.env.user.company_id.id)])
-        stock_moves = request.env['stock.move'].sudo().search(
-            [('company_id', '=', request.env.user.company_id.id)])
-        stock_quants = request.env['stock.quant'].sudo().search(
-            [('company_id', '=', request.env.user.company_id.id)])
-        stock_contracts = request.env['stock.contract'].sudo().search(
-            [('company_id', '=', request.env.user.company_id.id)])
+        stock_pickings = request.env['stock.picking'].sudo().search([])
+        stock_moves = request.env['stock.move'].sudo().search([])
+        stock_quants = request.env['stock.quant'].sudo().search([])
+        stock_contracts = request.env['stock.contract'].sudo().search([])
         values = ({
             'stock_pickings': stock_pickings,
             'stock_moves': stock_moves,
@@ -118,7 +114,7 @@ class CustomAuthSignupHome(AuthSignupHome):
         })
         return request.render('tracking.scenario_page', values)
 
-    @ http.route('/to_produce_ett', type='http', auth='user', website=True, sitemap=False)
+    @ http.route('/to_produce_mining_company', type='http', auth='user', website=True, sitemap=False)
     def to_produce_mining_company(self, company_id=False, scheduled_date=False):
         if company_id == False:
             company_id = request.env.user.company_id.id
@@ -164,6 +160,7 @@ class CustomAuthSignupHome(AuthSignupHome):
             'scheduled_date': datetime.now()
         }
         request.env['stock.quant'].sudo().create(stock_quant_vals)
+        return request.redirect('/scenarios')
 
     @ http.route('/create_big_data', type='http', auth='user', website=True, sitemap=False)
     def create_big_data(self):
@@ -210,3 +207,4 @@ class CustomAuthSignupHome(AuthSignupHome):
             self.create_transfer_receipt(
                 company_id=company.id, scheduled_date=scheduled_date)
             first_loop = False
+        return request.redirect('/scenarios')

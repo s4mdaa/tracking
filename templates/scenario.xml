@@ -3,102 +3,107 @@
     <template id="scenario_page" name="Tracking Scenario Page">
         <html>
             <style>
-.cusButton {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 10px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 2px;
-}
-
-.cusButton2 {
-  background-color: #008CBA;
-  border: none;
-  color: white;
-  padding: 10px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 2px;
-}
-
-.cusButton[disabled] {
-    border: 1px solid #999999;
-    background-color: #cccccc;
-    color: #666666;
-}
-.cusButton2[disabled] {
-    border: 1px solid #999999;
-    background-color: #cccccc;
-    color: #666666;
-}
+                .cusButton {
+                background-color: #4CAF50;
+                border: none;
+                color: white;
+                padding: 10px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 2px;
+                }
+                table {
+                border:1px solid;
+                width: 100%;
+                margin-bottom: 20px;
+                }
+                table, th, td {border:1px solid #555;border-collapse: collapse;}
             </style>
             <header></header>
             <body>
-                <table style="width: 100%; border:1px #888;">
+                <table class="table">
+                    <thead style="background-color:#7030a0; color:#FFF;">
+                        <tr>
+                            <td>##</td>
+                            <td>админ01</td>
+                            <td>Эрдэнэс таван толгой</td>
+                            <td>Энержи ресурс</td>
+                            <td>Нэмэх тээвэр</td>
+                            <td>Цагаан хад</td>
+                            <td>Гашуун сухайт</td>
+                            <td>#Коммент</td>
+                        </tr>
+                    </thead>
                     <tbody>
                         <tr>
-                            <td>Exchange дээрх хийгдсэн арилжааны мэдээллүүдийг tracking систем рүү татах</td>
-                            <td>ЭТТ агуулах дээрх нүүрсийг тээврийн хэрэгсэл рүү ачилт хийх</td>
-                            <td>Цагаан хад дээр ирсэн тээврийн хэрэгсэл дээрх нүүрсийг цагаан хад талаас хүлээж авах</td>
-                            <td>Гэрээ болон ачилтын мэдээллүүдийг баазаас цэвэрлэх</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td>
-                                <a href="/contracts/create">
-                                    <t t-if="len(stock_contracts) == 0">
-                                        <input type="button" class="cusButton" value="Гэрээ татах"/>
-                                    </t>
-                                    <t t-if="len(stock_contracts) > 0">
-                                        <input type="button" class="cusButton" value="Гэрээ татах" disabled="1"/>
-                                    </t>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="/transfer/create/ett">
-                                    <t t-if="len(stock_pickings) == 0 and len(stock_contracts) > 0">
-                                        <input type="button" class="cusButton" value="ЭТТ бараа явуулах"/>
-                                    </t>
-                                    <t t-if="len(stock_pickings) > 0 or len(stock_contracts) == 0">
-                                        <input type="button" class="cusButton" value="ЭТТ бараа явуулах" disabled="1"/>
-                                    </t>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="/tranfer/create/tsh">
-                                    <t t-if="len(stock_pickings) == 1">
-                                        <input type="button" class="cusButton" value="ЦХ бараа татах"/>
-                                    </t>
-                                    <t t-if="len(stock_pickings) == 2 or len(stock_pickings) == 0">
-                                        <input type="button" class="cusButton" value="ЦХ бараа татах" disabled="1"/>
-                                    </t>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="/remove_datas">
-                                    <t t-if="len(stock_contracts) == 0">
-                                        <input type="button" class="cusButton2" value="Дахин эхлүүлэх" disabled="1"/>
-                                    </t>
-                                    <t t-if="len(stock_contracts) > 0">
-                                        <input type="button" class="cusButton2" value="Дахин эхлүүлэх"/>
-                                    </t>
-                                </a>
-                            </td>
+                            <td>1</td>
+                            <td>Мэдээллийн санг цэвэрлэх болон мастер өгөгдөл оруулах </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                         </tr>
-                    </tfoot>
+                        <tr>
+                            <td>2</td>
+                            <td></td>
+                            <td>Нүүрс олборлох, овоолго үүсгэх 100,000 тонн</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Уурхайн ERP системээс авах</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Арилжааны буюу гэрээний мэдээлэл татах</td>
+                            <td>Гэрээ 1. 6400 тонн нүүр Цагаан хаданд хүргэх </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Татсан гэрээ шалгах</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td></td>
+                            <td>Гэрээний дагуу 5 машинд шилжүүлэг хийх. Машин тус бүр 70 тонн нүүрс </td>
+                            <td></td>
+                            <td>Гэрээний дагуу 5 машинд нүүрс зөөвөрлөх.  Машин тус бүр 70 тонн нүүрс </td>
+                            <td></td>
+                            <td></td>
+                            <td>Татсан гэрээ шалгах</td>
+                        </tr>
+                    </tbody>
                 </table>
+                <t t-set="link" t-value="'/to_produce_mining_company'"/>
+                <t t-set="text" t-value="'Дараагийн алхам ажиллуулах'"/>
+                <t t-if="len(stock_moves) > 0 and len(stock_contracts) == 0">
+                    <t t-set="link" t-value="'/contracts/create'"/>
+                </t>
+                <t t-elif="len(stock_pickings) == 0 and len(stock_contracts) > 0">
+                    <t t-set="link" t-value="'/transfer/create/ett'"/>
+                </t>
+                <t t-elif="len(stock_pickings) == 1">
+                    <t t-set="link" t-value="'/transfer/create/tsh'"/>
+                </t>
+                <t t-elif="len(stock_pickings) == 2">
+                    <t t-set="link" t-value="'/create_big_data'"/>
+                    <t t-set="text" t-value="'Бусад датаг оруулах'"/>
+                </t>
+                <t t-elif="len(stock_pickings) == 6">
+                    <t t-set="link" t-value="'#'"/>
+                    <t t-set="text" t-value="'Алхамууд дууссан'"/>
+                </t>
+                <a t-att-href="link" style="margin: 0px 10px; color: green; font:bold;">
+                    <t t-raw="text"/>
+                </a>
+                <a href="/remove_datas">Дахин эхлүүлэх</a>
             </body>
         </html>
     </template>
