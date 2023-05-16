@@ -120,7 +120,7 @@
             <field name="purchase_ok">true</field>
         </record>
         <record id="product_template02" model="product.template">
-            <field name="name">Коксжих, боловсруулаагүй</field>
+            <field name="name">Коксжих, дэгдэмхий</field>
             <field name="detailed_type">product</field>
             <field name="company_id" ref="res_company_tt"/>
             <field name="sale_ok">true</field>

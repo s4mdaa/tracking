@@ -1466,7 +1466,7 @@ msgstr ""
 
 #. module: tracking
 #: model:product.template,name:tracking.product_template02
-msgid "Коксжих, боловсруулаагүй"
+msgid "Коксжих, дэгдэмхий"
 msgstr ""
 
 #. module: tracking

@@ -22,14 +22,19 @@ class CustomAuthSignupHome(AuthSignupHome):
         return request.redirect('/scenarios')
 
     @http.route('/transfer/create/ett', type='http', auth='user', website=True, sitemap=False)
-    def create_transfer_delivery(self, company_id=False, scheduled_date=False):
+    def create_transfer_delivery(self, company_id=False, contract_id=False, scheduled_date=False):
         if company_id == False:
             scheduled_date = datetime.now()
             company_id = request.env.user.company_id.id
-        contract_id = request.env['stock.contract'].search(
-            [('company_id', '=', company_id)], order='id ASC', limit=1)
-        stock_vehicles = request.env['stock.vehicle'].search([
-            ('company_id.parent_id', '=', company_id)])
+            contract_id = request.env['stock.contract'].search(
+                [('company_id', '=', company_id)], order='id ASC', limit=1)
+            transfer_qty = 70
+            stock_vehicles = request.env['stock.vehicle'].search([
+                ('company_id.parent_id', '=', company_id)])
+        else:
+            stock_vehicles = request.env['stock.vehicle'].search([
+                ('company_id.parent_id', '=', company_id)])
+            transfer_qty = contract_id.total_qty/len(stock_vehicles)
         picking_id = request.env['stock.picking'].create({
             'contract_id': contract_id.id,
             'company_id': company_id,
@@ -45,7 +50,7 @@ class CustomAuthSignupHome(AuthSignupHome):
 
             request.env['stock.picking.line'].create({
                 'vehicle_id': stock_vehicle.id,
-                'transfer_qty': 70,
+                'transfer_qty': transfer_qty,
                 'picking_id': picking_id.id,
                 'scheduled_date': scheduled_date,
             })
@@ -53,14 +58,19 @@ class CustomAuthSignupHome(AuthSignupHome):
         return request.redirect('/scenarios')
 
     @ http.route('/transfer/create/tsh', type='http', auth='user', website=True, sitemap=False)
-    def create_transfer_receipt(self, company_id=False, scheduled_date=False):
+    def create_transfer_receipt(self, company_id=False, contract_id=False, transfer_qty=0, scheduled_date=False):
         if company_id == False:
             scheduled_date = datetime.now() + timedelta(seconds=30)
             company_id = request.env.user.company_id.id
-        contract_id = request.env['stock.contract'].search(
-            [('company_id', '=', company_id)], order='id ASC', limit=1)
-        stock_vehicles = request.env['stock.vehicle'].search(
-            [('company_id.parent_id', '=', company_id)])
+            contract_id = request.env['stock.contract'].search(
+                [('company_id', '=', company_id)], order='id ASC', limit=1)
+            transfer_qty = 70
+            stock_vehicles = request.env['stock.vehicle'].search([
+                ('company_id.parent_id', '=', company_id)])
+        else:
+            stock_vehicles = request.env['stock.vehicle'].search([
+                ('company_id.parent_id', '=', company_id)])
+            transfer_qty = contract_id.total_qty/len(stock_vehicles)
         picking_id = request.env['stock.picking'].create({
             'contract_id': contract_id.id,
             'company_id': contract_id.location_dest_id.company_id.id,
@@ -77,7 +87,7 @@ class CustomAuthSignupHome(AuthSignupHome):
 
             request.env['stock.picking.line'].create({
                 'vehicle_id': stock_vehicle.id,
-                'transfer_qty': 70,
+                'transfer_qty': transfer_qty,
                 'picking_id': picking_id.id,
                 'scheduled_date': scheduled_date,
             })
@@ -167,44 +177,65 @@ class CustomAuthSignupHome(AuthSignupHome):
         # create contract
         companies = request.env['res.company'].search(
             [('name', 'in', ('ЭР ХХК', 'Тавантолгой ХК'))])
-        trades = [
-            {'product_id': request.env['product.product'].search([('name', '=', 'Баяжуулсан Коксжих')], order='id ASC', limit=1).id,
-                'location_id': request.env['stock.location'].search([('company_id.name', '=', 'ЭР ХХК'), ('usage', '=', 'internal')], order='id ASC', limit=1).id,
-                'location_dest_id': request.env['stock.location'].search([('company_id.name', '=', 'Гашуун сухайт боомт'), ('usage', '=', 'internal')], order='id ASC', limit=1).id,
-                'amount': 3
-             },
-            {'product_id': request.env['product.product'].search([('name', '=', 'Коксжих, боловсруулаагүй')], order='id ASC', limit=1).id,
-                'location_id': request.env['stock.location'].search([('company_id.name', '=', 'Тавантолгой ХК'), ('usage', '=', 'internal')], order='id ASC', limit=1).id,
-                'location_dest_id': request.env['stock.location'].search([('company_id.name', '=', 'Шивээхүрэн боомт'), ('usage', '=', 'internal')], order='id ASC', limit=1).id,
-             'amount': 4
-             }
-        ]
-        scheduled_date = datetime.now() - timedelta(days=1)
-        for trade in trades:
-            deliveryDate = scheduled_date.date()
-            stock_contract_vals = {
-                'reference_id': f'3768586c-8ccc-46ff-b0f5-8633e509fc{trade["amount"]}',
-                'amount': trade['amount'],
-                'product_id': trade['product_id'],
-                'symbol': f'COAL650{trade["amount"]}',
-                'location_id': trade['location_id'],
-                'location_dest_id': trade['location_dest_id'],
-                'trade_date': scheduled_date,
-                'delivery_date': deliveryDate.replace(month=scheduled_date.month+1),
-                'total_qty': 6400 * trade['amount'],
-            }
-            request.env['stock.contract'].sudo().create(stock_contract_vals)
-        # create transfer
+        amount = 2
         first_loop = True
-        for company in companies:
-            if not first_loop:
-                scheduled_date += timedelta(minutes=1)
-            self.to_produce_mining_company(
-                company_id=company.id, scheduled_date=scheduled_date - timedelta(seconds=2))
-            self.create_transfer_delivery(
-                company_id=company.id, scheduled_date=scheduled_date)
-            scheduled_date += timedelta(seconds=30)
-            self.create_transfer_receipt(
-                company_id=company.id, scheduled_date=scheduled_date)
-            first_loop = False
+        for i in range(2):
+            for company in companies:
+                scheduled_date = datetime.now() - timedelta(weeks=4)
+                if i != 1:
+                    self.to_produce_mining_company(
+                        company_id=company.id, scheduled_date=scheduled_date - timedelta(seconds=2))
+                if company.name == 'ЭР ХХК':
+                    domain = ('company_id.name', 'in',
+                              ('Ханги мандал боомт', 'Цагаан хад'))
+                    if i == 1:
+                        domain = ('company_id.name', '=',
+                                  ('Ханги мандал боомт'))
+                else:
+                    domain = ('company_id.name', 'in',
+                              ('Гашуун сухайт боомт', 'Шивээхүрэн боомт'))
+                location_dest_ids = request.env['stock.location'].sudo().search(
+                    [('usage', '=', 'internal'), ('company_id.company_type', '=', 'warehouse'), domain])
+                for location_dest_id in location_dest_ids:
+                    if i == 1 and len(location_dest_ids) != 1:
+                        scheduled_date += timedelta(weeks=4)
+                    if i == 1 and len(location_dest_ids) == 1:
+                        scheduled_date += timedelta(weeks=12)
+                    product_id = request.env['product.product'].sudo().search(
+                        [('company_id', '=', company.id)], limit=1)
+                    location_id = request.env['stock.location'].sudo().search(
+                        [('usage', '=', 'internal'), ('company_id', '=', company.id)], limit=1)
+                    delivery_date = scheduled_date.date()
+                    stock_contract_vals = {
+                        'reference_id': f'3768586c-8ccc-46ff-b0f5-8633e509fc{company.id}{amount}',
+                        'amount': amount,
+                        'product_id': product_id.id,
+                        'symbol': f'COAL650{amount}',
+                        'location_id': location_id.id,
+                        'location_dest_id': location_dest_id.id,
+                        'trade_date': scheduled_date,
+                        'delivery_date': delivery_date.replace(month=scheduled_date.month + 1),
+                        'total_qty': 6400 * amount,
+                    }
+                    contract_id = request.env['stock.contract'].sudo().create(
+                        stock_contract_vals)
+                    amount += 1
+                    if scheduled_date + timedelta(weeks=3) < datetime.now():
+                        scheduled_date += timedelta(days=1)
+                    # create transfer
+                        if not first_loop:
+                            scheduled_date += timedelta(minutes=1)
+                        self.create_transfer_delivery(
+                            company_id=company.id, contract_id=contract_id, scheduled_date=scheduled_date)
+                        scheduled_date += timedelta(seconds=30)
+                        self.create_transfer_receipt(
+                            company_id=company.id, contract_id=contract_id, scheduled_date=scheduled_date)
+                        first_loop = False
         return request.redirect('/scenarios')
+
+    @http.route(['/get/tab/title/'], type='json', auth='public')
+    def get_tab_title(self, **kw):
+        company_id = request.env.company
+        new_name = company_id.tab_name
+        print(new_name, "+++++++++++++++++++++++++++++++++++++")
+        return new_name

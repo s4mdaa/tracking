@@ -14,6 +14,8 @@ class Company(models.Model):
     # used for resupply routes between warehouses that belong to this company
     company_type = fields.Selection(
         [('transport', 'Transport'), ('mining', 'Mining'), ('warehouse', 'Warehouse')], "Company Type", required=True)
+    tab_name = fields.Char(string="Backend Tab Name",
+                           default="Erdenes IT", readonly=False)
     internal_transit_location_id = fields.Many2one(
         'stock.location', 'Internal Transit Location', ondelete="restrict")
     stock_move_email_validation = fields.Boolean(

@@ -63,10 +63,10 @@ class Contract(models.Model):
     def _compute_qty(self):
         for rec in self:
             rec.total_qty = rec.amount * 6400
-            delivered_contract_lines = rec.contract_line_ids.search(
-                [('location_id', '=', rec.location_dest_id.id)])
-            income_contract_lines = rec.contract_line_ids.search(
-                [('location_id', 'not in', [rec.location_dest_id.id, rec.location_id.id])])
+            delivered_contract_lines = self.env['stock.contract.line'].search(
+                [('contract_id', '=', rec.id), ('location_id', '=', rec.location_dest_id.id)])
+            income_contract_lines = self.env['stock.contract.line'].search(
+                [('contract_id', '=', rec.id), ('location_id', 'not in', [rec.location_dest_id.id, rec.location_id.id])])
             rec.incoming_qty = sum(
                 income_contract_lines.mapped('quantity'))
             rec.delivered_qty = sum(
@@ -82,9 +82,8 @@ class Contract(models.Model):
             else:
                 rec.depreciation_qty = 0
                 rec.surplus = 0
-            rec.available_qty = rec.total_qty - \
-                (sum(
-                    delivered_contract_lines.mapped('quantity')) + surplus_or_depreciation + rec.incoming_qty)
+            rec.available_qty = rec.total_qty - (sum(
+                delivered_contract_lines.mapped('quantity')) + surplus_or_depreciation + rec.incoming_qty)
 
     def _get_contract_info(self):
         session = requests.Session()

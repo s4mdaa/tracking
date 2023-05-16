@@ -3,8 +3,11 @@
     <template id="scenario_page" name="Tracking Scenario Page">
         <html>
             <style>
+            tbody tr td {
+                color: #000000;
+            }
                 .bold-text {
-                        font-weight: bold;
+                        color: green;
                     }
                 .cusButton {
                 background-color: #4CAF50;
@@ -20,11 +23,29 @@
                 border-radius: 2px;
                 }
                 table {
-                border:1px solid;
+                border: 1px solid LightGray;
                 width: 100%;
                 margin-bottom: 20px;
                 }
-                table, th, td {border:1px solid #555;border-collapse: collapse;}
+                table, th, td {border: 1px solid LightGray;border-collapse: collapse;}
+
+body {
+    display: block;
+    margin: 8px;
+        border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    white-space: normal;
+    line-height: normal;
+    font-weight: normal;
+    font-size: medium;
+    font-style: normal;
+    color: -internal-quirk-inherit;
+    text-align: start;
+    border-spacing: 2px;
+    border-color: gray;
+    font-variant: normal;
+}
             </style>
             <header></header>
             <body>
@@ -32,18 +53,18 @@
                     <thead style="background-color:#7030a0; color:#FFF;">
                         <tr>
                             <td>##</td>
-                            <td>админ01</td>
-                            <td>Эрдэнэс таван толгой</td>
-                            <td>Транс чако</td>
-                            <td>Нэмэх тээвэр</td>
-                            <td>Цагаан хад</td>
-                            <td>#Коммент</td>
+                            <td style="width:17%;">админ01</td>
+                            <td style="width:17%;">Эрдэнэс таван толгой</td>
+                            <td style="width:17%;">Транс чако</td>
+                            <td style="width:16%;">Нэмэх тээвэр</td>
+                            <td style="width:16%;">Цагаан хад</td>
+                            <td style="width:16%;">#тайлбар</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td t-att-style="len(stock_moves) == 0 and len(stock_contracts) == 0 and 'font-weight: bold;'">
+                        <tr t-att-style="len(stock_moves) == 0 and len(stock_contracts) == 0 and 'background-color: Cornsilk;'">
+                            <td bgcolor="#7030A0" t-att-style="(len(stock_moves) == 0 and len(stock_contracts) == 0 and 'color: #FFFFFF;') or (len(stock_moves) > 0 and 'color: #808080;')">1</td>
+                            <td bgcolor="#7030A0" t-att-style="(len(stock_moves) == 0 and len(stock_contracts) == 0 and 'color: #FFFFFF;') or (len(stock_moves) > 0 and 'color: #808080;')">  
                                     Мэдээллийн санг цэвэрлэх болон мастер өгөгдөл оруулах
                             </td>
                             <td></td>
@@ -52,46 +73,45 @@
                             <td></td>
                             <td></td>
                         </tr>
-                        <tr>
+                        <tr t-att-style="len(stock_moves) > 0 and len(stock_contracts) == 0 and 'background-color: Cornsilk;'">
                             <td>2</td>
                             <td></td>
-                            <td t-att-style="len(stock_moves) > 0 and len(stock_contracts) == 0 and 'font-weight: bold;'">Нүүрс олборлох, овоолго үүсгэх 100,000 тонн</td>
+                            <td t-att-style="(len(stock_moves) > 0 and len(stock_contracts) == 0 and 'color: Blue;') or (len(stock_moves) > 0 and 'color: green;')">Нүүрс олборлох, овоолго үүсгэх 100,000 тонн</td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>Уурхайн ERP системээс авах</td>
+                            <td t-att-style="len(stock_moves) > 0 and 'color: 808080;'">Уурхайн ERP системээс авах</td>
                         </tr>
-                        <tr>
+                        <tr t-att-style="len(stock_pickings) == 0 and len(stock_contracts) > 0 and 'background-color: Cornsilk;'">
                             <td>3</td>
-                            <td t-att-style="len(stock_pickings) == 0 and len(stock_contracts) > 0 and 'font-weight: bold;'">Арилжааны буюу гэрээний мэдээлэл татах</td>
-                            <td t-att-style="len(stock_pickings) == 0 and len(stock_contracts) > 0 and 'font-weight: bold;'">Гэрээ 1. 6400 тонн нүүр Цагаан хаданд хүргэх</td>
+                            <td t-att-style="(len(stock_pickings) == 0 and len(stock_contracts) > 0 and 'color: Blue;') or (len(stock_contracts) > 0 and 'color: green;')">Арилжааны буюу гэрээний мэдээлэл татах</td>
+                            <td t-att-style="(len(stock_pickings) == 0 and len(stock_contracts) > 0 and 'color: Blue;') or (len(stock_contracts) > 0 and 'color: green;')">Гэрээ 1. 6400 тонн нүүр Цагаан хаданд хүргэх</td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>Exchange системээс татах</td>
+                            <td t-att-style="len(stock_contracts) > 0 and 'color: 808080;'">Exchange системээс татах</td>
                         </tr>
-                        <tr>
+                        <tr t-att-style="len(stock_pickings) == 1 and 'background-color: Cornsilk;'">
                             <td>4</td>
                             <td></td>
-                            <td t-att-style="len(stock_pickings) == 1 and 'font-weight: bold;'">Гэрээний дагуу 10 машинд ачилт хийх. Машин тус бүр 70 тонн нүүрс </td>
-                            <td t-att-style="len(stock_pickings) == 1 and 'font-weight: bold;'">5 машин</td>
-                            <td t-att-style="len(stock_pickings) == 1 and 'font-weight: bold;'">5 машин </td>
+                            <td t-att-style="(len(stock_pickings) == 1 and 'color: Blue;') or (len(stock_pickings) > 0 and 'color: green;')">Гэрээний дагуу 10 машинд ачилт хийх. Машин тус бүр 70 тонн нүүрс </td>
+                            <td t-att-style="len(stock_pickings) > 0 and 'color: 808080;'">5 машин</td>
+                            <td t-att-style="len(stock_pickings) > 0 and 'color: 808080;'">5 машин </td>
                             <td></td>
-                            <td>Уурхайгаас тээврийн хэрэгсэл рүү ачих</td>
+                            <td t-att-style="len(stock_pickings) > 0 and 'color: 808080;'">Уурхайгаас тээврийн хэрэгсэл рүү ачих</td>
                         </tr>
-                        <tr>
+                        <tr t-att-style="len(stock_pickings) == 2 and 'background-color: Cornsilk;'">
                             <td>5</td>
                             <td></td>
                             <td></td>
-                            <td t-att-style="len(stock_pickings) == 2 and 'font-weight: bold;'">5 машин</td>
-                            <td t-att-style="len(stock_pickings) == 2 and 'font-weight: bold;'">5 машин</td>
-                            <td t-att-style="len(stock_pickings) == 2 and 'font-weight: bold;'">Гэрээний дагуу 10 машинд шилжүүлэгдсэн нүүрсийг хүлээж авах. Машин тус бүр 70 тонн нүүрс </td>
-                            <td>Тээврийн хэрэгсэлээс эцсийн цэг дээр хүлээн авах</td>
+                            <td t-att-style="len(stock_pickings) > 1 and 'color: 808080;'">5 машин</td>
+                            <td t-att-style="len(stock_pickings) > 1 and 'color: 808080;'">5 машин</td>
+                            <td t-att-style="(len(stock_pickings) == 2 and 'color: Blue;') or (len(stock_pickings) > 1 and 'color: green;')">Гэрээний дагуу 10 машинд шилжүүлэгдсэн нүүрсийг хүлээж авах. Машин тус бүр 70 тонн нүүрс </td>
+                            <td t-att-style="len(stock_pickings) > 1 and 'color: 808080;'">Тээврийн хэрэгсэлээс эцсийн цэг дээр хүлээн авах</td>
                         </tr>
-                        <tr>
-                            <td>5</td>
-                            <td t-att-style="len(stock_pickings) == 6 and 'font-weight: bold;'">Нэгдсэн өгөгдөл оруулах</td>
-                            <td></td>
+                        <tr t-att-style="len(stock_pickings) == 10 and 'background-color: Cornsilk;'">
+                            <td>6</td>
+                            <td t-att-style="(len(stock_pickings) == 10 and 'color: Blue;') or (len(stock_pickings) > 2 and 'color: green;')">Нэгдсэн өгөгдөл оруулах</td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -115,7 +135,7 @@
                     <t t-set="link" t-value="'/create_big_data'"/>
                     <t t-set="text" t-value="'Бусад датаг оруулах'"/>
                 </t>
-                <t t-elif="len(stock_pickings) == 6">
+                <t t-elif="len(stock_pickings) == 10">
                     <t t-set="link" t-value="'#'"/>
                     <t t-set="text" t-value="'Алхамууд дууссан'"/>
                 </t>
