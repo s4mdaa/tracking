@@ -611,7 +611,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle____last_update
 #: model:ir.model.fields,field_description:tracking.field_stock_warehouse____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Огноо"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__write_uid
@@ -624,7 +624,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__write_uid
 #: model:ir.model.fields,field_description:tracking.field_stock_warehouse__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Хэрэглэгч"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__write_date
@@ -637,7 +637,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:tracking.field_stock_vehicle__write_date
 #: model:ir.model.fields,field_description:tracking.field_stock_warehouse__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Огноо"
 
 #. module: tracking
 #: model:ir.model.fields,help:tracking.field_stock_contract__company_id
@@ -1079,7 +1079,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:tracking.field_stock_move__sequence
 #, python-format
 msgid "Sequence"
-msgstr ""
+msgstr "Дараалал"
 
 #. module: tracking
 #: model:ir.model.fields,help:tracking.field_stock_move__location_id
@@ -1273,7 +1273,7 @@ msgstr "Галт тэрэг"
 #: model_terms:ir.ui.view,arch_db:tracking.view_picking_form
 #: model_terms:ir.ui.view,arch_db:tracking.view_warehouse_form
 msgid "Transfer"
-msgstr ""
+msgstr " Тээвэрлэлт"
 
 #. module: tracking
 #: model:ir.actions.act_window,name:tracking.stock_transfer_action
@@ -1321,7 +1321,7 @@ msgstr "Хэмжих нэгж"
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_move__product_uom
 msgid "UoM"
-msgstr ""
+msgstr "Нэгж"
 
 #. module: tracking
 #: model:ir.model.fields.selection,name:tracking.selection__stock_picking__priority__1

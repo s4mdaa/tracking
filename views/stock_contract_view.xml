@@ -84,6 +84,4 @@
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">tree,form</field>
     </record>
-
-    <menuitem action="stock_contract_action" id="stock_contract_menu" parent="reporting_root_menu" sequence="3" name="Contracts"/>
 </odoo>

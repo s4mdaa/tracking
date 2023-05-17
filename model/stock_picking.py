@@ -138,33 +138,24 @@ class Picking(models.Model):
                     stock_contract_line_dest_vals)
 
     def _create_per_stock_quants(self, source_location, destination_location, picking_line, rec, scheduled_date):
-        quant_params = [
-            {
-                'location_id': source_location.id,
+        if source_location.usage == 'internal':
+            location_id = source_location.id
+            quantity = -(picking_line.transfer_qty)
+        if destination_location.usage == 'internal':
+            location_id = destination_location.id
+            quantity = picking_line.transfer_qty
+        stock_quant = self.env['stock.quant'].search(
+            [('location_id', '=', location_id)], limit=1)
+        if stock_quant:
+            stock_quant.quantity += quantity
+        else:
+            stock_quant_vals = {
+                'location_id': location_id,
                 'product_id': rec.product_id.id,
-                'quantity': -(picking_line.transfer_qty),
+                'quantity': quantity,
                 'scheduled_date': scheduled_date
-            },
-            {
-                'location_id': destination_location.id,
-                'product_id': rec.product_id.id,
-                'quantity': picking_line.transfer_qty,
-                'scheduled_date': scheduled_date + timedelta(seconds=1)
-            },
-        ]
-        for params in quant_params:
-            stock_quant = self.env['stock.quant'].search(
-                [('location_id', '=', params['location_id'])], limit=1)
-            if stock_quant:
-                stock_quant.quantity += params['quantity']
-            else:
-                stock_quant_vals = {
-                    'location_id': params['location_id'],
-                    'product_id': params['product_id'],
-                    'quantity': params['quantity'],
-                    'scheduled_date': params['scheduled_date']
-                }
-                self.env['stock.quant'].sudo().create(stock_quant_vals)
+            }
+            self.env['stock.quant'].sudo().create(stock_quant_vals)
 
     @ api.depends('contract_id')
     def _compute_company_name(self):

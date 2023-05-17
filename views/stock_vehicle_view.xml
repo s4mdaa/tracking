@@ -52,5 +52,5 @@
         <field name="res_model">stock.vehicle</field>
         <field name="view_mode">tree,form</field>
     </record>
-    <menuitem id="stock_vehicle_menu" name="Vehicles" action="stock_vehicle_action" parent="reporting_root_menu" sequence="4"/>
+    <menuitem id="stock_vehicle_menu" name="Vehicles" action="stock_vehicle_action" parent="config_root_menu" sequence="4"/>
 </odoo>
