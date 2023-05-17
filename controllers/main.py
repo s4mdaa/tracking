@@ -19,7 +19,7 @@ class CustomAuthSignupHome(AuthSignupHome):
     def _get_trade_info(self):
         contract_obj = request.env['stock.contract']
         contract_obj._get_contract_info()
-        return request.redirect('/scenarios')
+        return request.redirect('/scenario')
 
     @http.route('/transfer/create/ett', type='http', auth='user', website=True, sitemap=False)
     def create_transfer_delivery(self, company_id=False, contract_id=False, scheduled_date=False):
@@ -55,7 +55,7 @@ class CustomAuthSignupHome(AuthSignupHome):
                 'scheduled_date': scheduled_date,
             })
         picking_id.action_done()
-        return request.redirect('/scenarios')
+        return request.redirect('/scenario')
 
     @ http.route('/transfer/create/tsh', type='http', auth='user', website=True, sitemap=False)
     def create_transfer_receipt(self, company_id=False, contract_id=False, transfer_qty=0, scheduled_date=False):
@@ -92,7 +92,7 @@ class CustomAuthSignupHome(AuthSignupHome):
                 'scheduled_date': scheduled_date,
             })
         picking_id.action_done()
-        return request.redirect('/scenarios')
+        return request.redirect('/scenario')
 
     @ http.route('/remove_datas', type='http', auth='user', website=True, sitemap=False)
     def remove_datas(self):
@@ -108,9 +108,9 @@ class CustomAuthSignupHome(AuthSignupHome):
         stock_contract_lines = request.env['stock.contract.line'].sudo().search([
         ])
         stock_contract_lines.unlink()
-        return request.redirect('/scenarios')
+        return request.redirect('/scenario')
 
-    @ http.route('/scenarios', type='http', auth='user', website=True, sitemap=False)
+    @ http.route('/scenario', type='http', auth='user', website=True, sitemap=False)
     def scenario(self):
         stock_pickings = request.env['stock.picking'].sudo().search([])
         stock_moves = request.env['stock.move'].sudo().search([])
@@ -170,7 +170,7 @@ class CustomAuthSignupHome(AuthSignupHome):
             'scheduled_date': datetime.now()
         }
         request.env['stock.quant'].sudo().create(stock_quant_vals)
-        return request.redirect('/scenarios')
+        return request.redirect('/scenario')
 
     @ http.route('/create_big_data', type='http', auth='user', website=True, sitemap=False)
     def create_big_data(self):
@@ -231,11 +231,4 @@ class CustomAuthSignupHome(AuthSignupHome):
                         self.create_transfer_receipt(
                             company_id=company.id, contract_id=contract_id, scheduled_date=scheduled_date)
                         first_loop = False
-        return request.redirect('/scenarios')
-
-    @http.route(['/get/tab/title/'], type='json', auth='public')
-    def get_tab_title(self, **kw):
-        company_id = request.env.company
-        new_name = company_id.tab_name
-        print(new_name, "+++++++++++++++++++++++++++++++++++++")
-        return new_name
+        return request.redirect('/scenario')
