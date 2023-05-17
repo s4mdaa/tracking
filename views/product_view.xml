@@ -45,7 +45,7 @@
             <field name="view_mode">kanban,tree,form</field>
         </record>
 
-        <menuitem id="product_template_menu" name="Products" action="product_template_action" parent="tracking_root_menu" sequence="2" groups="tracking.group_tracking_admin,tracking.group_tracking_ett_user" />
+        <menuitem id="product_template_menu" name="Products" action="product_template_action" web_icon="tracking,static/icon/mining-cart.png" sequence="2" groups="tracking.group_tracking_admin,tracking.group_tracking_ett_user" />
 
         <!-- <menuitem id="product_product_menu" name="Product Variants" action="product_product_action" parent="products_root_menu" sequence="2"/> -->
 

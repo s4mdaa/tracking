@@ -3,12 +3,18 @@
     <menuitem name="Tracking" web_icon="tracking,static/icon/car.png" id="tracking_root_menu" sequence="1" />
     <!-- <menuitem name="Operations" parent="tracking_root_menu" id="operations_root_menu" sequence="1" /> -->
     <!-- <menuitem name="Products" parent="tracking_root_menu" id="products_root_menu" sequence="2" groups="tracking.group_tracking_admin,tracking.group_tracking_ett_user"/> -->
-    <menuitem name="Reporting" parent="tracking_root_menu" id="reporting_root_menu" sequence="3" />
-    <menuitem name="Configuration" parent="tracking_root_menu" id="config_root_menu" sequence="4" groups="tracking.group_tracking_admin" />
+    <menuitem name="Reporting" id="reporting_root_menu" web_icon="tracking,static/icon/report.png" sequence="3" />
+    <menuitem name="Configuration" id="config_root_menu" web_icon="tracking,static/icon/setting.png" sequence="4" groups="tracking.group_tracking_admin" />
     <menuitem name="Warehouse Management" parent="config_root_menu" id="warehouse_config_menu" sequence="1"/>
     <menuitem name="Products" parent="config_root_menu" id="product_config_menu" sequence="1"/>
     <menuitem name="Products" parent="config_root_menu" id="product_config_menu" sequence="1"/>
     <record id="mail.menu_root_discuss" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+    <record id="base.menu_management" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+    <record id="base.menu_administration" model="ir.ui.menu">
         <field name="active" eval="False"/>
     </record>
 </odoo>	
