@@ -383,7 +383,7 @@ msgstr ""
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__destination_company_id
 msgid "Destination Company"
-msgstr ""
+msgstr "Хүргэх байршил"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__location_dest_id
@@ -1102,7 +1102,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__source_company_id
 #: model:ir.model.fields,field_description:tracking.field_stock_move__dest_company_id
 msgid "Source Company"
-msgstr ""
+msgstr "Гарах байршил"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__location_id
