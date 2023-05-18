@@ -146,18 +146,18 @@ class CustomAuthSignupHome(AuthSignupHome):
             [('company_id', '=', company_id)], order='id ASC', limit=1)
         default_lang = request.env['res.lang'].search(
             [('active', '=', True)])
-        if location_destination.company_id.name == 'ЭР ХХК':
-            reference = 'ЭР-Production'
+        if location_destination.company_id.name == 'Энержи Ресурс ХХК':
+            reference = 'Энержи Ресурс-Production'
             if default_lang.iso_code != 'en':
-                reference = 'ЭР-Үйлдвэрлэл'
-        if location_destination.company_id.name == 'ЭТТ ХХК':
-            reference = 'ЭТТ-Production'
+                reference = 'Энержи Ресурс-Үйлдвэрлэл'
+        if location_destination.company_id.name == 'Эрдэнэс Тавантолгой ХК':
+            reference = 'Эрдэнэс Тавантолгой ХК-Production'
             if default_lang.iso_code != 'en':
-                reference = 'ЭТТ-Үйлдвэрлэл'
+                reference = 'Эрдэнэс Тавантолгой ХК-Үйлдвэрлэл'
         if location_destination.company_id.name == 'Тавантолгой ХК':
-            reference = 'ЭТ-Production'
+            reference = 'Тавантолгой ХК-Production'
             if default_lang.iso_code != 'en':
-                reference = 'ЭТ-Үйлдвэрлэл'
+                reference = 'Тавантолгой ХК-Үйлдвэрлэл'
         stock_move_vals = {
             'name': str(location_source.name) + '-' + str(location_destination.name),
             'location_id': location_source.id,
@@ -185,7 +185,7 @@ class CustomAuthSignupHome(AuthSignupHome):
     def create_big_data(self):
         # create contract
         companies = request.env['res.company'].search(
-            [('name', 'in', ('ЭР ХХК', 'Тавантолгой ХК'))])
+            [('name', 'in', ('Энержи Ресурс ХХК', 'Тавантолгой ХК'))])
         amount = 2
         first_loop = True
         for i in range(2):

@@ -53,7 +53,7 @@ class Company(models.Model):
             'tracking.group_tracking_tsh_user')
         tracking_admin_group = self.env.ref('tracking.group_tracking_admin')
         companies = self.env['res.company'].search(
-            [('name', 'in', ('ЭТТ ХХК', 'Цагаан хад'))])
+            [('name', 'in', ('Эрдэнэс Тавантолгой ХК', 'Цагаан хад'))])
         with open("../erdenesit/tracking/static/icon/ett_profile.png", "rb") as image_file:
             ett_profile_image = base64.b64encode(image_file.read())
         user_admin = self.env['res.users'].browse(2)
@@ -64,7 +64,7 @@ class Company(models.Model):
         })
         for company in companies:
             image_1920 = False
-            if company.name == 'ЭТТ ХХК':
+            if company.name == 'Эрдэнэс Тавантолгой ХК':
                 login = 'ganzo@erdenesit.mn'
                 name = 'Д.Ганзориг'
                 company_ids = [(6, 0, [company.id])]

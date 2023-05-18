@@ -41,7 +41,7 @@
 
         <!-- Resource: res.company -->
         <record id="base.main_company" model="res.company">
-            <field name="name">ЭТТ ХХК</field>
+            <field name="name">Эрдэнэс Тавантолгой ХК</field>
             <field name="company_type">mining</field>
             <field name="currency_id">2</field>
             <field name="website">https://ett.mn/mn</field>
@@ -50,7 +50,7 @@
             <field name="street">Монгол улс, Улаанбаатар хот, Чингэлтэй дүүрэг, 1-р хороо. Жигжиджавын гудамж-8 Финанс төв</field>
         </record>
         <record id="res_company_er" model="res.company">
-            <field name="name">ЭР ХХК</field>
+            <field name="name">Энержи Ресурс ХХК</field>
             <field name="company_type">mining</field>
         </record>
         <record id="res_company_tt" model="res.company">
