@@ -21,19 +21,19 @@ body.o_web_client.top_menu_vertical .o_main_navbar .o_menu_systray .vertical_sid
         display: none !important;
 }
 
-.o-dropdown--menu a:nth-child(1),
-.o-dropdown--menu a:nth-child(2) {
-    display: none;
-}
+// .o-dropdown--menu a:nth-child(1),
+// .o-dropdown--menu a:nth-child(2) {
+//     display: none;
+// }
 
-.o-dropdown--menu span:nth-child(1),
-.o-dropdown--menu span:nth-child(3) {
-    display: none;
-}
+// .o-dropdown--menu span:nth-child(1),
+// .o-dropdown--menu span:nth-child(3) {
+//     display: none;
+// }
 
-.o-dropdown--menu .dropdown-divider {
-    display: none;
-}
+// .o-dropdown--menu .dropdown-divider {
+//     display: none;
+// }
 
 .greeting {
         display: none;
