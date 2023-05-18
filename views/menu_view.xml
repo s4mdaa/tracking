@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- <menuitem name="Tracking" web_icon="tracking,static/icon/car.png" id="tracking_root_menu" sequence="1" /> -->
-    <menuitem id="stock_transfer_menu" name="Transfers" web_icon="tracking,static/icon/truck.png" action="stock_transfer_action" sequence="1"/>
-    <menuitem id="product_template_menu" name="Products" action="product_template_action" web_icon="tracking,static/icon/coal.png" sequence="2" groups="tracking.group_tracking_admin,tracking.group_tracking_ett_user" />
-    <menuitem action="stock_contract_action" id="stock_contract_menu" web_icon="tracking,static/icon/contract.png" sequence="3" name="Contracts"/>
     <!-- <menuitem name="Operations" parent="tracking_root_menu" id="operations_root_menu" sequence="1" /> -->
     <!-- <menuitem name="Products" parent="tracking_root_menu" id="products_root_menu" sequence="2" groups="tracking.group_tracking_admin,tracking.group_tracking_ett_user"/> -->
     <menuitem name="Reporting" id="reporting_root_menu" web_icon="tracking,static/icon/report.png" sequence="4" />
@@ -13,9 +10,9 @@
     <record id="mail.menu_root_discuss" model="ir.ui.menu">
         <field name="active" eval="False"/>
     </record>
-    <record id="base.menu_management" model="ir.ui.menu">
+    <!-- <record id="base.menu_management" model="ir.ui.menu">
         <field name="active" eval="False"/>
-    </record>
+    </record> -->
     <record id="base.menu_administration" model="ir.ui.menu">
         <field name="active" eval="False"/>
     </record>

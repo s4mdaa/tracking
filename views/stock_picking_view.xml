@@ -83,4 +83,6 @@
         <field name="view_mode">tree,form</field>
     </record>
 
+    <menuitem id="stock_transfer_menu" name="Transfers" web_icon="tracking,static/icon/truck.png" action="stock_transfer_action" sequence="1"/>
+
 </odoo>
