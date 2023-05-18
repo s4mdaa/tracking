@@ -189,6 +189,7 @@ class CustomAuthSignupHome(AuthSignupHome):
         amount = 2
         first_loop = True
         for i in range(2):
+            index = 2
             for company in companies:
                 scheduled_date = datetime.now() - timedelta(weeks=4)
                 if i != 1:
@@ -210,7 +211,7 @@ class CustomAuthSignupHome(AuthSignupHome):
                         'reference_id': f'3768586c-8ccc-46ff-b0f5-8633e509fc{company.id}{amount}',
                         'amount': amount,
                         'product_id': product_id.id,
-                        'symbol': f'COAL650{amount}',
+                        'symbol': f'20240{index}COAL',
                         'location_id': location_id.id,
                         'location_dest_id': location_dest_id.id,
                         'trade_date': scheduled_date,
@@ -231,4 +232,5 @@ class CustomAuthSignupHome(AuthSignupHome):
                         self.create_transfer_receipt(
                             company_id=company.id, contract_id=contract_id, scheduled_date=scheduled_date)
                         first_loop = False
+                index += 1
         return request.redirect('/scenario')
