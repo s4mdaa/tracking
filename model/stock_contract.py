@@ -27,10 +27,10 @@ class Contract(models.Model):
     trade_date = fields.Datetime('Trade Date', default=fields.Datetime.now)
     delivery_date = fields.Date(
         'Delivery Date', default=fields.Datetime.now)
-    source_company_id = fields.Many2one('res.company', 'Source Company')
+    source_company_id = fields.Many2one(related='location_id.company_id')
     symbol = fields.Char('Symbol')
     destination_company_id = fields.Many2one(
-        'res.company', 'Destination Company')
+        related='location_dest_id.company_id')
     active = fields.Boolean(default=True)
     location_id = fields.Many2one(
         'stock.location', 'Source Location', domain=[('usage', '=', 'internal')])

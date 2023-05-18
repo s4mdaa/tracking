@@ -29,6 +29,8 @@ class Location(models.Model):
                           help="Optional localization details, for information purpose only")
     scrap_location = fields.Boolean('Is a Scrap Location?', default=False,
                                     help='Check this box to allow using this location to put scrapped/damaged goods.')
+    parent_company_id = fields.Many2one(
+        'res.company', 'Company', related='company_id.parent_id')
 
     @api.depends('name', 'location_id.complete_name', 'usage')
     def _compute_complete_name(self):

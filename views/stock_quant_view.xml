@@ -23,7 +23,7 @@
         <field name="arch" type="xml">
             <search string="Stock quant search">
                 <group expand="1" string="Group By...">
-                    <filter name="groupby_company_id" context="{'group_by':'company_id'}" string="Компаниар" />
+                    <filter name="groupby_company_id" context="{'group_by':'company_id'}" string="Компаниар" groups="tracking.group_tracking_admin,tracking.group_tracking_ett_user" />
                 </group>
             </search>
         </field>

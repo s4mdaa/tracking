@@ -101,6 +101,7 @@ class Picking(models.Model):
         stock_move_vals = {
             'name': str(source_location.name) + '-' + str(destination_location.name),
             'contract_id': rec.contract_id.id,
+            'picking_company_id': rec.company_id.id,
             'vehicle_id': picking_line.vehicle_id.id,
             'location_id': source_location.id,
             'location_dest_id': destination_location.id,

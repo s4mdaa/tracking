@@ -7,6 +7,8 @@
         <field eval="8" name="priority"/>
         <field name="arch" type="xml">
             <tree string="Moves" create="0" delete="0" default_order="date desc">
+                <field name="picking_company_id" invisible="1"/>
+                <field name="parent_company_id" invisible="1"/>
                 <field name="source_company_id" invisible="1"/>
                 <field name="dest_company_id" invisible="1"/>
                 <field name="date"/>

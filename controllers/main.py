@@ -1,5 +1,6 @@
 from odoo import http
 from odoo.http import request
+from odoo.exceptions import AccessError
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
 from datetime import datetime, timedelta
 import requests
@@ -110,18 +111,26 @@ class CustomAuthSignupHome(AuthSignupHome):
         stock_contract_lines.unlink()
         return request.redirect('/scenario')
 
-    @ http.route('/scenario', type='http', auth='user', website=True, sitemap=False)
+    @http.route(['/scenario', '/scenarios'], type='http', auth='user', website=True, sitemap=False)
     def scenario(self):
+        # Check if the current user has the 'tracking.group_tracking_admin' group
+        if not request.env.user.has_group('tracking.group_tracking_admin'):
+            raise AccessError("You are not authorized to access this page.")
+
+        current_url = request.httprequest.path
+        if current_url == '/scenarios':
+            return request.redirect('/scenario')
+
         stock_pickings = request.env['stock.picking'].sudo().search([])
         stock_moves = request.env['stock.move'].sudo().search([])
         stock_quants = request.env['stock.quant'].sudo().search([])
         stock_contracts = request.env['stock.contract'].sudo().search([])
-        values = ({
+        values = {
             'stock_pickings': stock_pickings,
             'stock_moves': stock_moves,
             'stock_quants': stock_quants,
             'stock_contracts': stock_contracts,
-        })
+        }
         return request.render('tracking.scenario_page', values)
 
     @ http.route('/to_produce_mining_company', type='http', auth='user', website=True, sitemap=False)
@@ -185,17 +194,8 @@ class CustomAuthSignupHome(AuthSignupHome):
                 if i != 1:
                     self.to_produce_mining_company(
                         company_id=company.id, scheduled_date=scheduled_date - timedelta(seconds=2))
-                if company.name == 'ЭР ХХК':
-                    domain = ('company_id.name', 'in',
-                              ('Ханги мандал боомт', 'Цагаан хад'))
-                    if i == 1:
-                        domain = ('company_id.name', '=',
-                                  ('Ханги мандал боомт'))
-                else:
-                    domain = ('company_id.name', 'in',
-                              ('Гашуун сухайт боомт', 'Шивээхүрэн боомт'))
                 location_dest_ids = request.env['stock.location'].sudo().search(
-                    [('usage', '=', 'internal'), ('company_id.company_type', '=', 'warehouse'), domain])
+                    [('usage', '=', 'internal'), ('company_id.company_type', '=', 'warehouse'), ('company_id.parent_id', '=', company.id)])
                 for location_dest_id in location_dest_ids:
                     if i == 1 and len(location_dest_ids) != 1:
                         scheduled_date += timedelta(weeks=4)

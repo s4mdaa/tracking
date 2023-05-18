@@ -61,6 +61,9 @@ class Move(models.Model):
     location_dest_usage = fields.Selection(
         string="Destination Location Type", related='location_dest_id.usage')
     description_picking = fields.Text('Description of Picking')
+    parent_company_id = fields.Many2one(
+        'res.company', 'Company', related='company_id.parent_id')
+    picking_company_id = fields.Many2one('res.company', 'Company')
 
     @api.depends('picking_id', 'name')
     def _compute_reference(self):
