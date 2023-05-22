@@ -47,13 +47,13 @@ class Company(models.Model):
 
     @api.model
     def create_company_user(self):
-        tracking_ett_user_group = self.env.ref(
-            'tracking.group_tracking_ett_user')
-        tracking_tsh_user_group = self.env.ref(
-            'tracking.group_tracking_tsh_user')
+        tracking_mining_user_group = self.env.ref(
+            'tracking.group_tracking_mining_user')
+        tracking_warehouse_user_group = self.env.ref(
+            'tracking.group_tracking_warehouse_user')
         tracking_admin_group = self.env.ref('tracking.group_tracking_admin')
         companies = self.env['res.company'].search(
-            [('name', 'in', ('Эрдэнэс Тавантолгой ХК', 'Цагаан хад'))])
+            [('company_type', '!=', 'transport')])
         with open("../erdenesit/tracking/static/icon/ett_profile.png", "rb") as image_file:
             ett_profile_image = base64.b64encode(image_file.read())
         user_admin = self.env['res.users'].browse(2)
@@ -64,27 +64,40 @@ class Company(models.Model):
         })
         for company in companies:
             image_1920 = False
-            if company.name == 'Эрдэнэс Тавантолгой ХК':
-                login = 'ganzo@erdenesit.mn'
-                name = 'Д.Ганзориг'
-                company_ids = [(6, 0, [company.id])]
-                company_id = company.id
-                groups_id = [(4, tracking_ett_user_group.id),
+            if company.company_type == 'mining':
+                groups_id = [(4, tracking_mining_user_group.id),
                              (4, self.env.ref('base.group_user').id)]
+            else:
+                groups_id = [(4, tracking_warehouse_user_group.id),
+                             (4, self.env.ref('base.group_user').id)]
+            if company.name == 'Эрдэнэс Тавантолгой ХК':
+                login = 'erdenesTavanTolgoi@erdenesit.mn'
+                name = 'Д.Ганзориг'
                 image_1920 = ett_profile_image
             if company.name == 'Цагаан хад':
-                login = 'amarsanaa@erdenesit.mn'
+                login = 'tsagaanHad@erdenesit.mn'
                 name = 'С.Амарсанаа'
-                company_id = company.id
-                groups_id = [(4, tracking_tsh_user_group.id),
-                             (4, self.env.ref('base.group_user').id)]
-                company_ids = [(6, 0, [company.id])]
+            if company.name == 'Энержи Ресурс ХХК':
+                login = 'energyResource@erdenesit.mn'
+                name = 'М.Дашпэлжээ'
+            if company.name == 'Тавантолгой ХК':
+                login = 'tavanTolgoi@erdenesit.mn'
+                name = 'Тавантолгой'
+            if company.name == 'Гашуун сухайт боомт':
+                login = 'gashuunSuhait@erdenesit.mn'
+                name = 'Гашуун сухайт'
+            if company.name == 'Ханги мандал боомт':
+                login = 'hangiMandal@erdenesit.mn'
+                name = 'Ханги мандал боомт'
+            if company.name == 'Шивээхүрэн боомт':
+                login = 'shiveeHuren@erdenesit.mn'
+                name = 'Шивээхүрэн боомт'
             self.env['res.users'].create({
                 'name': name,
                 'login': login,
                 'password': '123',
-                'company_ids': company_ids,
-                'company_id': company_id,
+                'company_ids': [(6, 0, [company.id])],
+                'company_id': company.id,
                 'groups_id': groups_id,
                 'image_1920': image_1920,
             })

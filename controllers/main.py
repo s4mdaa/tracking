@@ -39,6 +39,7 @@ class CustomAuthSignupHome(AuthSignupHome):
         picking_id = request.env['stock.picking'].create({
             'contract_id': contract_id.id,
             'company_id': company_id,
+            'scheduled_date': scheduled_date
         })
         is_first_iteration = True
 
@@ -76,6 +77,7 @@ class CustomAuthSignupHome(AuthSignupHome):
             'contract_id': contract_id.id,
             'company_id': contract_id.location_dest_id.company_id.id,
             'picking_type': 'receipt',
+            'scheduled_date': scheduled_date
         })
         is_first_iteration = True
 

@@ -53,6 +53,9 @@ class Picking(models.Model):
 
     parent_company_id = fields.Many2one(
         'res.company', 'Company', related='company_id.parent_id')
+    scheduled_date = fields.Datetime(
+        'Scheduled Date', store=True,
+        index=True, default=fields.Datetime.now)
 
     def action_edit(self):
         self.state = 'moving'

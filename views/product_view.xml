@@ -66,7 +66,7 @@
             <field name="view_mode">kanban,tree,form</field>
         </record>
 
-        <menuitem id="product_template_menu" name="Products" web_icon="tracking,static/icon/coal.png" action="product_template_action" sequence="2" groups="tracking.group_tracking_admin,tracking.group_tracking_ett_user" />
+        <menuitem id="product_template_menu" name="Products" web_icon="tracking,static/icon/coal.png" action="product_template_action" sequence="2" groups="tracking.group_tracking_admin,tracking.group_tracking_mining_user" />
         <!-- <menuitem id="product_product_menu" name="Product Variants" action="product_product_action" parent="products_root_menu" sequence="2"/> -->
 
         <menuitem id="product_category_menu" name="Product Categories" action="product_category_action" parent="product_config_menu" sequence="3"/>

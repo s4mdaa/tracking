@@ -417,9 +417,9 @@ msgid "Draft"
 msgstr "Ноорог"
 
 #. module: tracking
-#: model:res.groups,name:tracking.group_tracking_ett_user
-msgid "ETT User"
-msgstr ""
+#: model:res.groups,name:tracking.group_tracking_mining_user
+msgid "Mining User"
+msgstr "Уурхайн хэрэглэгч"
 
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_res_company__stock_move_email_validation
@@ -1219,9 +1219,9 @@ msgid "Symbol"
 msgstr "Симбол"
 
 #. module: tracking
-#: model:res.groups,name:tracking.group_tracking_tsh_user
-msgid "TSH User"
-msgstr ""
+#: model:res.groups,name:tracking.group_tracking_warehouse_user
+msgid "Warehouse User"
+msgstr "Агуулахын хэрэглэгч"
 
 #. module: tracking
 #: model:ir.model.fields,help:tracking.field_stock_warehouse__company_id

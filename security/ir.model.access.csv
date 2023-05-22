@@ -1,42 +1,42 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
 access_product_admin,product.product.admin,model_product_product,tracking.group_tracking_admin,1,1,1,1
-access_product_ett_user,product.product.user,model_product_product,tracking.group_tracking_ett_user,1,0,0,0
+access_product_ett_user,product.product.user,model_product_product,tracking.group_tracking_mining_user,1,0,0,0
 
 access_product_template_admin,product.template.admin,model_product_template,tracking.group_tracking_admin,1,1,1,1
-access_product_template_ett_user,product.template.user,model_product_template,tracking.group_tracking_ett_user,1,0,0,0
+access_product_template_ett_user,product.template.user,model_product_template,tracking.group_tracking_mining_user,1,0,0,0
 
 access_product_category_admin,product.category.admin,model_product_category,tracking.group_tracking_admin,1,1,1,1
 
 access_stock_warehouse_admin,stock.warehouse.admin,model_stock_warehouse,tracking.group_tracking_admin,1,1,1,1
 
 access_stock_location_admin,stock.location.admin,model_stock_location,tracking.group_tracking_admin,1,1,1,1
-access_stock_location_ett_user,stock.location.user,model_stock_location,tracking.group_tracking_ett_user,1,0,0,0
-access_stock_location_tsh_user,stock.location.user,model_stock_location,tracking.group_tracking_tsh_user,1,0,0,0
+access_stock_location_ett_user,stock.location.user,model_stock_location,tracking.group_tracking_mining_user,1,0,0,0
+access_stock_location_tsh_user,stock.location.user,model_stock_location,tracking.group_tracking_warehouse_user,1,0,0,0
 
 access_stock_quant_admin,stock.quant.admin,model_stock_quant,tracking.group_tracking_admin,1,1,1,1
-access_stock_quant_ett_user,stock.quant.user,model_stock_quant,tracking.group_tracking_ett_user,1,1,1,0
-access_stock_quant_tsh_user,stock.quant.user,model_stock_quant,tracking.group_tracking_tsh_user,1,1,1,0
+access_stock_quant_ett_user,stock.quant.user,model_stock_quant,tracking.group_tracking_mining_user,1,1,1,0
+access_stock_quant_tsh_user,stock.quant.user,model_stock_quant,tracking.group_tracking_warehouse_user,1,1,1,0
 
 access_stock_move_admin,stock.move.admin,model_stock_move,tracking.group_tracking_admin,1,1,1,1
-access_stock_move_ett_user,stock.move.user,model_stock_move,tracking.group_tracking_ett_user,1,0,0,0
-access_stock_move_tsh_user,stock.move.user,model_stock_move,tracking.group_tracking_tsh_user,1,0,0,0
+access_stock_move_ett_user,stock.move.user,model_stock_move,tracking.group_tracking_mining_user,1,0,0,0
+access_stock_move_tsh_user,stock.move.user,model_stock_move,tracking.group_tracking_warehouse_user,1,0,0,0
 
 access_stock_picking_admin,stock.picking.admin,model_stock_picking,tracking.group_tracking_admin,1,1,1,1
-access_stock_picking_ett_user,stock.picking.user,model_stock_picking,tracking.group_tracking_ett_user,1,1,1,0
-access_stock_picking_tsh_user,stock.picking.user,model_stock_picking,tracking.group_tracking_tsh_user,1,1,1,0
+access_stock_picking_ett_user,stock.picking.user,model_stock_picking,tracking.group_tracking_mining_user,1,1,1,0
+access_stock_picking_tsh_user,stock.picking.user,model_stock_picking,tracking.group_tracking_warehouse_user,1,1,1,0
 
 access_stock_contract_admin,stock.contract.admin,model_stock_contract,tracking.group_tracking_admin,1,1,1,1
-access_stock_contract_ett_user,stock.contract.user,model_stock_contract,tracking.group_tracking_ett_user,1,0,0,0
-access_stock_contract_tsh_user,stock.contract.user,model_stock_contract,tracking.group_tracking_tsh_user,1,0,0,0
+access_stock_contract_ett_user,stock.contract.user,model_stock_contract,tracking.group_tracking_mining_user,1,0,0,0
+access_stock_contract_tsh_user,stock.contract.user,model_stock_contract,tracking.group_tracking_warehouse_user,1,0,0,0
 
 access_stock_contract_line_admin,stock.contract.line.admin,model_stock_contract_line,tracking.group_tracking_admin,1,1,1,1
-access_stock_contract_line_ett_user,stock.contract.line.user,model_stock_contract_line,tracking.group_tracking_ett_user,1,0,0,0
-access_stock_contract_line_tsh_user,stock.contract.line.user,model_stock_contract_line,tracking.group_tracking_tsh_user,1,0,0,0
+access_stock_contract_line_ett_user,stock.contract.line.user,model_stock_contract_line,tracking.group_tracking_mining_user,1,0,0,0
+access_stock_contract_line_tsh_user,stock.contract.line.user,model_stock_contract_line,tracking.group_tracking_warehouse_user,1,0,0,0
 
 access_stock_vehicle_admin,stock.vehicle.admin,model_stock_vehicle,tracking.group_tracking_admin,1,1,1,1
-access_stock_vehicle_ett_user,stock.vehicle.user,model_stock_vehicle,tracking.group_tracking_ett_user,1,0,0,0
+access_stock_vehicle_ett_user,stock.vehicle.user,model_stock_vehicle,tracking.group_tracking_mining_user,1,0,0,0
 
 access_stock_picking_line_admin,stock.picking.line.admin,model_stock_picking_line,tracking.group_tracking_admin,1,1,1,1
-access_stock_picking_line_ett_user,stock.picking.line.user,model_stock_picking_line,tracking.group_tracking_ett_user,1,1,1,0
-access_stock_picking_line_tsh_user,stock.picking.line.user,model_stock_picking_line,tracking.group_tracking_tsh_user,1,1,1,0
+access_stock_picking_line_ett_user,stock.picking.line.user,model_stock_picking_line,tracking.group_tracking_mining_user,1,1,1,0
+access_stock_picking_line_tsh_user,stock.picking.line.user,model_stock_picking_line,tracking.group_tracking_warehouse_user,1,1,1,0
