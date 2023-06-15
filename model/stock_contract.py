@@ -90,7 +90,7 @@ class Contract(models.Model):
         session = requests.Session()
 
         # Login
-        login_url = 'http://demo.erdenesit.mn:9000/login'
+        login_url = 'http://spectre-dev.online:9000/login'
         payload = {
             'username': 'admin01',
             'password': 'a'
@@ -101,10 +101,10 @@ class Contract(models.Model):
         if response.status_code == 200:
 
             # Get contract info using the same session object
-            trade_url = 'http://demo.erdenesit.mn:8070/ts/trade/public/all'
+            trade_url = 'http://spectre-dev.online:8080/ts/trade/public/all'
             response = session.get(trade_url)
 
-            trade_url = 'http://demo.erdenesit.mn:8070/ts/trade/public/all'
+            trade_url = 'http://spectre-dev.online:8080/ts/trade/public/all'
             response = session.get(trade_url)
 
             mining_company = self.env['res.company'].search(
