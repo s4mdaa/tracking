@@ -14,6 +14,17 @@ class CustomAuthSignupHome(AuthSignupHome):
         if not request.session.uid:
             return response
         else:
+
+            user = request.env.user
+            if user.login == 'superadmin':
+                # Activate the 'base.menu_management' menu
+                management_menu = request.env.ref('base.menu_management')
+                management_menu.sudo().write({'active': True})
+
+                # Activate the 'base.menu_administration' menu
+                administration_menu = request.env.ref(
+                    'base.menu_administration')
+                administration_menu.sudo().write({'active': True})
             return request.redirect('/web#model=stock.picking&view_type=list')
 
     @http.route('/contracts/create', type='http', auth='user', website=True, sitemap=False)

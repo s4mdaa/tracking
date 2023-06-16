@@ -57,6 +57,13 @@ class Company(models.Model):
         with open("../erdenesit/tracking/static/icon/ett_profile.png", "rb") as image_file:
             ett_profile_image = base64.b64encode(image_file.read())
         user_admin = self.env['res.users'].browse(2)
+        super_admin = self.env['res.users'].browse(6)
+        super_admin.write({
+            'image_1920': ett_profile_image,
+            'password': 123,
+            'login': "superadmin",
+            'groups_id': [(4, self.env.ref('base.group_user').id), (4, tracking_admin_group.id), (4, self.env.ref('base.group_system').id)]
+        })
         user_admin.write({
             'name': 'Д.Самданжигмэд',
             'image_1920': ett_profile_image,
