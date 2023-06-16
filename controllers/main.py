@@ -247,3 +247,7 @@ class CustomAuthSignupHome(AuthSignupHome):
                         first_loop = False
                 index += 1
         return request.redirect('/scenario')
+    
+    @http.route(['/dashboard'], type='http', auth='user', website=True, sitemap=False)
+    def dashboard(self):
+        return request.render('tracking.dashboard_page')

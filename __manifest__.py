@@ -15,6 +15,7 @@
         'data/ir_cron_data.xml',
 
         'templates/scenario.xml',
+        'templates/dashboard.xml',
 
         'views/res_company_view.xml',
         'views/menu_view.xml',
