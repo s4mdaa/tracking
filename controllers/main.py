@@ -16,15 +16,15 @@ class CustomAuthSignupHome(AuthSignupHome):
         else:
 
             user = request.env.user
-            if user.login == 'superadmin':
-                # Activate the 'base.menu_management' menu
-                management_menu = request.env.ref('base.menu_management')
-                management_menu.sudo().write({'active': True})
-
-                # Activate the 'base.menu_administration' menu
-                administration_menu = request.env.ref(
+            management_menu = request.env.ref('base.menu_management')
+            administration_menu = request.env.ref(
                     'base.menu_administration')
+            if user.login == 'superadmin':
+                management_menu.sudo().write({'active': True})
                 administration_menu.sudo().write({'active': True})
+            else:
+                management_menu.sudo().write({'active': False})
+                administration_menu.sudo().write({'active': False})
             return request.redirect('/web#model=stock.picking&view_type=list')
 
     @http.route('/contracts/create', type='http', auth='user', website=True, sitemap=False)
