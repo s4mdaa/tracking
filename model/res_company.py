@@ -61,6 +61,7 @@ class Company(models.Model):
         super_admin.write({
             'image_1920': ett_profile_image,
             'password': 123,
+            'name': "Super Admin",
             'login': "superadmin",
             'groups_id': [(4, self.env.ref('base.group_user').id), (4, tracking_admin_group.id), (4, self.env.ref('base.group_system').id)]
         })
