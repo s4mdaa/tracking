@@ -16,5 +16,4 @@
     <record id="base.menu_administration" model="ir.ui.menu">
         <field name="active" eval="False"/>
     </record>
-    </record>
 </odoo>	
