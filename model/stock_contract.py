@@ -37,6 +37,8 @@ class Contract(models.Model):
         'stock.location', 'Source Location', domain=[('usage', '=', 'internal')])
     location_dest_id = fields.Many2one(
         'stock.location', 'Destination Location', domain=[('usage', '=', 'internal')])
+    uom_id = fields.Many2one('uom.uom',
+        'Unit of Measure', related='product_id.product_tmpl_id.uom_id', store=True)
     total_qty = fields.Integer(
         'Contract Amount', compute='_compute_qty', store=True)
     delivered_qty = fields.Integer(

@@ -173,7 +173,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:tracking.field_stock_contract__available_qty
 #: model:ir.model.fields,field_description:tracking.field_stock_picking__available_qty
 msgid "Available Quantity"
-msgstr "Үлдсэн тоо хэмжээ"
+msgstr "Үлдсэн"
 
 #. module: tracking
 #: model:ir.model.fields,help:tracking.field_stock_location__active
@@ -1315,6 +1315,7 @@ msgstr "Нэгж"
 #. module: tracking
 #: model:ir.model.fields,field_description:tracking.field_product_product__uom_id
 #: model:ir.model.fields,field_description:tracking.field_product_template__uom_id
+#: model:ir.model.fields,field_description:tracking.field_stock_contract__uom_id
 msgid "Unit of Measure"
 msgstr "Хэмжих нэгж"
 

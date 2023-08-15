@@ -24,7 +24,8 @@
                             <field name="source_company_id" options="{'no_create': True}"/>
                             <field name="symbol"/>
                             <field name="trade_date"/>
-                            <field name="total_qty" />
+                            <field name="uom_id" />
+                            <field name="delivered_qty" />
                             <field name="incoming_qty" />
                             <field name="depreciation_qty" />
                         </group>
@@ -33,7 +34,7 @@
                             <field name="destination_company_id" options="{'no_create': True}"/>
                             <field name="amount"/>
                             <field name="delivery_date"/>
-                            <field name="delivered_qty" />
+                            <field name="total_qty" />
                             <field name="available_qty" />
                             <field name="surplus" />
                         </group>

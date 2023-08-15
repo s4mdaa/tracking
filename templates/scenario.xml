@@ -85,7 +85,7 @@ body {
                         <tr t-att-style="len(stock_pickings) == 0 and len(stock_contracts) > 0 and 'background-color: Cornsilk;'">
                             <td>3.</td>
                             <td t-att-style="(len(stock_moves) > 0 and len(stock_contracts) == 0 and 'color: Blue;') or (len(stock_moves) > 0 and 'color: green;')">Арилжааны буюу гэрээний мэдээлэл татах</td>
-                            <td t-att-style="(len(stock_moves) > 0 and len(stock_contracts) == 0 and 'color: Blue;') or (len(stock_moves) > 0 and 'color: green;')">Гэрээ 1: Цагаан хад руу 6400 тонн нүүрс</td>
+                            <td t-att-style="(len(stock_moves) > 0 and len(stock_contracts) == 0 and 'color: Blue;') or (len(stock_moves) > 0 and 'color: green;')">Гэрээ 1: Цагаан хад руу 12800 тонн нүүрс</td>
                             <td></td>
                             <td></td>
                             <td></td>
