@@ -107,7 +107,7 @@ body {
                             <td t-att-style="len(stock_pickings) > 1 and 'color: 808080;'">5 машин</td>
                             <td t-att-style="len(stock_pickings) > 1 and 'color: 808080;'">5 машин</td>
                             <td t-att-style="(len(stock_pickings) == 2 and 'color: Blue;') or (len(stock_pickings) > 1 and 'color: green;')">Гэрээний дагуу 10 машинд шилжүүлэгдсэн нүүрсийг хүлээж авах. Машин тус бүр 70 тонн нүүрс </td>
-                            <td t-att-style="len(stock_pickings) > 1 and 'color: 808080;'">Тээврийн хэрэгсэлээс эцсийн цэг дээр хүлээн авах</td>
+                            <td t-att-style="len(stock_pickings) > 1 and 'color: 808080;'">Тээврийн хэрэгслээс эцсийн цэг дээр хүлээн авах</td>
                         </tr>
                         <tr t-att-style="len(stock_pickings) == 8 and 'background-color: Cornsilk;'">
                             <td>6.</td>
