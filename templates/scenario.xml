@@ -76,7 +76,7 @@ body {
                         <tr t-att-style="len(stock_moves) > 0 and len(stock_contracts) == 0 and 'background-color: Cornsilk;'">
                             <td>2.</td>
                             <td></td>
-                            <td t-att-style="(len(stock_moves) > 0 and len(stock_contracts) == 0 and 'color: Blue;') or (len(stock_moves) > 0 and 'color: green;')">Нүүрс олборлох, овоолго үүсгэх 100,000 тонн</td>
+                            <td t-att-style="(len(stock_moves) == 0 and len(stock_contracts) == 0 and 'color: Blue;') or (len(stock_moves) > 0 and 'color: green;')">Нүүрс олборлох, овоолго үүсгэх 100,000 тонн</td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -84,8 +84,8 @@ body {
                         </tr>
                         <tr t-att-style="len(stock_pickings) == 0 and len(stock_contracts) > 0 and 'background-color: Cornsilk;'">
                             <td>3.</td>
-                            <td t-att-style="(len(stock_pickings) == 0 and len(stock_contracts) > 0 and 'color: Blue;') or (len(stock_contracts) > 0 and 'color: green;')">Арилжааны буюу гэрээний мэдээлэл татах</td>
-                            <td t-att-style="(len(stock_pickings) == 0 and len(stock_contracts) > 0 and 'color: Blue;') or (len(stock_contracts) > 0 and 'color: green;')">Гэрээ 1. 6400 тонн нүүрс Цагаан хаданд хүргэх</td>
+                            <td t-att-style="(len(stock_moves) > 0 and len(stock_contracts) == 0 and 'color: Blue;') or (len(stock_moves) > 0 and 'color: green;')">Арилжааны буюу гэрээний мэдээлэл татах</td>
+                            <td t-att-style="(len(stock_moves) > 0 and len(stock_contracts) == 0 and 'color: Blue;') or (len(stock_moves) > 0 and 'color: green;')">Гэрээ 1: Цагаан хад руу 6400 тонн нүүрс</td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -94,7 +94,7 @@ body {
                         <tr t-att-style="len(stock_pickings) == 1 and 'background-color: Cornsilk;'">
                             <td>4.</td>
                             <td></td>
-                            <td t-att-style="(len(stock_pickings) == 1 and 'color: Blue;') or (len(stock_pickings) > 0 and 'color: green;')">Гэрээний дагуу 10 машинд ачилт хийх. Машин тус бүр 70 тонн нүүрс </td>
+                            <td t-att-style="(len(stock_pickings) == 0 and len(stock_contracts) > 0 and 'color: Blue;') or (len(stock_contracts) > 0 and 'color: green;')">Гэрээний дагуу 10 машинд ачилт хийх. Машин тус бүр 70 тонн нүүрс </td>
                             <td t-att-style="len(stock_pickings) > 0 and 'color: 808080;'">5 машин</td>
                             <td t-att-style="len(stock_pickings) > 0 and 'color: 808080;'">5 машин </td>
                             <td></td>
@@ -106,12 +106,12 @@ body {
                             <td></td>
                             <td t-att-style="len(stock_pickings) > 1 and 'color: 808080;'">5 машин</td>
                             <td t-att-style="len(stock_pickings) > 1 and 'color: 808080;'">5 машин</td>
-                            <td t-att-style="(len(stock_pickings) == 2 and 'color: Blue;') or (len(stock_pickings) > 1 and 'color: green;')">Гэрээний дагуу 10 машинд шилжүүлэгдсэн нүүрсийг хүлээж авах. Машин тус бүр 70 тонн нүүрс </td>
+                            <td t-att-style="(len(stock_pickings) == 1 and 'color: Blue;') or (len(stock_pickings) > 0 and 'color: green;')">Гэрээний дагуу 10 машинд шилжүүлэгдсэн нүүрсийг хүлээж авах. Машин тус бүр 70 тонн нүүрс </td>
                             <td t-att-style="len(stock_pickings) > 1 and 'color: 808080;'">Тээврийн хэрэгслээс эцсийн цэг дээр хүлээн авах</td>
                         </tr>
                         <tr t-att-style="len(stock_pickings) == 8 and 'background-color: Cornsilk;'">
                             <td>6.</td>
-                            <td t-att-style="(len(stock_pickings) == 8 and 'color: Blue;') or (len(stock_pickings) > 2 and 'color: green;')">Нэгдсэн өгөгдөл оруулах</td>
+                            <td t-att-style="(len(stock_pickings) == 2 and 'color: Blue;') or (len(stock_pickings) > 1 and 'color: green;')">Нэгдсэн өгөгдөл оруулах</td>
                             <td></td>
                             <td></td>
                             <td></td>
