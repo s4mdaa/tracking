@@ -92,7 +92,7 @@ class Contract(models.Model):
         session = requests.Session()
 
         # Login
-        login_url = 'http://demo.erdenesit.mn:9000/login'
+        login_url = 'https://49.0.132.144/login'
         payload = {
             'username': 'admin01',
             'password': 'a'
