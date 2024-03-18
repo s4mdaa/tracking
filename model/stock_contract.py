@@ -92,59 +92,68 @@ class Contract(models.Model):
         session = requests.Session()
 
         # Login
-        login_url = 'https://49.0.132.144/login'
+        login_url = 'http://grx.ngengine.com:8300/ts/trade/public/all'
         payload = {
             'username': 'admin01',
             'password': 'a'
         }
         response = session.post(login_url, data=payload)
 
-        # Check login response status code
-        if response.status_code == 200:
+        # print(response.status_code,"@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
-            # Get contract info using the same session object
-            trade_url = 'http://demo.erdenesit.mn:8070/ts/trade/public/all'
-            response = session.get(trade_url)
+        # # Check login response status code
+        # if response.status_code == 200:
 
-            trade_url = 'http://demo.erdenesit.mn:8070/ts/trade/public/all'
-            response = session.get(trade_url)
+        #     print("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ")
 
-            mining_company = self.env['res.company'].search(
-                [('company_type', '=', 'mining')], order='id ASC', limit=1)
-            warehouse_company = self.env['res.company'].search(
-                [('company_type', '=', 'warehouse')], order='id ASC', limit=1)
+        # Get contract info using the same session object
+        trade_url = 'http://grx.ngengine.com:8300/ts/trade/public/all'
+        response = session.get(trade_url)
 
-            location_id = self.env['stock.location'].search(
-                [('company_id', '=', mining_company.id), ('usage', '=', 'internal')], order='id ASC', limit=1)
-            location_dest_id = self.env['stock.location'].search(
-                [('company_id', '=', warehouse_company.id), ('usage', '=', 'internal')], order='id ASC', limit=1)
-            product_id = self.env['product.product'].search(
-                [('name', '=', 'Коксжих')], order='id ASC', limit=1)
+        trade_url = 'http://grx.ngengine.com:8300/ts/trade/public/all'
+        response = session.get(trade_url)
 
-            if response.status_code == 200:
-                data = response.json()
-                for trade in data:
-                    contractObj = self.env['stock.contract'].search(
-                        [('name', '=', trade['id'])], limit=1)
-                    if not contractObj:
-                        date = datetime.strptime(
-                            trade['date'], '%Y-%m-%dT%H:%M:%S.%f%z')
-                        tradeDateTime = date.replace(
-                            tzinfo=None) - timedelta(hours=8)
-                        deliveryDate = tradeDateTime.date()
-                        stock_contract_vals = {
-                            'reference_id': trade['id'],
-                            'amount': trade['amount'],
-                            'product_id': product_id.id,
-                            'symbol': trade['instrument'],
-                            'location_id': location_id.id,
-                            'location_dest_id': location_dest_id.id,
-                            'trade_date':  tradeDateTime,
-                            'delivery_date':  deliveryDate.replace(month=date.month+1),
-                            'total_qty': 6400 * trade['amount'],
-                        }
-                        self.env['stock.contract'].sudo().create(
-                            stock_contract_vals)
+        mining_company = self.env['res.company'].search(
+            [('company_type', '=', 'mining')], order='id ASC', limit=1)
+        warehouse_company = self.env['res.company'].search(
+            [('company_type', '=', 'warehouse')], order='id ASC', limit=1)
+
+        location_id = self.env['stock.location'].search(
+            [('company_id', '=', mining_company.id), ('usage', '=', 'internal')], order='id ASC', limit=1)
+        location_dest_id = self.env['stock.location'].search(
+            [('company_id', '=', warehouse_company.id), ('usage', '=', 'internal')], order='id ASC', limit=1)
+        product_id = self.env['product.product'].search(
+            [('name', '=', 'Коксжих')], order='id ASC', limit=1)
+        
+        #     print(response.status_code,"@@@@@@@@@@@@@@@@@@@@@@@@@@")
+
+        #     if response.status_code == 200:
+
+        json_data = [{"id":"e669d8ea-fe73-4231-a200-4c5ba04855eb","instrument":"202406COAL","amount":1.00,"value":1024000.00,"price":160.00,"auction":"202406COAL","date":"2024-03-16T16:59:27.101071Z"},{"id":"5f1605c3-44f9-4b60-90ef-fcb493c4d3a9","instrument":"202406COAL","amount":1.00,"value":1024000.00,"price":160.00,"auction":"202406COAL","date":"2024-03-16T16:59:27.100983Z"},{"id":"109a3b85-dc96-4954-be7d-4e48f0536496","instrument":"202406COAL","amount":2.00,"value":2048000.00,"price":160.00,"auction":"202406COAL","date":"2024-03-16T16:59:30.126341Z"},{"id":"4ac2ea90-88b6-44e7-81b3-e88365d52805","instrument":"202406COAL","amount":2.00,"value":2048000.00,"price":160.00,"auction":"202406COAL","date":"2024-03-16T16:59:30.126143Z"}]
+
+        for trade in json_data:
+            contractObj = self.env['stock.contract'].search(
+                [('name', '=', trade['id'])], limit=1)
+            if not contractObj:
+                date = datetime.strptime(
+                    trade['date'], '%Y-%m-%dT%H:%M:%S.%f%z')
+                tradeDateTime = date.replace(
+                    tzinfo=None) - timedelta(hours=8)
+                deliveryDate = tradeDateTime.date()
+                stock_contract_vals = {
+                    'reference_id': trade['id'],
+                    'amount': trade['amount'],
+                    'product_id': product_id.id,
+                    'symbol': trade['instrument'],
+                    'location_id': location_id.id,
+                    'location_dest_id': location_dest_id.id,
+                    'trade_date':  tradeDateTime,
+                    'delivery_date':  deliveryDate.replace(month=date.month+1),
+                    'total_qty': 6400 * trade['amount'],
+                }
+                self.env['stock.contract'].sudo().create(
+                    stock_contract_vals)
+
 
     @ api.model_create_multi
     def create(self, vals_list):
