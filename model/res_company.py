@@ -54,7 +54,7 @@ class Company(models.Model):
         tracking_admin_group = self.env.ref('tracking.group_tracking_admin')
         companies = self.env['res.company'].search(
             [('company_type', '!=', 'transport')])
-        with open("../erdenesit/tracking/static/icon/ett_profile.png", "rb") as image_file:
+        with open("/opt/odoo/erdenesit/tracking/static/icon/ett_profile.png", "rb") as image_file:
             ett_profile_image = base64.b64encode(image_file.read())
         user_admin = self.env['res.users'].browse(2)
         # super_admin = self.env['res.users'].browse(6)
